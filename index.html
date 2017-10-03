@@ -5,9 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GroovyMarty</title>
-  
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- let's try Bootstrap 4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Spicy+Rice">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Griffy">
+  <link rel="stylesheet" href="gvyweb.css">
 
   <!-- Fix for HTML5 on IE version 8 or earlier -->
   <!--[if lt IE 9]>
@@ -16,10 +21,41 @@
 </head>
 
 <body>
-  <h1>Welcome to GroovyMarty, the world's grooviest website!</h1>
+  <nav class="navbar navbar-expand-sm navbar-dark navbar-custom">
+    <a href="/" class="navbar-brand"><span class="groovy-font">GroovyMarty</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#my-navbar">
+      <i class="fa fa-bars fa-lg py-1 text-white"></i>
+    </button>
+    <div class="navbar-collapse collapse" id="my-navbar">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#"><i class="fa fa-home fa-lg py-1 text-white"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Family Album</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Slide Shows</a>
+        </li>
+      </ul>
+      <span class="ml-auto navbar-text">Hello</span>
+    </div>
+  </nav>  
+   
+  <div class="jumbotron">
+    <div class="container">
+      <h1><span class="curly-font">Welcome to</span> <span class="groovy-font">GroovyMarty</span></h1>
+      <h4><i>The world's <span class="curly-font">grooviest</span> website!</i></h4>
+      <p>This is my own personal website.  Everyone should have one, don't you think?</p>
+    </div>
+  </div>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+          integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+          integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+          integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
 </body>
 </html>
