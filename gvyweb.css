@@ -7,12 +7,18 @@ body {
 .curly-font {
   font-family: 'Griffy', cursive;
 }
-.navbar-custom {
+#my-navbar {
   background-color: gold;
 }
-.navbar-custom .navbar-brand, .groovy-logo, .groovy-logo-color {
+.groovy-logo, .groovy-logo-color,
+#my-navbar .navbar-brand.active,
+#my-navbar .nav-link.active {
   color: darkviolet;
 }
-.navbar-custom .navbar-brand:hover {
+#my-navbar .nav-link.active {
+  font-weight: bold
+}
+#my-navbar .navbar-brand:hover,
+#my-navbar .nav-link:hover {
   color: deeppink;
 }
