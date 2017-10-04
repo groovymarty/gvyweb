@@ -1,4 +1,4 @@
-var myApp = angular.module('gvyweb', ['ui.router']);
+var myApp = angular.module('gvyweb', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ngTouch']);
 
 myApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -17,3 +17,13 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     
   $urlRouterProvider.otherwise("/home");
 });
+
+myApp.controller('NavBarCtrl', ['$scope', function($scope) {
+  $scope.isCollapsed = true;
+  $scope.collapse = function() {
+    $scope.isCollapsed = true;
+  };
+  $scope.toggleCollapsed = function() {
+    $scope.isCollapsed = !$scope.isCollapsed;
+  };
+}]);

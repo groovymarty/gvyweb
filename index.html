@@ -6,10 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GroovyMarty</title>
 
-  <!-- let's try Bootstrap 4 -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Spicy+Rice">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Griffy">
   <link rel="stylesheet" href="gvyweb.css">
@@ -21,29 +19,33 @@
 </head>
 
 <body ng-app="gvyweb">
-  <nav class="navbar navbar-expand-sm navbar-light" id="my-navbar">
-    <a class="navbar-brand groovy-font" ui-sref="home" ui-sref-active="active">
-      <i class="fa fa-home fa-lg py-1"></i> GroovyMarty</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#my-nav">
-      <i class="fa fa-bars fa-lg py-1"></i>
-    </button>
-    <div class="navbar-collapse collapse" id="my-nav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" ui-sref="pictures" ui-sref-active="active">Family Album</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" ui-sref="slideshows" ui-sref-active="active">Slide Shows</a>
-        </li>
-      </ul>
-      <span class="ml-auto navbar-text">Hello</span>
+  <nav class="navbar navbar-default" id="my-navbar" ng-controller="NavBarCtrl">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" ng-click="toggleCollapsed()">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand groovy-font" ui-sref="home">GroovyMarty</a>
+      </div>
+      <div class="collapse navbar-collapse" uib-collapse="isCollapsed">
+        <ul class="nav navbar-nav">
+          <li><a ui-sref="home" ui-sref-active="active" ng-click="collapse()">Home</a></li>
+          <li><a ui-sref="pictures" ui-sref-active="active" ng-click="collapse()">Family Album</a></li>
+          <li><a ui-sref="slideshows" ui-sref-active="active" ng-click="collapse()">Slide Shows</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
   
   <ui-view></ui-view>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-touch.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
   <script src="gvyweb.js"></script>
 </body>
 </html>
