@@ -27,12 +27,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand groovy-font" ui-sref="home">GroovyMarty</a>
+        <a class="navbar-brand groovy-font" ui-sref="home" ng-click="collapse()">GroovyMarty</a>
+        <p class="navbar-text visible-xs-inline-block">{{$state.current.displayName}}</p>
       </div>
       <div class="collapse navbar-collapse" uib-collapse="isCollapsed">
         <ul class="nav navbar-nav">
           <li><a ui-sref="home" ui-sref-active="active" ng-click="collapse()">Home</a></li>
-          <li><a ui-sref="pictures" ui-sref-active="active" ng-click="collapse()">Family Album</a></li>
+          <li><a ui-sref="pictures" ui-sref-active="active" ng-click="collapse()">Pictures</a></li>
+          <li><a ui-sref="pictures" ng-click="collapse()">Family Album</a></li>
           <li><a ui-sref="slideshows" ui-sref-active="active" ng-click="collapse()">Slide Shows</a></li>
         </ul>
       </div>

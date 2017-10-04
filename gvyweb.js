@@ -3,14 +3,17 @@ var myApp = angular.module('gvyweb', ['ui.router', 'ui.bootstrap', 'ngAnimate', 
 myApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
+      displayName: "Home",
       url: "/home",
       templateUrl: "home.html"
     })
     .state('pictures', {
+      displayName: "Pictures",
       url: "/pictures",
       template: "<h1>Pictures coming soon!</h1>"
     })
     .state('slideshows', {
+      displayName: "Slide Shows",
       url: "/slideshows",
       template: "<h1>Slide shows coming soon!</h1>"
     });
@@ -18,7 +21,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/home");
 });
 
-myApp.controller('NavBarCtrl', ['$scope', function($scope) {
+myApp.controller('NavBarCtrl', ['$scope', '$state', function($scope, $state) {
+  $scope.$state = $state;
   $scope.isCollapsed = true;
   $scope.collapse = function() {
     $scope.isCollapsed = true;

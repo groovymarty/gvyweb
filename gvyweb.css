@@ -13,10 +13,12 @@ body {
 }
 .groovy-logo, .groovy-logo-color,
 #my-navbar .navbar-brand,
+#my-navbar .navbar-text,
 #my-navbar .active {
   color: darkviolet;
 }
-#my-navbar .navbar-nav .active {
+#my-navbar .navbar-nav .active,
+#my-navbar .navbar-text {
   font-weight: bold
 }
 #my-navbar :hover {
