@@ -1,15 +1,15 @@
-.groovy-font {
+.groovy-font, .groovy-logo {
   font-family: 'Spicy Rice', fantasy;
 }
 .curly-font {
   font-family: 'Griffy', cursive;
 }
 .navbar-custom {
-  background-color: orangered;
+  background-color: orange;
 }
-.navbar-custom .navbar-brand {
-  color: springgreen;
+.navbar-custom .navbar-brand, .groovy-logo, .groovy-logo-color {
+  color: darkviolet;
 }
 .navbar-custom .navbar-brand:hover {
-  color: yellow;
+  color: deeppink;
 }
