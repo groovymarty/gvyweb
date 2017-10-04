@@ -21,6 +21,6 @@ body {
 #my-navbar .navbar-text {
   font-weight: bold
 }
-#my-navbar :hover {
+#my-navbar .navbar-nav :hover {
   color: deeppink;
 }
