@@ -1,3 +1,6 @@
+body {
+  background-color: lemonchiffon;
+}
 .groovy-font, .groovy-logo {
   font-family: 'Spicy Rice', fantasy;
 }
@@ -5,7 +8,7 @@
   font-family: 'Griffy', cursive;
 }
 .navbar-custom {
-  background-color: orange;
+  background-color: gold;
 }
 .navbar-custom .navbar-brand, .groovy-logo, .groovy-logo-color {
   color: darkviolet;
