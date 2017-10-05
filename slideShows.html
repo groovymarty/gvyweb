@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row" ng-repeat="show in shows">
+    <div class="panel panel-default col-md-8">
+      <div class="panel-body">
+        <p><b>{{show.title}}</b></p>
+        <p>{{show.caption}}</p>
+        <a ng-href="{{show.dbxlink}}">Click here to view</a>
+      </div>
+    </div>
+  </div>
+</div>

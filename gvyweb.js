@@ -15,7 +15,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     .state('slideshows', {
       displayName: "Slide Shows",
       url: "/slideshows",
-      template: "<h1>Slide shows coming soon!</h1>"
+      controller: "SlideShowsCtrl",
+      templateUrl: "slideShows.html"
     });
     
   $urlRouterProvider.otherwise("/home");
