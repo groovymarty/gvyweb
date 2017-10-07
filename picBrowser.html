@@ -1,23 +1,43 @@
 <div class="container">
-  <p>PATH:</p>
-  <div ng-repeat="folder in path">
-    <a ui-sref="picbrowser({id: folder.id})">{{folder.name}}</a>
+  <div class="row">
+    <div class="panel panel-default col-md-6">
+      <div class="panel-body">
+        <h4>PATH:</h4>
+        <p ng-repeat="folder in path">
+          <a ui-sref="picbrowser({id: folder.id})">{{folder.name}}</a></p>
+        </p>
+      </div>
+    </div>
   </div>
-  <hr>
-  <p>FOLDERS:</p>
-  <div ng-repeat="id in cur.folders">
-    <a ui-sref="picbrowser({id: id})">{{cur.names[id]}}</a>
+  <div class="row">
+    <div class="panel panel-default col-md-6">
+      <div class="panel-body">
+        <h4>FOLDERS:</h4>
+        <p ng-repeat="id in cur.folders">
+          <a ui-sref="picbrowser({id: id})">{{cur.names[id]}}</a></p>
+      </div>
+    </div>
   </div>
-  <hr>
-  <p>PHOTOS:</p>
-  <div ng-repeat="id in cur.pictures">
-    <img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}">
-    <p>{{cur.names[id]}}</p>
+  <div class="row">
+    <div class="panel panel-default col-md-6">
+      <div class="panel-body">
+        <h4>PHOTOS:</h4>
+        <div ng-repeat="id in cur.pictures">
+          <img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}">
+          <p>{{cur.names[id]}}</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <hr>
-  <p>VIDEOS:</p>
-  <div ng-repeat="id in cur.videos">
-    <video controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
-    <p>{{cur.names[id]}}</p>
+  <div class="row">
+    <div class="panel panel-default col-md-6">
+      <div class="panel-body">
+        <h4>VIDEOS:</h4>
+        <div ng-repeat="id in cur.videos">
+          <video controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
+          <p>{{cur.names[id]}}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
