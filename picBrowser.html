@@ -8,22 +8,16 @@
   <div ng-repeat="id in cur.folders">
     <a ui-sref="picbrowser({id: id})">{{cur.names[id]}}</a>
   </div>
-  <div ng-repeat="id in cur.contents.folders">
-    <a ui-sref="picbrowser({id: id})">{{cur.contNames[id]}}</a>
-  </div>
   <hr>
   <p>PHOTOS:</p>
   <div ng-repeat="id in cur.pictures">
     <img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}">
-    <p>{{cur.meta[id].caption || cur.names[id]}}</p>
-  </div>
-  <div ng-repeat="id in cur.contents.pictures">
-    <img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}">
-    <p>{{cur.contMeta[id].caption || cur.contNames[id]}}</p>
+    <p>{{cur.names[id]}}</p>
   </div>
   <hr>
   <p>VIDEOS:</p>
   <div ng-repeat="id in cur.videos">
+    <video controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
     <p>{{cur.names[id]}}</p>
   </div>
 </div>

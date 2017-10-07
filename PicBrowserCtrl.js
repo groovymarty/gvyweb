@@ -8,6 +8,9 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       pictures: [],
       videos: []
     };
+
+    // get specified folder and insert at beginning of path
+    // continue recursively until root folder reached
     function buildPath(id) {
       return gvypics.getFolder(id).then(function(folder) {
         if ($scope.cur.isPlaceholder) {
