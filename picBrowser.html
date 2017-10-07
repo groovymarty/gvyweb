@@ -1,41 +1,59 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="panel panel-default col-md-6">
-      <div class="panel-body">
-        <h4>PATH:</h4>
-        <p ng-repeat="folder in path">
-          <a ui-sref="picbrowser({id: folder.id})">{{folder.name}}</a></p>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="panel panel-default col-md-6">
-      <div class="panel-body">
-        <h4>FOLDERS:</h4>
-        <p ng-repeat="id in cur.folders">
-          <a ui-sref="picbrowser({id: id})">{{cur.names[id]}}</a></p>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="panel panel-default col-md-6">
-      <div class="panel-body">
-        <h4>PHOTOS:</h4>
-        <div ng-repeat="id in cur.pictures">
-          <img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}">
-          <p>{{cur.names[id]}}</p>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">Path</div>
+        </div>
+        <div class="panel-body">
+          <p ng-repeat="folder in path">
+            <a ui-sref="picbrowser({id: folder.id})">{{folder.name}}</a></p>
+          </p>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="panel panel-default col-md-6">
-      <div class="panel-body">
-        <h4>VIDEOS:</h4>
-        <div ng-repeat="id in cur.videos">
-          <video controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
-          <p>{{cur.names[id]}}</p>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">Folders</div>
+        </div>
+        <div class="panel-body">
+          <p ng-repeat="id in cur.folders">
+            <a ui-sref="picbrowser({id: id})">{{cur.names[id]}}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">Pictures</div>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="id in cur.pictures">
+              <img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}">
+              <p>{{cur.names[id]}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">Videos</div>
+        </div>
+        <div class="panel-body">
+          <div ng-repeat="id in cur.videos">
+            <video controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
+            <p>{{cur.names[id]}}</p>
+          </div>
         </div>
       </div>
     </div>
