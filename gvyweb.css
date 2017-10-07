@@ -11,6 +11,10 @@ body {
 #my-navbar .navbar-toggle:hover {
   background-color: gold;
 }
+#my-navbar .navbar-toggle {
+  margin-left: 8px;
+  margin-right: 0px;
+}
 .groovy-logo, .groovy-logo-color,
 #my-navbar .navbar-brand,
 #my-navbar .navbar-text,

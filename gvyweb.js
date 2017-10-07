@@ -7,10 +7,11 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       url: "/home",
       templateUrl: "home.html"
     })
-    .state('pictures', {
+    .state('picbrowser', {
       displayName: "Pictures",
-      url: "/pictures",
-      template: "<h1>Pictures coming soon!</h1>"
+      url: "/picbrowser/:id",
+      controller: "PicBrowserCtrl",
+      templateUrl: "picBrowser.html"
     })
     .state('slideshows', {
       displayName: "Slide Shows",
