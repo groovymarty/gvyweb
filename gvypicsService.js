@@ -21,9 +21,19 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
       append(folder.videos, folder.contents.videos);
       append(folder.pictures, folder.contents.pictures);
       // merge content names and meta into the main folder
-      // note precedence: for example contents.meta overrides contMeta
       Object.assign(folder.names, folder.contNames);
-      Object.assign(meta, folder.contMeta, folder.contents.meta);
+      Object.assign(meta, folder.contMeta);
+      // contents.meta overrides regular meta, on a individual property basis
+      // for example you can provide a different caption for a picture in a collection
+      if (folder.contents.meta) {
+        Object.keys(folder.contents.meta).forEach(function (id) {
+          if (id in meta) {
+            Object.assign(meta[id], folder.contents.meta[id]);
+          } else {
+            meta[id] = folder.contents.meta[id];
+          }
+        });
+      }
       // these are no longer needed
       delete folder.contents;
       delete folder.contNames;
