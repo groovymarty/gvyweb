@@ -28,3 +28,17 @@ body {
 #my-navbar .navbar-nav :hover {
   color: deeppink;
 }
+.tile-panel {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.tile-panel .tile {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}

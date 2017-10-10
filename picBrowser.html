@@ -28,17 +28,10 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="panel-title">Pictures</div>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3" ng-repeat="id in cur.pictures">
-              <img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}">
+      <div class="tile-panel">
+        <div class="tile" style="width:150px" ng-repeat="id in cur.pictures">
+              <div></div><img class="img-responsive" ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}"></div>
               <p>{{cur.names[id]}}</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
