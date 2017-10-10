@@ -28,7 +28,7 @@ body {
 #my-navbar .navbar-nav :hover {
   color: deeppink;
 }
-.tile-panel {
+.pic-tile-panel {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -37,8 +37,15 @@ body {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-.tile-panel .tile {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+.pic-tile {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.pic-tile-sm {
+  width: 128px;
+}
+.pic-tile-pic {
+}
+.pic-tile-text {
+  background-color: white;
 }
