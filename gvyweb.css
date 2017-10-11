@@ -45,6 +45,9 @@ body {
   .lower-folder {
     font-size: 125%;
   }
+  .kill-padding-xs {
+    padding: 0px;
+  }
 }
 .pic-tile-panel {
   display: -webkit-flex;
@@ -60,7 +63,13 @@ body {
   margin-bottom: 20px;
 }
 .pic-tile-sm {
-  width: 130px;
+  width: 130px; /*2px for border*/
+}
+.pic-tile-md {
+  width: 642px; /*2px for border*/
+}
+.pic-tile-lg {
+  width: 1026px; /*2px for border*/
 }
 .pic-tile-pic {
 }

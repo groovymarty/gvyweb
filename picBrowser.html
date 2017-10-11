@@ -36,7 +36,9 @@
     <div class="col-xs-12">
       <div class="pic-tile-panel">
         <div class="pic-tile pic-tile-sm" ng-repeat="id in cur.pictures | limitTo: nlimit">
-          <div class="pic-tile-pic"><img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}"></div>
+          <div class="pic-tile-pic">
+            <a ui-sref="picviewer({id: id})"><img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}"></a>
+          </div>
           <div class="pic-tile-text">{{cur.names[id]}}</div>
         </div>
         <div class="pic-tile pic-tile-sm" ng-if="cur.pictures.length > nlimit">
