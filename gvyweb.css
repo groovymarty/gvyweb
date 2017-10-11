@@ -28,6 +28,10 @@ body {
 #my-navbar .navbar-nav :hover {
   color: deeppink;
 }
+.current {
+  font-weight: bold;
+  font-size: 150%;
+}
 .pic-tile-panel {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -42,10 +46,16 @@ body {
   margin-bottom: 20px;
 }
 .pic-tile-sm {
-  width: 128px;
+  width: 130px;
 }
 .pic-tile-pic {
 }
+.pic-tile-pic > img {
+  border: solid 1px gainsboro;
+  border-bottom: none;
+}
 .pic-tile-text {
+  padding: 3px;
   background-color: white;
+  border: solid 1px gainsboro;
 }
