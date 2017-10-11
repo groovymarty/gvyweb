@@ -1,13 +1,17 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
   '$scope', '$stateParams', 'gvypics',
   function($scope, $stateParams, gvypics) {
-    $scope.path = [];
-    $scope.cur = { //replace with real folder as soon as we can
+    var placeholder = {
       isPlaceholder: true,
+      id: "",
       folders: [],
       pictures: [],
-      videos: []
+      videos: []      
     };
+    $scope.root = placeholder;
+    $scope.firstlevel = placeholder;
+    $scope.path = [];
+    $scope.cur = placeholder;
 
     // get specified folder and insert at beginning of path
     // continue recursively until root folder reached
@@ -16,11 +20,16 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         if ($scope.cur.isPlaceholder) {
           $scope.cur = folder;
         }
-        $scope.path.unshift(folder);
-        if (folder.id !== "") {
-          return buildPath(folder.parent);
-        } else {
+        if (folder.id === "") {
+          $scope.root = folder;
           return true; //done
+        } else {
+          if (folder.parent === "") {
+            $scope.firstlevel = folder;
+          } else {
+            $scope.path.unshift(folder);
+          }
+          return buildPath(folder.parent);
         }
       }).catch(function(err) {
         console.log(err.message);

@@ -28,9 +28,19 @@ body {
 #my-navbar .navbar-nav :hover {
   color: deeppink;
 }
-.current {
+.higher-folder {
+  font-size: 125%;
+  text-decoration: underline;
+}
+.cur-folder {
   font-weight: bold;
   font-size: 150%;
+  text-decoration: underline;
+}
+@media(max-width:767px) {
+  .lower-folder {
+    font-size: 125%;
+  }
 }
 .pic-tile-panel {
   display: -webkit-flex;
@@ -56,6 +66,7 @@ body {
 }
 .pic-tile-text {
   padding: 3px;
+  overflow-wrap: break-word;
   background-color: white;
   border: solid 1px gainsboro;
 }

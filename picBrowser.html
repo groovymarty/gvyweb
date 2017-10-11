@@ -3,11 +3,17 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-body">
-          <p ng-repeat="folder in path">
-            <a ui-sref="picbrowser({id: folder.id})" ng-class="{current: $last}">{{folder.name}}</a></p>
+          <p style="display: inline-block" ng-repeat="id in root.folders">
+            <a ui-sref="picbrowser({id: id})" class="btn"
+               ng-class="id === firstlevel.id ? 'btn-primary' : 'btn-default'">{{id}}</a> &nbsp;
           </p>
-          <p ng-repeat="id in cur.folders">
-            <a ui-sref="picbrowser({id: id})">{{cur.names[id]}}</a></p>
+          <p ng-repeat="folder in path">
+            <a ui-sref="picbrowser({id: $last ? folder.parent : folder.id})"
+               ng-class="$last ? 'cur-folder' : 'higher-folder'">{{folder.name}}</a></p>
+          </p>
+          <p ng-if="cur !== root" ng-repeat="id in cur.folders">
+            <a ui-sref="picbrowser({id: id})"
+               class="lower-folder">{{cur.names[id]}}</a></p>
         </div>
       </div>
     </div>
