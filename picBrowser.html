@@ -18,18 +18,16 @@
       </div>
     </div>
   </div>
-  <div class="row" ng-if="cur.videos.length !== 0">
+  <div class="row" ng-repeat="id in cur.videos" ng-show="$first || showVideo">
     <div class="col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading" ng-click="toggleVideo()">
+        <div class="panel-heading" ng-if="$first" ng-click="toggleVideo()">
           <div class="panel-title">{{cur.videos.length}} Video{{cur.videos.length > 1 ? "s" : ""}},
             click here to {{showVideo ? "hide" : "see"}} them</div>
         </div>
         <div class="panel-body" ng-show="showVideo">
-          <div ng-repeat="id in cur.videos">
-            <video style="width:100%" controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
-            <p>{{cur.names[id]}}</p>
-          </div>
+          <video style="width:100%" controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
+          <p>{{cur.names[id]}}</p>
         </div>
       </div>
     </div>
