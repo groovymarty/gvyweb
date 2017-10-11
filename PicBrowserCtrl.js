@@ -12,6 +12,10 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.firstlevel = placeholder;
     $scope.path = [];
     $scope.cur = placeholder;
+    $scope.nlimit = 100;
+    $scope.morePics = function() {
+      $scope.nlimit += 100;
+    };
     $scope.showVideo = false;
     $scope.toggleVideo = function() {
       $scope.showVideo = !$scope.showVideo;

@@ -29,7 +29,7 @@ body {
 #my-navbar .navbar-nav :hover {
   color: deeppink;
 }
-.btn-purple {
+.btn-primary.btn-purple, .btn-primary.btn-purple :focus {
   background-color: darkviolet;
  }
 .higher-folder {

@@ -23,7 +23,7 @@
       <div class="panel panel-default">
         <div class="panel-heading" ng-if="$first" ng-click="toggleVideo()">
           <div class="panel-title">{{cur.videos.length}} Video{{cur.videos.length > 1 ? "s" : ""}},
-            click here to {{showVideo ? "hide" : "see"}} them</div>
+            click here to {{showVideo ? "hide" : "see"}} {{cur.videos.length > 1 ? "them" : "it"}}</div>
         </div>
         <div class="panel-body" ng-show="showVideo">
           <video style="width:100%" controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
@@ -35,9 +35,13 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="pic-tile-panel">
-        <div class="pic-tile pic-tile-sm" ng-repeat="id in cur.pictures">
+        <div class="pic-tile pic-tile-sm" ng-repeat="id in cur.pictures | limitTo: nlimit">
           <div class="pic-tile-pic"><img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}"></div>
           <div class="pic-tile-text">{{cur.names[id]}}</div>
+        </div>
+        <div class="pic-tile pic-tile-sm" ng-if="cur.pictures.length > nlimit">
+          <button class="btn btn-primary btn-purple" ng-click="morePics()">
+            {{nlimit}} of {{cur.pictures.length}}, click here for more</button>
         </div>
       </div>
     </div>
