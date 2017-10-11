@@ -5,7 +5,7 @@
         <div class="panel-body">
           <p style="display: inline-block" ng-repeat="id in root.folders">
             <a ui-sref="picbrowser({id: id})" class="btn"
-               ng-class="id === firstlevel.id ? 'btn-primary' : 'btn-default'">{{id}}</a> &nbsp;
+               ng-class="id === firstlevel.id ? 'btn-primary btn-purple' : 'btn-default'">{{id}}</a> &nbsp;
           </p>
           <p ng-repeat="folder in path">
             <a ui-sref="picbrowser({id: $last ? folder.parent : folder.id})"
@@ -18,27 +18,28 @@
       </div>
     </div>
   </div>
+  <div class="row" ng-if="cur.videos.length !== 0">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading" ng-click="toggleVideo()">
+          <div class="panel-title">{{cur.videos.length}} Video{{cur.videos.length > 1 ? "s" : ""}},
+            click here to {{showVideo ? "hide" : "see"}} them</div>
+        </div>
+        <div class="panel-body" ng-show="showVideo">
+          <div ng-repeat="id in cur.videos">
+            <video style="width:100%" controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
+            <p>{{cur.names[id]}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-xs-12">
       <div class="pic-tile-panel">
         <div class="pic-tile pic-tile-sm" ng-repeat="id in cur.pictures">
           <div class="pic-tile-pic"><img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}"></div>
           <div class="pic-tile-text">{{cur.names[id]}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="panel-title">Videos</div>
-        </div>
-        <div class="panel-body">
-          <div ng-repeat="id in cur.videos">
-            <video controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
-            <p>{{cur.names[id]}}</p>
-          </div>
         </div>
       </div>
     </div>

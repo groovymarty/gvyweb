@@ -12,6 +12,10 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.firstlevel = placeholder;
     $scope.path = [];
     $scope.cur = placeholder;
+    $scope.showVideo = false;
+    $scope.toggleVideo = function() {
+      $scope.showVideo = !$scope.showVideo;
+    };
 
     // get specified folder and insert at beginning of path
     // continue recursively until root folder reached

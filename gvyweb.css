@@ -16,6 +16,7 @@ body {
   margin-right: 0px;
 }
 .groovy-logo, .groovy-logo-color,
+.cur-folder, .higher-folder,
 #my-navbar .navbar-brand,
 #my-navbar .navbar-text,
 #my-navbar .active {
@@ -28,6 +29,9 @@ body {
 #my-navbar .navbar-nav :hover {
   color: deeppink;
 }
+.btn-purple {
+  background-color: darkviolet;
+ }
 .higher-folder {
   font-size: 125%;
   text-decoration: underline;
