@@ -1,9 +1,12 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-12 kill-padding-xs">
-      <div style="display: inline-block; max-width: 100%">
-        <div style="display: inline-block; max-width: 100%" class="pic-tile-pic">
-          <img style="max-width: 100%" ng-src="{{'gvypics/pic/'+id+'?sz=lg'}}"></div>
+    <div class="col-xs-12">
+      <div style="display: inline-block">
+        <div style="display: inline-block" class="pic-tile-pic">
+          <div style="display: inline-block" class="full-screen-black-xs">
+            <img class="full-screen-xs" ng-src="{{'gvypics/pic/'+id+'?sz=lg'}}">
+          </div>
+        </div>
         <div class="pic-tile-text">{{cur.names[id]}}</div>
       </div>
     </div>
