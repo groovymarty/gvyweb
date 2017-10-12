@@ -9,10 +9,15 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       videos: []      
     };
     $scope.id = $stateParams.id;
+    $scope.nextId = null;
+    $scope.prevId = null;
     $scope.cur = placeholder;
 
     gvypics.getFolder($stateParams.id).then(function(folder) {
       $scope.cur = folder;
+      var i = folder.pictures.indexOf($stateParams.id);
+      $scope.nextId = folder.pictures[i+1];
+      $scope.prevId = folder.pictures[i-1];
     }).catch(function(err) {
       console.log(err.message);
     });
