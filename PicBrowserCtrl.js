@@ -22,16 +22,37 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     };
     $scope.showCarousel = false;
     $scope.curIndex = 0;
+    $scope.startIndex = 0;
+    $scope.endIndex = 0;
+    var nPrefetch = 2;
 
     function setCarouselSize() {
-      console.log("setting "+$window.screen.availWidth+" x "+$window.screen.availHeight);
-      document.getElementById("carousel").style.height = $window.screen.availHeight + "px";
+      document.getElementById("carousel").style.maxHeight = $window.screen.availHeight + "px";
       document.getElementById("carousel").style.width = $window.screen.availWidth + "px";
     }
+    
+    function updateCarouselRange() {
+      var iStart = $scope.curIndex - nPrefetch;
+      if (iStart < 0) {
+        iStart = 0;
+      }
+      if (iStart < $scope.startIndex) {
+        $scope.startIndex = iStart;
+      }
+      var iEnd = $scope.curIndex + nPrefetch;
+      if (iEnd > $scope.cur.pictures.length) {
+        iEnd = $scope.cur.pictures.length;
+      }
+      if (iEnd > $scope.endIndex) {
+        $scope.endIndex = iEnd;
+      }
+    }
+
     $scope.toggleCarousel = function(id) {
       $scope.showCarousel = !$scope.showCarousel;
       if ($scope.showCarousel) {
         $scope.curIndex = $scope.cur.pictures.indexOf(id) || 0;
+        updateCarouselRange();
         setCarouselSize();
       }
     };
@@ -40,6 +61,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         $timeout(setCarouselSize, 10);
       }
     });
+    $scope.$watch('curIndex', updateCarouselRange);
 
     // get specified folder and insert at beginning of path
     // continue recursively until root folder reached
