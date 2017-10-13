@@ -9,11 +9,12 @@
           </p>
           <p ng-repeat="folder in path">
             <a ui-sref="picbrowser({id: $last ? folder.parent : folder.id})"
-               ng-class="$last ? 'cur-folder' : 'higher-folder'">{{folder.name}}</a></p>
+               ng-class="$last ? 'cur-folder' : 'higher-folder'">{{folder.name}}</a>
           </p>
           <p ng-if="cur !== root" ng-repeat="id in cur.folders">
             <a ui-sref="picbrowser({id: id})"
-               class="lower-folder">{{cur.names[id]}}</a></p>
+               class="lower-folder">{{cur.names[id]}}</a>
+          </p>
         </div>
       </div>
     </div>
@@ -22,8 +23,10 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading" ng-if="$first" ng-click="toggleVideo()">
-          <div class="panel-title">{{cur.videos.length}} Video{{cur.videos.length > 1 ? "s" : ""}},
-            click here to {{showVideo ? "hide" : "see"}} {{cur.videos.length > 1 ? "them" : "it"}}</div>
+          <div class="panel-title">
+            {{cur.videos.length}} Video{{cur.videos.length > 1 ? "s" : ""}},
+            click here to {{showVideo ? "hide" : "see"}} {{cur.videos.length > 1 ? "them" : "it"}}
+          </div>
         </div>
         <div class="panel-body" ng-show="showVideo">
           <video style="width:100%" controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
@@ -32,12 +35,12 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" ng-hide="showCarousel">
     <div class="col-xs-12">
       <div class="pic-tile-panel">
         <div class="pic-tile pic-tile-sm" ng-repeat="id in cur.pictures | limitTo: nlimit">
-          <div class="pic-tile-pic">
-            <a ui-sref="picviewer({id: id})"><img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}"></a>
+          <div class="pic-tile-pic" ng-click="toggleCarousel(id)">
+            <img ng-src="{{'gvypics/pic/'+id+'?sz=sm'}}">
           </div>
           <div class="pic-tile-text">{{cur.names[id]}}</div>
         </div>
@@ -46,6 +49,15 @@
             {{nlimit}} of {{cur.pictures.length}}, click here for more</button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<div ng-show="showCarousel">
+  <button class="btn btn-default" ng-click="toggleCarousel()">Close Carousel</button>
+  <div uib-carousel id="carousel" style="background-color: black" active="curIndex">
+    <div uib-slide ng-repeat="id in cur.pictures" index="$index">
+      <img class="max-size" ng-src="{{'gvypics/pic/'+id+'?sz=lg'}}">
+      <div class="carousel-caption"><p>{{cur.names[id]}}</p></div>
     </div>
   </div>
 </div>

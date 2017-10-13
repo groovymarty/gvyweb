@@ -13,12 +13,6 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       controller: "PicBrowserCtrl",
       templateUrl: "picBrowser.html"
     })
-    .state('picviewer', {
-      displayName: "Pictures",
-      url: "/picviewer/:id",
-      controller: "PicViewerCtrl",
-      templateUrl: "picViewer.html"
-    })
     .state('slideshows', {
       displayName: "Slide Shows",
       url: "/slideshows",

@@ -4,6 +4,14 @@ html, body {
 body {
   background-color: lemonchiffon;
 }
+.full-size, .carousel-inner, .carousel-inner .item, .carousel-inner .item .text-center {
+  height: 100%;
+  width: 100%;
+}
+.max-size {
+  max-height: 100%;
+  max-width: 100%;
+}
 .groovy-font, .groovy-logo {
   font-family: 'Spicy Rice', fantasy;
 }
@@ -48,22 +56,6 @@ body {
   .lower-folder {
     font-size: 125%;
   }
-  .full-screen-black-xs {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background-color: black;
-  }
-  .full-screen-pic-xs {
-    height: 100%;
-    width: 100%;
-  }
-  .full-screen-pic-xs > img {
-    max-height: 100%;
-    max-width: 100%;
-  }
 }
 .pic-tile-panel {
   display: -webkit-flex;
@@ -99,22 +91,6 @@ body {
   background-color: white;
   border: solid 1px gainsboro;
 }
-.btn-dim-left {
-  opacity: 0.3;
-  position: absolute;
-  left: 15px;
-  bottom: 15px;
-}
-.btn-dim-center {
-  opacity: 0.3;
-  position: absolute;
-  left: 50%;
-  margin-left: -26px;
-  bottom: 15px;
-}
-.btn-dim-right {
-  opacity: 0.3;
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
+.carousel-indicators {
+  display: none;
 }
