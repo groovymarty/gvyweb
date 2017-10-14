@@ -50,7 +50,7 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
 
   // get specified folder
   // return from cache if possible, otherwise fetch from server and add to cache
-  function getFolder(id) {
+  this.getFolder = function(id) {
     if (id in folderCache) {
       return Promise.resolve(folderCache[id]);
     } else {
@@ -71,9 +71,5 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
         }
       });
     }
-  }
-
-  return {
-    getFolder: getFolder
   };
 }]);

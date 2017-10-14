@@ -27,8 +27,11 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     var nPrefetch = 2;
 
     function setCarouselSize() {
-      document.getElementById("carousel").style.maxHeight = $window.screen.availHeight + "px";
-      document.getElementById("carousel").style.width = $window.screen.availWidth + "px";
+      var h = $window.innerHeight;
+      var w = $window.innerWidth;
+      console.log("setting "+w+"x"+h);
+      document.getElementById("carousel").style.height = h + "px";
+      document.getElementById("carousel").style.width = w + "px";
     }
     
     function updateCarouselRange() {

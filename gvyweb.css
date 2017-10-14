@@ -4,14 +4,6 @@ html, body {
 body {
   background-color: lemonchiffon;
 }
-.full-size, .carousel-inner, .carousel-inner .item, .carousel-inner .item .text-center {
-  height: 100%;
-  width: 100%;
-}
-.max-size {
-  max-height: 100%;
-  max-width: 100%;
-}
 .groovy-font, .groovy-logo {
   font-family: 'Spicy Rice', fantasy;
 }
@@ -93,4 +85,12 @@ body {
 }
 .carousel-indicators {
   display: none;
+}
+.carousel-inner, .carousel-inner .item, .carousel-inner .item .text-center {
+  height: 100%;
+  width: 100%;
+}
+.carousel-pic {
+  max-height: 100%;
+  max-width: 100%;
 }
