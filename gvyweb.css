@@ -59,25 +59,47 @@ body {
   flex-wrap: wrap;
 }
 .pic-tile {
-  margin-right: 20px;
   margin-bottom: 20px;
 }
 .pic-tile-sm {
   width: 130px; /*2px for border*/
 }
-.pic-tile-md {
-  width: 642px; /*2px for border*/
+.pic-tile-sm > img {
+  border: solid 1px gainsboro;
+}
+@media(min-width: 300px) { /*room for two?*/
+  .pic-tile-sm {
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+}
+@media(min-width: 657px) { /*room for border & margin?*/
+  .pic-tile-md {
+    width: 642px;
+    margin-left: 15px;
+  }
+  .pic-tile-md > img {
+    border: solid 1px gainsboro;
+  }
+}
+@media(max-width: 656px) { /*else borderless, marginless */
+  .pic-tile-md {
+    width: 640px;
+  }
 }
 .pic-tile-lg {
-  width: 1026px; /*2px for border*/
+  width: 1024px;
 }
 .pic-tile-pic {
+  position: relative;
 }
 .pic-tile-pic > img {
-  border: solid 1px gainsboro;
+  max-width: 100%;
   border-bottom: none;
 }
 .pic-tile-text {
+  float: left;
+  max-width: 100%;
   padding: 3px;
   overflow-wrap: break-word;
   background-color: white;

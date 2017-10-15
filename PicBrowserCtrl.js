@@ -1,6 +1,7 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
   '$scope', '$stateParams', 'gvypics', '$window', '$timeout',
   function($scope, $stateParams, gvypics, $window, $timeout) {
+    $scope.sz = $stateParams.sz || "sm";
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -12,9 +13,10 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.firstlevel = placeholder;
     $scope.path = [];
     $scope.cur = placeholder;
-    $scope.nlimit = 100;
+    var moreBump = ($scope.sz == "sm") ? 100 : 20;
+    $scope.nlimit = moreBump;
     $scope.morePics = function() {
-      $scope.nlimit += 100;
+      $scope.nlimit += moreBump;
     };
     $scope.showVideo = false;
     $scope.toggleVideo = function() {

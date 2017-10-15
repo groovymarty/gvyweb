@@ -9,7 +9,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('picbrowser', {
       displayName: "Pictures",
-      url: "/picbrowser/:id",
+      url: "/picbrowser/:id?sz",
       controller: "PicBrowserCtrl",
       templateUrl: "picBrowser.html"
     })
