@@ -31,10 +31,14 @@
       </div>
       <div class="navbar-collapse" uib-collapse="isCollapsed">
         <ul class="nav navbar-nav">
-          <li><a ui-sref="home" ui-sref-active="active" ng-click="collapse()">Home</a></li>
-          <li><a ui-sref="picbrowser({id: ''})" ui-sref-active="active" ng-click="collapse()">Pictures</a></li>
-          <li><a ui-sref="picbrowser({id: 'C02'})" ng-click="collapse()">Family Album</a></li>
-          <li><a ui-sref="slideshows" ui-sref-active="active" ng-click="collapse()">Slide Shows</a></li>
+          <li><a ui-sref="home" ui-sref-active="active"
+                 ng-click="collapse()">Home</a></li>
+          <li><a ui-sref="picbrowser({id: ''})" ng-class="{active: $state.current.displayName=='Pictures'}"
+                 ng-click="collapse()">Pictures</a></li>
+          <li><a ui-sref="picbrowser({id: 'C02'})"
+                 ng-click="collapse()">Family Album</a></li>
+          <li><a ui-sref="slideshows" ui-sref-active="active"
+                 ng-click="collapse()">Slide Shows</a></li>
         </ul>
       </div>
     </div>
