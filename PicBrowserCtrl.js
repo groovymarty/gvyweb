@@ -1,7 +1,27 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
   '$scope', '$stateParams', 'gvypics', '$window', '$timeout',
   function($scope, $stateParams, gvypics, $window, $timeout) {
-    $scope.sz = $stateParams.sz || "sm";
+    var moreBump;
+    $scope.toggleTileSz = function(newSz) {
+      $scope.sz = newSz || (($scope.sz === "sm") ? "md" : "sm");
+      switch ($scope.sz) {
+        case "sm":
+          moreBump = 100;
+          $scope.tileSzBtnText = "Large Tiles";
+          break;
+        case "md":
+          moreBump = 20;
+          $scope.tileSzBtnText = "Small Tiles";
+          break;
+      }
+      $scope.nlimit = moreBump;
+      $stateParams.sz = $scope.sz;
+    };
+    $scope.toggleTileSz($stateParams.sz);
+    $scope.morePics = function() {
+      $scope.nlimit += moreBump;
+    };
+
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -13,15 +33,12 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.firstlevel = placeholder;
     $scope.path = [];
     $scope.cur = placeholder;
-    var moreBump = ($scope.sz == "sm") ? 100 : 20;
-    $scope.nlimit = moreBump;
-    $scope.morePics = function() {
-      $scope.nlimit += moreBump;
-    };
+ 
     $scope.showVideo = false;
     $scope.toggleVideo = function() {
       $scope.showVideo = !$scope.showVideo;
     };
+
     $scope.showCarousel = false;
     $scope.curIndex = 0;
     $scope.startIndex = 0;
@@ -67,6 +84,19 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
     });
     $scope.$watch('curIndex', updateCarouselRange);
+    
+    function pickNext(cur) {
+      if (cur.folders.length) {
+        // Pick first child
+        $scope.nextId = $scope.cur.folders[0];
+      } else if (cur.parentFolder) {
+        // Pick next sibling, if there is one
+        var i = cur.parentFolder.folders.indexOf(cur.id) + 1;
+        if (i < cur.parentFolder.folders.length) {
+          $scope.nextId = cur.parentFolder.folders[i];
+        }
+      }
+    }
 
     // get specified folder and insert at beginning of path
     // continue recursively until root folder reached
@@ -76,9 +106,16 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           $scope.cur = folder;
         }
         if (folder.id === "") {
+          if ($scope.firstlevel) {
+            $scope.firstlevel.parentFolder = folder;
+          }
           $scope.root = folder;
+          pickNext($scope.cur);
           return true; //done
         } else {
+          if ($scope.path[0]) {
+            $scope.path[0].parentFolder = folder;
+          }
           if (folder.parent === "") {
             $scope.firstlevel = folder;
           } else {

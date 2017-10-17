@@ -4,18 +4,26 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <p style="display: inline-block" ng-repeat="id in root.folders">
-            <a ui-sref="picbrowser({id: id})" class="btn"
+            <a ui-sref="picbrowser({id: id, sz: sz})" class="btn"
                ng-class="id === firstlevel.id ? 'btn-primary btn-purple' : 'btn-default'">{{id}}</a> &nbsp;
           </p>
           <p ng-repeat="folder in path">
-            <a ui-sref="picbrowser({id: $last ? folder.parent : folder.id})"
+            <a ui-sref="picbrowser({id: $last ? folder.parent : folder.id, sz: sz})"
                ng-class="$last ? 'cur-folder' : 'higher-folder'">{{folder.name}}</a>
           </p>
           <p ng-if="cur !== root" ng-repeat="id in cur.folders">
-            <a ui-sref="picbrowser({id: id})"
+            <a ui-sref="picbrowser({id: id, sz: sz})"
                class="lower-folder">{{cur.names[id]}}</a>
           </p>
         </div>
+      </div>
+      <div class="panel-footer-drippy">
+        <a ui-sref="picbrowser({id: cur.parent, sz: sz})" class="btn btn-default" ng-show="cur !== root">
+          <span class="glyphicon glyphicon-arrow-up groovy-logo-color"></span> Back</a> &nbsp;
+        <a ui-sref="picbrowser({id: nextId, sz: sz})" class="btn btn-default" ng-show="nextId">
+          <span class="glyphicon glyphicon-arrow-right groovy-logo-color"></span> Next</a>
+        <button class="btn btn-default pull-right" ng-show="cur.pictures.length" ng-click="toggleTileSz()">
+          {{tileSzBtnText}}</button>
       </div>
     </div>
   </div>
@@ -24,8 +32,8 @@
       <div class="panel panel-default">
         <div class="panel-heading" ng-if="$first" ng-click="toggleVideo()">
           <div class="panel-title">
-            {{cur.videos.length}} Video{{cur.videos.length > 1 ? "s" : ""}},
-            click here to {{showVideo ? "hide" : "see"}} {{cur.videos.length > 1 ? "them" : "it"}}
+            <span class="groovy-logo">{{cur.videos.length}} Video{{cur.videos.length > 1 ? "s" : ""}}</span>
+            <span class="curly-font">click here to {{showVideo ? "hide" : "see"}} {{cur.videos.length > 1 ? "them" : "it"}}</span>
           </div>
         </div>
         <div class="panel-body" ng-show="showVideo">

@@ -116,3 +116,9 @@ body {
   max-height: 100%;
   max-width: 100%;
 }
+.panel-footer-drippy {
+  margin-top: -20px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
