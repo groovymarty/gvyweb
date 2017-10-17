@@ -85,16 +85,25 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     });
     $scope.$watch('curIndex', updateCarouselRange);
     
-    function pickNext(cur) {
-      if (cur.folders.length) {
-        // Pick first child
-        $scope.nextId = $scope.cur.folders[0];
-      } else if (cur.parentFolder) {
-        // Pick next sibling, if there is one
+    // pick target for "next" button
+    function pickNextSibling(cur) {
+      if (cur.parentFolder) {
         var i = cur.parentFolder.folders.indexOf(cur.id) + 1;
         if (i < cur.parentFolder.folders.length) {
           $scope.nextId = cur.parentFolder.folders[i];
+        } else {
+          pickNextSibling(cur.parentFolder);
         }
+      }
+    }
+    function pickNext(cur) {
+      if (cur.folders.length) {
+        // Pick first child, but not if we're at root
+        if (cur.id !== "") {
+          $scope.nextId = $scope.cur.folders[0];
+        }
+      } else {
+        pickNextSibling(cur);
       }
     }
 
