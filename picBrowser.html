@@ -60,7 +60,7 @@
   <button class="btn btn-default" ng-click="toggleCarousel()">Close Carousel</button>
   <div uib-carousel id="carousel" style="background-color: black" active="curIndex">
     <div uib-slide ng-repeat="id in cur.pictures.slice(startIndex, endIndex)" index="$index">
-      <img class="carousel-pic" ng-src="{{'gvypics/pic/'+id+'?sz=lg'}}">
+      <img class="carousel-pic" ng-src="{{'gvypics/pic/'+id+'?sz=lg'}}" ng-click="toggleCarousel()">
       <div class="carousel-caption"><p>{{cur.names[id]}}</p></div>
     </div>
   </div>
