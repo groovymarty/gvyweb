@@ -69,38 +69,13 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         $scope.endIndex = iEnd;
       }
     }
-    
-    function GoInFullscreen(element) { //mhs added
-      if(element.requestFullscreen)
-        element.requestFullscreen();
-      else if(element.mozRequestFullScreen)
-        element.mozRequestFullScreen();
-      else if(element.webkitRequestFullscreen)
-        element.webkitRequestFullscreen();
-      else if(element.msRequestFullscreen)
-        element.msRequestFullscreen();
-    }
-    
-    function GoOutFullscreen() { //mhs added
-      if(document.exitFullscreen)
-        document.exitFullscreen();
-      else if(document.mozCancelFullScreen)
-        document.mozCancelFullScreen();
-      else if(document.webkitExitFullscreen)
-        document.webkitExitFullscreen();
-      else if(document.msExitFullscreen)
-        document.msExitFullscreen();
-    }
 
     $scope.toggleCarousel = function(id) {
       $scope.showCarousel = !$scope.showCarousel;
       if ($scope.showCarousel) {
         $scope.curIndex = $scope.cur.pictures.indexOf(id) || 0;
         updateCarouselRange();
-        GoInFullscreen(document.getElementById("carousel")); //mhs added
-        //setCarouselSize();
-      } else {
-        GoOutFullscreen(document.getElementById("carousel")); //mhs added
+        setCarouselSize();
       }
     };
     angular.element($window).on('resize', function() {
