@@ -147,17 +147,6 @@ body {
   right: 15px;
   bottom: 15px;
 }
-.carousel-indicators {
-  display: none;
-}
-.carousel-inner, .carousel-inner .item, .carousel-inner .item .text-center {
-  height: 100%;
-  width: 100%;
-}
-.carousel-pic {
-  max-height: 100%;
-  max-width: 100%;
-}
 .panel-footer-drippy {
   margin-top: -20px;
   margin-bottom: 20px;

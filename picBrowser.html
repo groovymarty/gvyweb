@@ -22,7 +22,7 @@
           <span class="glyphicon glyphicon-arrow-up groovy-logo-color"></span> Back</a> &nbsp;
         <a ui-sref="picbrowser({id: nextId, sz: sz})" class="btn btn-default" ng-show="nextId">
           <span class="glyphicon glyphicon-arrow-right groovy-logo-color"></span> Next</a>
-        <button class="btn btn-default pull-right" ng-show="cur.pictures.length" ng-click="toggleTileSz()">
+        <button class="btn btn-default pull-right" ng-show="cur.pictures.length" ng-click="rotateTileSz()">
           {{tileSzBtnText}}</button>
       </div>
     </div>
@@ -44,9 +44,9 @@
     </div>
   </div>
 </div>
-<div class="pic-tile-panel" ng-hide="showCarousel">
+<div class="pic-tile-panel">
   <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-repeat="id in cur.pictures | limitTo: nlimit">
-    <div class="pic-tile-pic" ng-click="toggleCarousel(id)">
+    <div class="pic-tile-pic" ng-click="clickPic(id)">
       <img ng-src="{{'gvypics/pic/'+id+'?sz='+sz}}">
     </div>
     <p class="pic-tile-text">{{cur.names[id]}}</p>
@@ -54,14 +54,5 @@
   <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="cur.pictures.length > nlimit">
     <button class="btn btn-primary btn-purple" ng-click="morePics()">
       {{nlimit}} of {{cur.pictures.length}}, click here for more</button>
-  </div>
-</div>
-<div ng-show="showCarousel">
-  <button class="btn btn-default" ng-click="toggleCarousel()">Close Carousel</button>
-  <div uib-carousel id="carousel" style="background-color: black" active="curIndex">
-    <div uib-slide ng-repeat="id in cur.pictures.slice(startIndex, endIndex)" index="$index">
-      <img class="carousel-pic" ng-src="{{'gvypics/pic/'+id+'?sz=lg'}}">
-      <div class="carousel-caption"><p>{{cur.names[id]}}</p></div>
-    </div>
   </div>
 </div>

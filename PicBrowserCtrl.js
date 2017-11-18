@@ -1,8 +1,20 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
-  '$scope', '$stateParams', 'gvypics', '$window', '$timeout',
-  function($scope, $stateParams, gvypics, $window, $timeout) {
+  '$scope', '$stateParams', '$state', 'gvypics',
+  function($scope, $stateParams, $state, gvypics) {
+    var placeholder = {
+      isPlaceholder: true,
+      id: "",
+      folders: [],
+      pictures: [],
+      videos: []      
+    };
+    $scope.root = placeholder;
+    $scope.firstlevel = placeholder;
+    $scope.path = [];
+    $scope.cur = placeholder;
     var moreBump;
-    $scope.toggleTileSz = function(newSz) {
+
+    $scope.rotateTileSz = function(newSz) {
       $scope.sz = newSz || (($scope.sz === "sm") ? "md" : "sm");
       switch ($scope.sz) {
         case "sm":
@@ -17,74 +29,25 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       $scope.nlimit = moreBump;
       $stateParams.sz = $scope.sz;
     };
-    $scope.toggleTileSz($stateParams.sz);
+    $scope.rotateTileSz($stateParams.sz);
+    
+    $scope.clickPic = function(id) {
+      if ($scope.sz !== "md") {
+        $scope.rotateTileSz();
+      } else {
+        $state.go('picviewer', {id: id});
+      }
+    };
+
     $scope.morePics = function() {
       $scope.nlimit += moreBump;
     };
-
-    var placeholder = {
-      isPlaceholder: true,
-      id: "",
-      folders: [],
-      pictures: [],
-      videos: []      
-    };
-    $scope.root = placeholder;
-    $scope.firstlevel = placeholder;
-    $scope.path = [];
-    $scope.cur = placeholder;
  
     $scope.showVideo = false;
     $scope.toggleVideo = function() {
       $scope.showVideo = !$scope.showVideo;
     };
 
-    $scope.showCarousel = false;
-    $scope.curIndex = 0;
-    $scope.startIndex = 0;
-    $scope.endIndex = 0;
-    var nPrefetch = 2;
-
-    function setCarouselSize() {
-      var h = $window.innerHeight;
-      var w = $window.innerWidth;
-      console.log("setting "+w+"x"+h);
-      document.getElementById("carousel").style.height = h + "px";
-      document.getElementById("carousel").style.width = w + "px";
-    }
-    
-    function updateCarouselRange() {
-      var iStart = $scope.curIndex - nPrefetch;
-      if (iStart < 0) {
-        iStart = 0;
-      }
-      if (iStart < $scope.startIndex) {
-        $scope.startIndex = iStart;
-      }
-      var iEnd = $scope.curIndex + nPrefetch;
-      if (iEnd > $scope.cur.pictures.length) {
-        iEnd = $scope.cur.pictures.length;
-      }
-      if (iEnd > $scope.endIndex) {
-        $scope.endIndex = iEnd;
-      }
-    }
-
-    $scope.toggleCarousel = function(id) {
-      $scope.showCarousel = !$scope.showCarousel;
-      if ($scope.showCarousel) {
-        $scope.curIndex = $scope.cur.pictures.indexOf(id) || 0;
-        updateCarouselRange();
-        setCarouselSize();
-      }
-    };
-    angular.element($window).on('resize', function() {
-      if ($scope.showCarousel) {
-        $timeout(setCarouselSize, 10);
-      }
-    });
-    $scope.$watch('curIndex', updateCarouselRange);
-    
     // pick target for "next" button
     function pickNextSibling(cur) {
       if (cur.parentFolder) {
