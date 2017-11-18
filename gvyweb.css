@@ -1,4 +1,5 @@
 html, body {
+  width: 100%;
   height: 100%;
 }
 body {
@@ -50,6 +51,7 @@ body {
   }
 }
 .pic-tile-panel {
+  position: relative;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -64,7 +66,7 @@ body {
 .pic-tile-sm {
   width: 130px; /*2px for border*/
 }
-.pic-tile-sm > img {
+.pic-tile-sm img {
   border: solid 1px gainsboro;
 }
 @media(min-width: 300px) { /*room for two?*/
@@ -78,7 +80,7 @@ body {
     width: 642px;
     margin-left: 15px;
   }
-  .pic-tile-md > img {
+  .pic-tile-md img { /*640*/
     border: solid 1px gainsboro;
   }
 }
@@ -87,14 +89,35 @@ body {
     width: 640px;
   }
 }
-.pic-tile-lg {
-  width: 1024px;
+@media(min-width: 1041px) {
+  .pic-tile-lg {
+    width: 1026px;
+    margin-top: 15px;
+    margin-left: 15px;
+  }
+  .pic-tile-lg img { /*1024*/
+    border: solid 1px gainsboro;
+  }
+}
+@media(max-width: 1040px) {
+  .pic-tile-lg {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+  }
+  .pic-tile-pic {
+    width: 100%;
+    height: 100%;
+  }
 }
 .pic-tile-pic {
   position: relative;
 }
-.pic-tile-pic > img {
+.pic-tile-pic img {
+  min-width: 64px;
+  min-height: 64px;
   max-width: 100%;
+  max-height: 100%;
   border-bottom: none;
 }
 .pic-tile-text {
@@ -104,6 +127,25 @@ body {
   overflow-wrap: break-word;
   background-color: white;
   border: solid 1px gainsboro;
+}
+.btn-dim-left {
+  opacity: 0.3;
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+}
+.btn-dim-center {
+  opacity: 0.3;
+  position: absolute;
+  left: 50%;
+  margin-left: -26px;
+  bottom: 15px;
+}
+.btn-dim-right {
+  opacity: 0.3;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
 }
 .carousel-indicators {
   display: none;
