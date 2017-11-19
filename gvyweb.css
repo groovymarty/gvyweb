@@ -129,6 +129,9 @@ body {
   background-color: white;
   border: solid 1px gainsboro;
 }
+.current .pic-tile-text {
+  background-color: yellow;
+}
 .btn-dim-left {
   opacity: 0.3;
   position: absolute;
