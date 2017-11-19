@@ -11,48 +11,50 @@
             <a ui-sref="picbrowser({id: $last ? folder.parent : folder.id, sz: sz})"
                ng-class="$last ? 'cur-folder' : 'higher-folder'">{{folder.name}}</a>
           </p>
-          <p ng-if="cur !== root" ng-repeat="id in cur.folders">
+          <p ng-if="curFold !== root" ng-repeat="id in curFold.folders">
             <a ui-sref="picbrowser({id: id, sz: sz})"
-               class="lower-folder">{{cur.names[id]}}</a>
+               class="lower-folder">{{curFold.names[id]}}</a>
           </p>
         </div>
       </div>
       <div class="panel-footer-drippy">
-        <a ui-sref="picbrowser({id: cur.parent, sz: sz})" class="btn btn-default" ng-show="cur !== root">
+        <a ui-sref="picbrowser({id: curFold.parent, sz: sz})" class="btn btn-default" ng-show="curFold !== root">
           <span class="glyphicon glyphicon-arrow-up groovy-logo-color"></span> Back</a> &nbsp;
         <a ui-sref="picbrowser({id: nextId, sz: sz})" class="btn btn-default" ng-show="nextId">
           <span class="glyphicon glyphicon-arrow-right groovy-logo-color"></span> Next</a>
-        <button class="btn btn-default pull-right" ng-show="cur.pictures.length" ng-click="rotateTileSz()">
+        <button class="btn btn-default pull-right" ng-show="curFold.pictures.length" ng-click="rotateTileSz()">
           {{tileSzBtnText}}</button>
       </div>
     </div>
   </div>
-  <div class="row" ng-repeat="id in cur.videos" ng-show="$first || showVideo">
+  <div class="row" ng-repeat="id in curFold.videos" ng-show="$first || showVideo">
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading" ng-if="$first" ng-click="toggleVideo()">
           <div class="panel-title">
-            <span class="groovy-logo">{{cur.videos.length}} Video{{cur.videos.length > 1 ? "s" : ""}}</span>
-            <span class="curly-font">click here to {{showVideo ? "hide" : "see"}} {{cur.videos.length > 1 ? "them" : "it"}}</span>
+            <span class="groovy-logo">{{curFold.videos.length}} Video{{curFold.videos.length > 1 ? "s" : ""}}</span>
+            <span class="curly-font">click here to {{showVideo ? "hide" : "see"}}
+                  {{curFold.videos.length > 1 ? "them" : "it"}}</span>
           </div>
         </div>
         <div class="panel-body" ng-show="showVideo">
           <video style="width:100%" controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
-          <p>{{cur.names[id]}}</p>
+          <p>{{curFold.names[id]}}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div class="pic-tile-panel">
-  <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-repeat="id in cur.pictures | limitTo: nlimit">
+  <div class="pic-tile" ng-class="'pic-tile-'+sz" id="{{id}}"
+       ng-repeat="id in curFold.pictures | limitTo: nlimit">
     <div class="pic-tile-pic" ng-click="clickPic(id)">
       <img ng-src="{{'gvypics/pic/'+id+'?sz='+sz}}">
     </div>
-    <p class="pic-tile-text">{{cur.names[id]}}</p>
+    <p class="pic-tile-text">{{curFold.names[id]}}</p>
   </div>
-  <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="cur.pictures.length > nlimit">
+  <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="curFold.pictures.length > nlimit">
     <button class="btn btn-primary btn-purple" ng-click="morePics()">
-      {{nlimit}} of {{cur.pictures.length}}, click here for more</button>
+      {{nlimit}} of {{curFold.pictures.length}}, click here for more</button>
   </div>
 </div>
