@@ -43,6 +43,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.rotateTileSz($stateParams.sz);
     
     $scope.clickPic = function(id) {
+      /*
       setCurPic(id);
       if ($scope.sz !== "md") {
         $scope.rotateTileSz();
@@ -50,6 +51,8 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         $state.go('picviewer', {id: id});
       }
       setSticky();
+      */
+      $state.go('picviewer', {id: id});
     };
 
     $scope.morePics = function() {
@@ -148,34 +151,42 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
     }
     
-    function isInView(elem) {
+    function isInView(elem, state) {
       var top = elem.getBoundingClientRect().top;
       var bottom = elem.getBoundingClientRect().bottom;
       var wHeight = window.innerHeight;
+      var result = false;
+      var partial = false;
       if (top < 0) {
-        if (bottom < 0) {
-          // element is completely out of view above
-          return false;
-        } else {
+        if (bottom >= 0) {
           // top edge is above but bottom is in view
           // declare in view if at least 50% of screen covered
-          return bottom*2 >= wHeight;
+          partial = true;
+          result = bottom*2 >= wHeight || (state && state.forceNext);
         }
       } else if (top < wHeight) {
         // top edge is in view
         // declare in view if bottom edge also in view or at least 50% of screen covered
-        return bottom < wHeight || top*2 < wHeight;
-      } else {
-        // element is completely out of view below
-        return false;
+        if (bottom < wHeight) {
+          result = true;
+        } else {
+          partial = true;
+          result = top*2 < wHeight || (state && state.forceNext);
+        }
       }
+      // if partially in view but not not enough, force next one to be in view
+      if (state) {
+        state.forceNext = partial && !result;
+      }
+      return result;
     }
     
     function findInView() {
       if (!curPic || !isInView(curPic)) {
+        var inViewState = {};
         if (!$scope.curFold.pictures.some(function(id) {
           var elem = document.getElementById(id);
-          if (elem && isInView(elem)) {
+          if (elem && isInView(elem, inViewState)) {
             setCurPic(id);
             return true;
           } else {
