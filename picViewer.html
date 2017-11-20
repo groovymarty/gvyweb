@@ -1,7 +1,7 @@
-<div class="pic-tile pic-viewer">
+<div class="pic-tile pic-viewer" id="viewer">
   <div class="pic-tile-pic">
     <img ng-src="{{'gvypics/pic/'+id+'?sz=lg'}}">
-    </div>
+  </div>
   <div class="pic-tile-text hidden-xs">{{cur.names[id]}}</div>
   <a ui-sref="picviewer({id: prevId})" ng-if="prevId"
      class="btn btn-default btn-lg btn-dim-left">

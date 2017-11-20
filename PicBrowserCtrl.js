@@ -138,7 +138,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     
     function setCurPic(id) {
       if (curPic) {
-        angular.element(curPic).removeClass('current');
+        angular.element(curPic).removeClass('current sticky');
       }
       if (id) {
         curPic = document.getElementById(id);

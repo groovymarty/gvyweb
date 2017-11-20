@@ -21,5 +21,18 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     }).catch(function(err) {
       console.log(err.message);
     });
+    
+    var elem = document.getElementById('viewer');
+    if (elem) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullscreen) {
+        elem.mozRequestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    }
   }
 ]);
