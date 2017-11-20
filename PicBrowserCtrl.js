@@ -13,7 +13,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.path = [];
     $scope.curFold = placeholder;
     $scope.nlimit = 0;
-    var curPic = null;
+    var curPic = null; //DOM pic-tile element
     var moreBump;
     var scrollTimer = null;
     var lastScrollY = 0;
@@ -37,7 +37,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
       $stateParams.sz = $scope.sz;
       if (curPic) {
-        $scope.$applyAsync(fixScrollReset);
+        $scope.$applyAsync(setSticky);
       }
     };
     $scope.rotateTileSz($stateParams.sz);
@@ -49,7 +49,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       } else {
         $state.go('picviewer', {id: id});
       }
-      fixScrollReset();
+      setSticky();
     };
 
     $scope.morePics = function() {
@@ -123,11 +123,12 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           var moreNeeded = i - $scope.nlimit + 1;
           $scope.nlimit += Math.ceil(moreNeeded / 20) * 20;
           //console.log("bumping nlimit to "+$scope.nlimit);
+          // give angular a chance to respond to nlimit change then try again
           $scope.$applyAsync(initCurPic);
         } else {
           setCurPic(id);
           if (curPic) {
-            fixScrollReset();
+            setSticky();
           } else {
             startScrollTimer(initCurPic, 200);
           }
@@ -151,15 +152,55 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       var top = elem.getBoundingClientRect().top;
       var bottom = elem.getBoundingClientRect().bottom;
       var wHeight = window.innerHeight;
-      // true if top of element is in view, and bottom also in view if possible
-      return top >= 0 && top < wHeight && (bottom < wHeight || top < 1);
+      if (top < 0) {
+        if (bottom < 0) {
+          // element is completely out of view above
+          return false;
+        } else {
+          // top edge is above but bottom is in view
+          // declare in view if at least 50% of screen covered
+          return bottom*2 >= wHeight;
+        }
+      } else if (top < wHeight) {
+        // top edge is in view
+        // declare in view if bottom edge also in view or at least 50% of screen covered
+        return bottom < wHeight || top*2 < wHeight;
+      } else {
+        // element is completely out of view below
+        return false;
+      }
     }
     
-    function fixScrollReset() {
+    function findInView() {
+      if (!curPic || !isInView(curPic)) {
+        if (!$scope.curFold.pictures.some(function(id) {
+          var elem = document.getElementById(id);
+          if (elem && isInView(elem)) {
+            setCurPic(id);
+            return true;
+          } else {
+            return false;
+          }
+        })) {
+          console.log("can't find picture in view");
+        }
+      }
+    }
+    
+    function setSticky() {
       if (curPic) {
+        angular.element(curPic).addClass('sticky');
         inViewCount = 0;
         userScroll = false;
         fixScroll();
+      }
+    }
+    
+    function clearSticky() {
+      if (curPic) {
+        angular.element(curPic).removeClass('sticky');
+        userScroll = true;
+        cancelScrollTimer();
       }
     }
     
@@ -170,14 +211,16 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           inViewCount = 0;
           userScroll = false;
           curPic.scrollIntoView();
+          startScrollTimer(fixScroll, 500);
         } else {
           inViewCount += 1;
           //console.log("in view "+inViewCount);
           if (inViewCount >= 2) {
-            userScroll = true;
+            clearSticky();
+          } else {
+            startScrollTimer(fixScroll, 500);
           }
         }
-        startScrollTimer(fixScroll, 500);
       }
     }
     
@@ -199,15 +242,19 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     
     angular.element(window).on('scroll', function() {
       var scrollY = window.scrollY;
-      var delta = scrollY - lastScrollY;
       if (userScroll) {
-        if (delta < -10 || delta > 10) {
-          cancelScrollTimer();
-          lastScrollY = scrollY;
-        }
-      } else {
-        lastScrollY = scrollY;
+        //var delta = scrollY - lastScrollY;
+        $scope.$applyAsync(findInView);
       }
+      lastScrollY = scrollY;
+    });
+    
+    angular.element(window).on('resize', function() {
+      setSticky();
+    });
+    
+    angular.element(window).on('orientationchange', function() {
+      setSticky();
     });
   }
 ]);

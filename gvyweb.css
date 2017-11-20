@@ -130,7 +130,11 @@ body {
   border: solid 1px gainsboro;
 }
 .current .pic-tile-text {
-  background-color: yellow;
+  background-color: gold;
+}
+.sticky .pic-tile-text {
+  color: deeppink;
+  border-color: deeppink;
 }
 .btn-dim-left {
   opacity: 0.3;
