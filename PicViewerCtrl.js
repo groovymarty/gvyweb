@@ -28,12 +28,12 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     });
     
     function isFullScreen() {
-      return document.fullScreenElement || document.mozFullScreenElement ||
+      return document.fullscreenElement || document.mozFullScreenElement ||
         document.webkitFullScreenElement || document.msFullScreenElement;
     }
     
     function requestFullScreen(elem) {
-      if (elem.requestFullScreen) {
+      if (elem.requestFullscreen) {
         elem.requestFullScreen();
       } else if (elem.mozRequestFullScreen) {
         elem.mozRequestFullScreen();
@@ -44,12 +44,26 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       }
     }
 
+    function exitFullScreen() {
+      if (document.exitFullscreen) {
+        document.exitFullScreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullScreen) {
+        document.webkitExitFullScreen();
+      } else if (document.msExitFullScreen) {
+        document.msExitFullScreen();
+      }
+    }
+
     $scope.clickPic = function() {
       if (!isFullScreen()) {
         var elem = document.getElementById('viewer');
         if (elem) {
           requestFullScreen(elem);
         }
+      } else {
+        exitFullScreen();
       }
     };
     
