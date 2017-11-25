@@ -264,12 +264,22 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       lastScrollY = scrollY;
     });
     
+    function fixScrollOnce() {
+      if (curPic && !isInView(curPic)) {
+        curPic.scrollIntoView();
+      }
+    }
+    
     angular.element(window).on('resize', function() {
-      setSticky();
+      if (curPic && !isInView(curPic)) {
+        fixScrollOnce();
+      }
     });
     
     angular.element(window).on('orientationchange', function() {
-      setSticky();
+      if (curPic && !isInView(curPic)) {
+        fixScrollOnce();
+      }
     });
   }
 ]);
