@@ -107,6 +107,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         pickNextSibling(fold);
       }
     }
+
     function pickNextSibling(fold) {
       if (fold.parentFolder) {
         var i = fold.parentFolder.folders.indexOf(fold.id) + 1;
@@ -136,6 +137,8 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
             startScrollTimer(initCurPic, 200);
           }
         }
+      } else {
+        userScroll = true;
       }
     }
     
@@ -156,13 +159,13 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       var bottom = elem.getBoundingClientRect().bottom;
       var wHeight = window.innerHeight;
       var result = false;
-      var partial = false;
+      var partial = '';
       if (top < 0) {
         if (bottom >= 0) {
           // top edge is above but bottom is in view
           // declare in view if at least 50% of screen covered
-          partial = true;
-          result = bottom*2 >= wHeight || (state && state.forceNext);
+          partial = 'b';
+          result = bottom*2 >= wHeight || (state && state.lastPartial === 't');
         }
       } else if (top < wHeight) {
         // top edge is in view
@@ -170,13 +173,14 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         if (bottom < wHeight) {
           result = true;
         } else {
-          partial = true;
-          result = top*2 < wHeight || (state && state.forceNext);
+          partial = 't';
+          result = top*2 < wHeight || (state && state.lastPartial === 'b');
         }
       }
-      // if partially in view but not not enough, force next one to be in view
+      // if partially in view but not not enough, accept next partial of opposite type
+      // for example if bottom edge in view, accept next one with top edge in view
       if (state) {
-        state.forceNext = partial && !result;
+        state.lastPartial = partial;
       }
       return result;
     }
