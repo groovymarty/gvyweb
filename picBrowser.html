@@ -46,15 +46,21 @@
   </div>
 </div>
 <div class="pic-tile-panel">
+  <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="istart > 0">
+    <div class="pic-tile-text btn-primary btn-purple" ng-click="moreBack()">
+      {{istart}} skipped, click here for more
+    </div>
+  </div>
   <div class="pic-tile" ng-class="'pic-tile-'+sz" id="{{id}}"
-       ng-repeat="id in curFold.pictures | limitTo: nlimit">
+       ng-repeat="id in curFold.pictures | limitTo: nlimit : istart">
     <div class="pic-tile-pic" ng-click="clickPic(id)">
       <img ng-src="{{'gvypics/pic/'+id+'?sz='+sz}}">
     </div>
     <p class="pic-tile-text">{{curFold.names[id]}}</p>
   </div>
-  <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="curFold.pictures.length > nlimit">
-    <button class="btn btn-primary btn-purple" ng-click="morePics()">
-      {{nlimit}} of {{curFold.pictures.length}}, click here for more</button>
+  <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="curFold.pictures.length > istart+nlimit">
+    <div class="pic-tile-text btn-primary btn-purple" ng-click="moreFwd()">
+      {{istart+nlimit}} of {{curFold.pictures.length}}, click here for more
+    </div>
   </div>
 </div>

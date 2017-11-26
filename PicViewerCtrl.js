@@ -29,7 +29,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     
     function isFullScreen() {
       return document.fullscreenElement || document.mozFullScreenElement ||
-        document.webkitFullScreenElement || document.msFullScreenElement;
+        document.webkitFullscreenElement || document.msFullscreenElement;
     }
     
     function requestFullScreen(elem) {
@@ -37,10 +37,10 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         elem.requestFullScreen();
       } else if (elem.mozRequestFullScreen) {
         elem.mozRequestFullScreen();
-      } else if (elem.webkitRequestFullScreen) {
-        elem.webkitRequestFullScreen();
-      } else if (elem.msRequestFullScreen) {
-        elem.msRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
       }
     }
 
@@ -49,10 +49,10 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         document.exitFullScreen();
       } else if (document.mozCancelFullScreen) {
         document.mozCancelFullScreen();
-      } else if (document.webkitExitFullScreen) {
-        document.webkitExitFullScreen();
-      } else if (document.msExitFullScreen) {
-        document.msExitFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
       }
     }
 
@@ -64,18 +64,27 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         }
       } else {
         exitFullScreen();
+        $state.go('picviewer', {id: $scope.curId});
       }
     };
     
     $scope.doPrev = function() {
       if ($scope.prevId) {
-        setCurId($scope.prevId);
+        if (isFullScreen()) {
+          setCurId($scope.prevId);
+        } else {
+          $state.go('picviewer', {id: $scope.prevId});
+        }
       }
     };
     
     $scope.doNext = function() {
       if ($scope.nextId) {
-        setCurId($scope.nextId);
+        if (isFullScreen()) {
+          setCurId($scope.nextId);
+        } else {
+          $state.go('picviewer', {id: $scope.nextId});
+        }
       }
     };
     

@@ -12,8 +12,10 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.firstlevel = placeholder;
     $scope.path = [];
     $scope.curFold = placeholder;
+    $scope.istart = 0;
     $scope.nlimit = 0;
     var curPic = null; //DOM pic-tile element
+    var curPicId = null;
     var moreBump;
     var scrollTimer = null;
     var lastScrollY = 0;
@@ -32,9 +34,13 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           $scope.tileSzBtnText = "Small Tiles";
           break;
       }
-      if ($scope.nlimit < moreBump) {
-        $scope.nlimit = moreBump;
+      // reset range to include current picture
+      var i = $scope.curFold.pictures.indexOf(curPicId);
+      if (i < 0) {
+        i = 0;
       }
+      $scope.istart = Math.floor(i / moreBump) * moreBump;
+      $scope.nlimit = moreBump;
       $stateParams.sz = $scope.sz;
       if (curPic) {
         $scope.$applyAsync(setSticky);
@@ -55,7 +61,17 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       $state.go('picviewer', {id: id});
     };
 
-    $scope.morePics = function() {
+    $scope.moreBack = function() {
+      if ($scope.istart > moreBump) {
+        $scope.istart -= moreBump;
+        $scope.nlimit += moreBump;
+      } else {
+        $scope.nlimit += $scope.istart;
+        $scope.istart = 0;
+      }
+    };
+ 
+    $scope.moreFwd = function() {
       $scope.nlimit += moreBump;
     };
  
@@ -123,11 +139,11 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       var id = $stateParams.id;
       var i = $scope.curFold.pictures.indexOf(id);
       if (i >= 0) {
-        if (i >= $scope.nlimit) {
-          var moreNeeded = i - $scope.nlimit + 1;
-          $scope.nlimit += Math.ceil(moreNeeded / 20) * 20;
-          //console.log("bumping nlimit to "+$scope.nlimit);
-          // give angular a chance to respond to nlimit change then try again
+        if (i < $scope.istart || i >= $scope.istart+$scope.nlimit) {
+          // reset range to include current picture
+          $scope.istart = Math.floor(i / moreBump) * moreBump;
+          $scope.nlimit = moreBump;
+          // give angular a chance to respond to istart/nlimit change then try again
           $scope.$applyAsync(initCurPic);
         } else {
           setCurPic(id);
@@ -150,6 +166,9 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         curPic = document.getElementById(id);
         if (curPic) {
           angular.element(curPic).addClass('current');
+          curPicId = id;
+        } else {
+          curPicId = null;
         }
       }
     }
