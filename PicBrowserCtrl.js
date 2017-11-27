@@ -48,6 +48,15 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     };
     $scope.rotateTileSz($stateParams.sz);
     
+    function makeGoParams(id) {
+      var i = $scope.curFold.pictures.indexOf(id);
+      if (i < $scope.curFold.numNativePics) {
+        return {id: id};
+      } else {
+        return {id: $scope.curFold.id, i: i};
+      }
+    }
+
     $scope.clickPic = function(id) {
       /*
       setCurPic(id);
@@ -58,7 +67,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
       setSticky();
       */
-      $state.go('picviewer', {id: id});
+      $state.go('picviewer', makeGoParams(id));
     };
 
     $scope.moreBack = function() {
@@ -138,6 +147,13 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     function initCurPic() {
       var id = $stateParams.id;
       var i = $scope.curFold.pictures.indexOf(id);
+      if (i < 0) {
+        i = parseInt($stateParams.i);
+        id = $scope.curFold.pictures[i];
+        if (!id) {
+          i = -1;
+        }
+      }
       if (i >= 0) {
         if (i < $scope.istart || i >= $scope.istart+$scope.nlimit) {
           // reset range to include current picture
