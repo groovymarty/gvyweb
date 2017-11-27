@@ -8,14 +8,22 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       pictures: [],
       videos: []      
     };
-    $scope.curId = $stateParams.id;
+    $scope.curId = null;
     $scope.nextId = null;
     $scope.prevId = null;
     $scope.curFold = placeholder;
     
     function setCurId(id) {
-      $scope.curId = id;
       var i = $scope.curFold.pictures.indexOf(id);
+      if (i < 0) {
+        i = parseInt($stateParams.i);
+        id = $scope.curFold.pictures[i];
+        if (!id) {
+          i = 0;
+          id = $scope.curFold.pictures[0];
+        }
+      }
+      $scope.curId = id;
       $scope.nextId = $scope.curFold.pictures[i+1];
       $scope.prevId = $scope.curFold.pictures[i-1];
     }
@@ -55,6 +63,15 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         document.msExitFullscreen();
       }
     }
+    
+    function makeGoParams(id) {
+      var i = $scope.curFold.pictures.indexOf(id);
+      if (i < $scope.curFold.numNativePics) {
+        return {id: id};
+      } else {
+        return {id: $scope.curFold.id, i: i};
+      }
+    }
 
     $scope.clickPic = function() {
       if (!isFullScreen()) {
@@ -64,7 +81,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         }
       } else {
         exitFullScreen();
-        $state.go('picviewer', {id: $scope.curId});
+        $state.go('picviewer', makeGoParams($scope.curId));
       }
     };
     
@@ -73,7 +90,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         if (isFullScreen()) {
           setCurId($scope.prevId);
         } else {
-          $state.go('picviewer', {id: $scope.prevId});
+          $state.go('picviewer', makeGoParams($scope.prevId));
         }
       }
     };
@@ -83,13 +100,13 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         if (isFullScreen()) {
           setCurId($scope.nextId);
         } else {
-          $state.go('picviewer', {id: $scope.nextId});
+          $state.go('picviewer', makeGoParams($scope.nextId));
         }
       }
     };
     
     $scope.doClose = function() {
-      $state.go('picbrowser', {id: $scope.curId});
+      $state.go('picbrowser', makeGoParams($scope.curId));
     };
   }
 ]);

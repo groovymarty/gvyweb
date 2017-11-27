@@ -15,6 +15,8 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
   function reduceFolder(folder) {
     var meta = folder.meta || {};
     delete folder.meta;
+    // remember how many pictures were in pictures array originally
+    folder.numNativePics = folder.pictures.length;
     if (folder.contents) {
       // append contents arrays to the main folder containers
       append(folder.folders, folder.contents.folders);
