@@ -12,6 +12,8 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.nextId = null;
     $scope.prevId = null;
     $scope.curFold = placeholder;
+    var viewer = document.getElementById('viewer');
+    var image = document.getElementById('viewer-img');
     
     function setCurId(id) {
       var i = $scope.curFold.pictures.indexOf(id);
@@ -75,9 +77,8 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
 
     $scope.clickPic = function() {
       if (!isFullScreen()) {
-        var elem = document.getElementById('viewer');
-        if (elem) {
-          requestFullScreen(elem);
+        if (viewer) {
+          requestFullScreen(viewer);
         }
       } else {
         exitFullScreen();
@@ -108,15 +109,47 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.doClose = function() {
       $state.go('picbrowser', makeGoParams($scope.curId));
     };
+
+    var mc = new Hammer.Manager(image);
+    var pinch = new Hammer.Pinch();
+    var pan = new Hammer.Pan();
+  
+    pinch.recognizeWith(pan);
+    mc.add([pinch, pan]);
+  
+    var adjustScale = 1;
+    var adjustDeltaX = 0;
+    var adjustDeltaY = 0;
     
-    $scope.doPinch = function(event) {
-      $scope.stuff = event;
-      $scope.stuff.what = "pinch";
-    };
+    var currentScale = null;
+    var currentDeltaX = null;
+    var currentDeltaY = null;
     
-    $scope.doPress = function(event) {
-      $scope.stuff = event;
-      $scope.stuff.what = "press";
-    };
+    // Prevent long press saving on mobiles.
+    viewer.addEventListener('touchstart', function (e) {
+      e.preventDefault();
+    });
+    
+    // Handles pinch and pan events/transforming at the same time
+    mc.on("pinch pan", function (ev) { 
+      var transforms = [];
+
+      // Adjusting the current pinch/pan event properties using the previous ones set when they finished touching
+      currentScale = adjustScale * ev.scale;
+      currentDeltaX = adjustDeltaX + (ev.deltaX / currentScale);
+      currentDeltaY = adjustDeltaY + (ev.deltaY / currentScale);
+
+      // Concatinating and applying parameters.
+      transforms.push("scale("+currentScale+")");
+      transforms.push("translate("+currentDeltaX+"px,"+currentDeltaY+"px)");
+      image.style.transform = transforms.join(" ");
+    });
+
+    mc.on("panend pinchend", function () {  
+      // Saving the final transforms for adjustment next time the user interacts.
+      adjustScale = currentScale;
+      adjustDeltaX = currentDeltaX;
+      adjustDeltaY = currentDeltaY;
+    });
   }
 ]);
