@@ -81,8 +81,9 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
           requestFullScreen(viewer);
         }
       } else {
-        exitFullScreen();
-        $state.go('picviewer', makeGoParams($scope.curId));
+        //exitFullScreen();
+        //$state.go('picviewer', makeGoParams($scope.curId), {reload: true});
+        resetTransforms();
       }
     };
     
@@ -90,6 +91,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       if ($scope.prevId) {
         if (isFullScreen()) {
           setCurId($scope.prevId);
+          resetTransforms();
         } else {
           $state.go('picviewer', makeGoParams($scope.prevId));
         }
@@ -100,6 +102,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       if ($scope.nextId) {
         if (isFullScreen()) {
           setCurId($scope.nextId);
+          resetTransforms();
         } else {
           $state.go('picviewer', makeGoParams($scope.nextId));
         }
@@ -125,11 +128,6 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     var currentDeltaX = null;
     var currentDeltaY = null;
     
-    // Prevent long press saving on mobiles.
-    viewer.addEventListener('touchstart', function (e) {
-      e.preventDefault();
-    });
-    
     // Handles pinch and pan events/transforming at the same time
     mc.on("pinch pan", function (ev) { 
       var transforms = [];
@@ -151,5 +149,12 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       adjustDeltaX = currentDeltaX;
       adjustDeltaY = currentDeltaY;
     });
+    
+    function resetTransforms() {
+      adjustScale = 1;
+      adjustDeltaX = 0;
+      adjustDeltaY = 0;
+      image.style.transform = "";
+    }
   }
 ]);
