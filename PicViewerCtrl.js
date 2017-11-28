@@ -108,5 +108,15 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.doClose = function() {
       $state.go('picbrowser', makeGoParams($scope.curId));
     };
+    
+    $scope.doPinch = function(event) {
+      $scope.stuff = event;
+      $scope.stuff.what = "pinch";
+    };
+    
+    $scope.doPress = function(event) {
+      $scope.stuff = event;
+      $scope.stuff.what = "press";
+    };
   }
 ]);

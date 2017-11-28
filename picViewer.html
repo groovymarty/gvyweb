@@ -1,5 +1,7 @@
 <div class="pic-tile pic-viewer" id="viewer">
-  <div class="pic-tile-pic" ng-click="clickPic()" hm-swipeleft="doPrev()" hm-swiperight="doNext()">
+  <p ng-if="stuff">{{stuff | json}}</p>
+  <div class="pic-tile-pic" ng-click="clickPic()" hm-swiperight="doPrev()" hm-swipeleft="doNext()"
+       hm-pinch="doPinch($event)" hm-press="doPress($event)">
     <img ng-src="{{'gvypics/pic/'+curId+'?sz=lg'}}" ng-if="curId">
   </div>
   <div class="pic-tile-text hidden-xs">{{curFold.names[curId]}}</div>
