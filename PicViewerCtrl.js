@@ -77,14 +77,13 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     }
 
     $scope.clickPic = function() {
-      if (!isFullScreen()) {
-        if (viewer) {
-          requestFullScreen(viewer);
-        }
+      if (isTransformed()) {
+        resetTransforms();
+      } else if (!isFullScreen()) {
+        requestFullScreen(viewer);
       } else {
         //exitFullScreen();
         //$state.go('picviewer', makeGoParams($scope.curId), {reload: true});
-        resetTransforms();
       }
     };
     
@@ -136,9 +135,9 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     var adjustDeltaX = 0;
     var adjustDeltaY = 0;
     
-    var currentScale = null;
-    var currentDeltaX = null;
-    var currentDeltaY = null;
+    var currentScale = 1;
+    var currentDeltaX = 0;
+    var currentDeltaY = 0;
           
     function setupImage() {
       if (!image) {
@@ -179,6 +178,10 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
           });
         }
       }
+    }
+    
+    function isTransformed() {
+      return currentScale !== 1 || currentDeltaX || currentDeltaY;
     }
     
     function resetTransforms() {
