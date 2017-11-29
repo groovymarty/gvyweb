@@ -116,7 +116,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     };
     
     var mc = new Hammer.Manager(viewer);
-    mc.add(new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONAL}));
+    mc.add(new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONTAL}));
     mc.add(new Hammer.Press({time: 500}));
     
     mc.on("swipeleft", function() {
@@ -131,6 +131,9 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       enableClickPic = false; //avoid interference with click handler
       resetTransforms();
       exitFullScreen();
+      $timeout(function() { //sometimes no pressup event when we exit full screen
+        enableClickPic = true;
+      }, 2000);
     });
     
     mc.on("pressup", function() {
