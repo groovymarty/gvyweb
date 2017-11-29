@@ -115,9 +115,8 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     };
     
     var mc = new Hammer.Manager(viewer);
-    var swipe = new Hammer.Swipe();
-    var press = new Hammer.Press();
-    mc.add([swipe, press]);
+    mc.add(new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONAL}));
+    mc.add(new Hammer.Press());
     
     mc.on("swipeleft", function() {
       $scope.doNext();
@@ -133,6 +132,14 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
   
     // see https://gist.github.com/synthecypher/f778e4f5a559268a874e for pan-zoom-image.js
     
+    var adjustScale = 1;
+    var adjustDeltaX = 0;
+    var adjustDeltaY = 0;
+    
+    var currentScale = null;
+    var currentDeltaX = null;
+    var currentDeltaY = null;
+          
     function setupImage() {
       if (!image) {
         image = document.getElementById('viewer-img');
@@ -142,17 +149,8 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
           var mc = new Hammer.Manager(image);
           var pinch = new Hammer.Pinch();
           var pan = new Hammer.Pan();
-        
           pinch.recognizeWith(pan);
-          mc.add([pinch, pan, swipe, press]);
-          
-          var adjustScale = 1;
-          var adjustDeltaX = 0;
-          var adjustDeltaY = 0;
-          
-          var currentScale = null;
-          var currentDeltaX = null;
-          var currentDeltaY = null;
+          mc.add([pinch, pan]);
           
           // Handles pinch and pan events/transforming at the same time
           mc.on("pinch pan", function (ev) { 
