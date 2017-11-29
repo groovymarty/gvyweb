@@ -115,7 +115,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     
     var mc = new Hammer.Manager(viewer);
     mc.add(new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONAL}));
-    mc.add(new Hammer.Press());
+    mc.add(new Hammer.Press({time: 1000}));
     
     mc.on("swipeleft", function() {
       $scope.doNext();
@@ -126,6 +126,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     });
     
     mc.on("press", function() {
+      resetTransforms();
       exitFullScreen();
     });
   
@@ -159,7 +160,8 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
             currentDeltaY = adjustDeltaY + (ev.deltaY / currentScale);
             
             // if pinched smaller than original, snap back to original
-            if (currentScale < 1) {
+            // also no panning unless scaled larger than original
+            if (currentScale <= 1) {
               resetTransforms();
             } else {
               // Concatinating and applying parameters.
