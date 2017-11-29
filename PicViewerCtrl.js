@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicViewerCtrl', [
-  '$scope', '$stateParams', '$state', 'gvypics',
-  function($scope, $stateParams, $state, gvypics) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics',
+  function($scope, $stateParams, $state, $timeout, gvypics) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -13,7 +13,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.prevId = null;
     $scope.curFold = placeholder;
     var viewer = document.getElementById('viewer');
-    var image = document.getElementById('viewer-img');
+    var image = null;
     
     function setCurId(id) {
       var i = $scope.curFold.pictures.indexOf(id);
@@ -28,6 +28,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $scope.curId = id;
       $scope.nextId = $scope.curFold.pictures[i+1];
       $scope.prevId = $scope.curFold.pictures[i-1];
+      setupImage();
     }
 
     gvypics.getFolder($stateParams.id).then(function(folder) {
@@ -112,49 +113,83 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.doClose = function() {
       $state.go('picbrowser', makeGoParams($scope.curId));
     };
-
-    var mc = new Hammer.Manager(image);
-    var pinch = new Hammer.Pinch();
-    var pan = new Hammer.Pan();
-  
-    pinch.recognizeWith(pan);
-    mc.add([pinch, pan]);
-  
-    var adjustScale = 1;
-    var adjustDeltaX = 0;
-    var adjustDeltaY = 0;
     
-    var currentScale = null;
-    var currentDeltaX = null;
-    var currentDeltaY = null;
+    var mc = new Hammer.Manager(viewer);
+    var swipe = new Hammer.Swipe();
+    var press = new Hammer.Press();
+    mc.add([swipe, press]);
     
-    // Handles pinch and pan events/transforming at the same time
-    mc.on("pinch pan", function (ev) { 
-      var transforms = [];
-
-      // Adjusting the current pinch/pan event properties using the previous ones set when they finished touching
-      currentScale = adjustScale * ev.scale;
-      currentDeltaX = adjustDeltaX + (ev.deltaX / currentScale);
-      currentDeltaY = adjustDeltaY + (ev.deltaY / currentScale);
-
-      // Concatinating and applying parameters.
-      transforms.push("scale("+currentScale+")");
-      transforms.push("translate("+currentDeltaX+"px,"+currentDeltaY+"px)");
-      image.style.transform = transforms.join(" ");
+    mc.on("swipeleft", function() {
+      $scope.doNext();
     });
-
-    mc.on("panend pinchend", function () {  
-      // Saving the final transforms for adjustment next time the user interacts.
-      adjustScale = currentScale;
-      adjustDeltaX = currentDeltaX;
-      adjustDeltaY = currentDeltaY;
+  
+    mc.on("swiperight", function() {
+      $scope.doPrev();
     });
+    
+    mc.on("press", function() {
+      exitFullScreen();
+    });
+  
+    // see https://gist.github.com/synthecypher/f778e4f5a559268a874e for pan-zoom-image.js
+    
+    function setupImage() {
+      if (!image) {
+        image = document.getElementById('viewer-img');
+        if (!image) {
+          $timeout(setupImage, 10, false);
+        } else {
+          var mc = new Hammer.Manager(image);
+          var pinch = new Hammer.Pinch();
+          var pan = new Hammer.Pan();
+        
+          pinch.recognizeWith(pan);
+          mc.add([pinch, pan, swipe, press]);
+          
+          var adjustScale = 1;
+          var adjustDeltaX = 0;
+          var adjustDeltaY = 0;
+          
+          var currentScale = null;
+          var currentDeltaX = null;
+          var currentDeltaY = null;
+          
+          // Handles pinch and pan events/transforming at the same time
+          mc.on("pinch pan", function (ev) { 
+            // Adjusting the current pinch/pan event properties using the previous ones set when they finished touching
+            currentScale = adjustScale * ev.scale;
+            currentDeltaX = adjustDeltaX + (ev.deltaX / currentScale);
+            currentDeltaY = adjustDeltaY + (ev.deltaY / currentScale);
+            
+            // if pinched smaller than original, snap back to original
+            if (currentScale < 1) {
+              resetTransforms();
+            } else {
+              // Concatinating and applying parameters.
+              var transforms = [];
+              transforms.push("scale("+currentScale+")");
+              transforms.push("translate("+currentDeltaX+"px,"+currentDeltaY+"px)");
+              image.style.transform = transforms.join(" ");
+            }
+          });
+      
+          mc.on("panend pinchend", function () {  
+            // Saving the final transforms for adjustment next time the user interacts.
+            adjustScale = currentScale;
+            adjustDeltaX = currentDeltaX;
+            adjustDeltaY = currentDeltaY;
+          });
+        }
+      }
+    }
     
     function resetTransforms() {
-      adjustScale = 1;
-      adjustDeltaX = 0;
-      adjustDeltaY = 0;
-      image.style.transform = "";
+      currentScale = adjustScale = 1;
+      currentDeltaX = adjustDeltaX = 0;
+      currentDeltaY = adjustDeltaY = 0;
+      if (image) {
+        image.style.transform = "";
+      }
     }
   }
 ]);

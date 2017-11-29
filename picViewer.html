@@ -1,6 +1,6 @@
 <div class="pic-tile pic-viewer" id="viewer">
   <div class="pic-tile-pic" ng-click="clickPic()">
-    <img id="viewer-img" ng-src="{{'gvypics/pic/'+curId+'?sz=lg'}}" ng-show="curId">
+    <img id="viewer-img" ng-src="{{'gvypics/pic/'+curId+'?sz=lg'}}" ng-if="curId">
   </div>
   <div class="pic-tile-text hidden-xs">{{curFold.names[curId]}}</div>
   <div class="btn btn-default btn-lg btn-dim-left" ng-click="doPrev()" ng-if="prevId">
