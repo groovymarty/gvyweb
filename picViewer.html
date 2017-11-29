@@ -1,5 +1,5 @@
 <div class="pic-tile pic-viewer" id="viewer">
-  <div class="pic-tile-pic">
+  <div class="pic-tile-pic" ng-click="clickPic()">
     <img id="viewer-img" ng-src="{{'gvypics/pic/'+curId+'?sz=lg'}}" ng-if="curId">
   </div>
   <div class="pic-tile-text hidden-xs">{{curFold.names[curId]}}</div>

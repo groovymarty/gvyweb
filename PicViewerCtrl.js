@@ -76,6 +76,17 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       }
     }
 
+    $scope.clickPic = function() {
+      if (isTransformed()) {
+        resetTransforms();
+      } else if (!isFullScreen()) {
+        requestFullScreen(viewer);
+      } else {
+        //exitFullScreen();
+        //$state.go('picviewer', makeGoParams($scope.curId), {reload: true});
+      }
+    };
+  
     $scope.doPrev = function() {
       if ($scope.prevId) {
         if (isFullScreen()) {
@@ -105,7 +116,6 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     var mc = new Hammer.Manager(viewer);
     mc.add(new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONAL}));
     mc.add(new Hammer.Press({time: 500}));
-    mc.add(new Hammer.Tap());
     
     mc.on("swipeleft", function() {
       $scope.doNext();
@@ -120,17 +130,6 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       exitFullScreen();
     });
     
-    mc.on("tap", function() {
-      if (isTransformed()) {
-        resetTransforms();
-      } else if (!isFullScreen()) {
-        requestFullScreen(viewer);
-      } else {
-        //exitFullScreen();
-        //$state.go('picviewer', makeGoParams($scope.curId), {reload: true});
-      }
-    });
-  
     // see https://gist.github.com/synthecypher/f778e4f5a559268a874e for pan-zoom-image.js
     
     var adjustScale = 1;
