@@ -154,7 +154,9 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     var pinch = new Hammer.Pinch();
     var pan = new Hammer.Pan();
     pinch.recognizeWith(pan);
-    swipe.recognizeWith(pan);
+    // pan and swipe are incompatible, even with recognizeWith
+    // keep pan disabled until user scales picture larger, then enable pan and disable swipe
+    pan.set({enable: false});
     mc.add([pinch, pan]);
           
     // Handles pinch and pan events/transforming at the same time
@@ -169,7 +171,10 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       if (currentScale <= 1) {
         resetTransforms();
       } else {
-        // Concatinating and applying parameters.
+        // picture has been scaled larger, enable pan and disable swipe
+        swipe.set({enable: false});
+        pan.set({enable: true});
+        // apply transformations
         var transforms = [];
         transforms.push("scale("+currentScale+")");
         transforms.push("translate("+currentDeltaX+"px,"+currentDeltaY+"px)");
@@ -194,6 +199,8 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     }
     
     function resetTransforms() {
+      swipe.set({enable: true});
+      pan.set({enable: false});
       currentScale = adjustScale = 1;
       currentDeltaX = adjustDeltaX = 0;
       currentDeltaY = adjustDeltaY = 0;
