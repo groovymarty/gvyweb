@@ -116,8 +116,9 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     };
     
     var mc = new Hammer.Manager(viewer);
-    mc.add(new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONTAL}));
-    mc.add(new Hammer.Press({time: 500}));
+    var swipe = new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONTAL});
+    var press = new Hammer.Press({time: 500});
+    mc.add([swipe, press]);
     
     mc.on("swipeleft", function() {
       $scope.doNext();
@@ -153,6 +154,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     var pinch = new Hammer.Pinch();
     var pan = new Hammer.Pan();
     pinch.recognizeWith(pan);
+    swipe.recognizeWith(pan);
     mc.add([pinch, pan]);
           
     // Handles pinch and pan events/transforming at the same time
