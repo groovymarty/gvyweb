@@ -122,10 +122,12 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     
     mc.on("swipeleft", function() {
       $scope.doNext();
+      $scope.$apply();
     });
   
     mc.on("swiperight", function() {
       $scope.doPrev();
+      $scope.$apply();
     });
     
     mc.on("press", function() {
