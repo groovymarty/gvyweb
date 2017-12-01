@@ -133,7 +133,8 @@ body {
 .btn-out {
   transition: opacity 1s linear;
 }
-.btn-out.btn-out-out {
+.btn-out.btn-out-out,
+.btn[disabled].btn-dim.btn-out.btn-out-out {
   opacity: 0;
 }
 .btn-bottom-left {

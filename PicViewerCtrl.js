@@ -132,7 +132,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         buttons.forEach(function(elem) {
           angular.element(elem).addClass("btn-out btn-out-out");
         });
-      }, 2500);
+      }, 2000);
     }
     
     function cancelButtonOutTimer() {
