@@ -35,12 +35,12 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $scope.curId = id;
       $scope.nextId = $scope.curFold.pictures[i+1];
       $scope.prevId = $scope.curFold.pictures[i-1];
-      buttonOutReset();
     }
 
     gvypics.getFolder($stateParams.id).then(function(folder) {
       $scope.curFold = folder;
       setCurId($stateParams.id);
+      buttonOutReset();
     }).catch(function(err) {
       console.log(err.message);
     });
@@ -98,8 +98,13 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         showCaption(true);
       }
     };
+    
+    $scope.prevClick = function() {
+      buttonOutReset();
+      doPrev();
+    };
   
-    $scope.doPrev = function() {
+    function doPrev() {
       if ($scope.prevId) {
         if (isFullScreen()) {
           setCurId($scope.prevId);
@@ -108,9 +113,14 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
           $state.go('picviewer', makeGoParams($scope.prevId));
         }
       }
+    }
+    
+    $scope.nextClick = function() {
+      buttonOutReset();
+      doNext();
     };
     
-    $scope.doNext = function() {
+    function doNext() {
       if ($scope.nextId) {
         if (isFullScreen()) {
           setCurId($scope.nextId);
@@ -119,7 +129,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
           $state.go('picviewer', makeGoParams($scope.nextId));
         }
       }
-    };
+    }
     
     $scope.doClose = function() {
       $state.go('picbrowser', makeGoParams($scope.curId));
@@ -168,12 +178,12 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     mc.add([swipe, press]);
     
     mc.on("swipeleft", function() {
-      $scope.doNext();
+      doNext();
       $scope.$apply(); //to reload image if full screen
     });
   
     mc.on("swiperight", function() {
-      $scope.doPrev();
+      doPrev();
       $scope.$apply(); //to reload image if full screen
     });
     
