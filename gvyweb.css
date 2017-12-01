@@ -124,24 +124,35 @@ body {
   color: deeppink;
   border-color: deeppink;
 }
-.btn-dim-left {
+.btn-dim {
   opacity: 0.3;
+}
+.btn[disabled].btn-dim {
+  opacity: 0.1;
+}
+.btn-bottom-left {
   position: absolute;
   left: 15px;
-  bottom: 15px;
+  bottom: 60px;
 }
-.btn-dim-center {
-  opacity: 0.3;
-  position: absolute;
-  left: 50%;
-  margin-left: -26px;
-  bottom: 15px;
-}
-.btn-dim-right {
-  opacity: 0.3;
+.btn-bottom-right {
   position: absolute;
   right: 15px;
-  bottom: 15px;
+  bottom: 60px;
+}
+.btn-top-right {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+.caption-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: black;
+  background-color: white;
+  padding: 0 5px 0 5px;
+  opacity: 0.8;
 }
 .panel-footer-drippy {
   margin-top: -20px;

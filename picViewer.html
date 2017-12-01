@@ -3,13 +3,16 @@
     <img id="viewer-img" ng-src="{{'gvypics/pic/'+curId+'?sz=lg'}}" ng-if="curId">
   </div>
   <div class="pic-tile-text hidden-xs">{{curFold.names[curId]}}</div>
-  <div class="btn btn-default btn-lg btn-dim-left" ng-click="doPrev()" ng-if="prevId">
-    <span class="glyphicon glyphicon-circle-arrow-left"></span>
-  </div>
-  <div class="btn btn-default btn-lg btn-dim-center" ng-click="doClose()">
+  <div class="btn btn-default btn-lg btn-dim btn-top-right" ng-click="doClose()">
     <span class="glyphicon glyphicon-remove"></span>
   </div>
-  <div class="btn btn-default btn-lg btn-dim-right" ng-click="doNext()" ng-if="nextId">
+  <div class="btn btn-default btn-lg btn-dim btn-bottom-left" ng-click="doPrev()" ng-disabled="!prevId">
+    <span class="glyphicon glyphicon-circle-arrow-left"></span>
+  </div>
+  <div class="caption-bottom">
+    {{curFold.names[curId]}}
+  </div>
+  <div class="btn btn-default btn-lg btn-dim btn-bottom-right" ng-click="doNext()" ng-disabled="!nextId">
     <span class="glyphicon glyphicon-circle-arrow-right"></span>
   </div>
 </div>

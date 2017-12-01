@@ -122,12 +122,12 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     
     mc.on("swipeleft", function() {
       $scope.doNext();
-      $scope.$apply();
+      $scope.$apply(); //to reload image if full screen
     });
   
     mc.on("swiperight", function() {
       $scope.doPrev();
-      $scope.$apply();
+      $scope.$apply(); //to reload image if full screen
     });
     
     mc.on("press", function() {
