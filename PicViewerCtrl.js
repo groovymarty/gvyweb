@@ -35,6 +35,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $scope.curId = id;
       $scope.nextId = $scope.curFold.pictures[i+1];
       $scope.prevId = $scope.curFold.pictures[i-1];
+      showCaption(true);
     }
 
     gvypics.getFolder($stateParams.id).then(function(folder) {
