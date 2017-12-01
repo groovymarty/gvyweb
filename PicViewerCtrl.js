@@ -20,7 +20,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     var buttonOutTimer = null;
     var caption = document.getElementById('viewer-caption');
     var buttonsVisible = true;
-    var captionShown = false;
+    var captionShown = true;
     
     function setCurId(id) {
       var i = $scope.curFold.pictures.indexOf(id);
@@ -126,13 +126,9 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     };
     
     function showCaption(show) {
-      caption.style.display = show ? "block" : "none";
+      angular.element(caption).toggleClass("caption-out", !show);
       captionShown = show;
     }
-    
-    $scope.mouseMove = function() {
-      buttonOutReset();
-    };
     
     function buttonOutReset() {
       // redisplay the buttons

@@ -130,12 +130,14 @@ body {
 .btn[disabled].btn-dim {
   opacity: 0.1;
 }
-.btn-out {
-  transition: opacity 1s linear;
-}
-.btn-out.btn-out-out,
-.btn[disabled].btn-dim.btn-out.btn-out-out {
-  opacity: 0;
+@media(max-width: 767px) {
+  .btn-out {
+    transition: opacity 1s linear;
+  }
+  .btn-out.btn-out-out,
+  .btn[disabled].btn-dim.btn-out.btn-out-out {
+    opacity: 0;
+  }
 }
 .btn-bottom-left {
   position: absolute;
@@ -161,6 +163,12 @@ body {
   padding: 0 5px 0 5px;
   opacity: 0.8;
 }
+@media(max-width: 767px) {
+  .caption-out {
+    opacity: 0;
+  }
+}
+@media(max-width: 767px) {
 .panel-footer-drippy {
   margin-top: -20px;
   margin-bottom: 20px;

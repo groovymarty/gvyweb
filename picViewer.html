@@ -1,5 +1,5 @@
 <div class="pic-tile pic-viewer" id="viewer">
-  <div class="pic-tile-pic" ng-click="clickPic()" ng-mousemove="mouseMove()">
+  <div class="pic-tile-pic" ng-click="clickPic()">
     <span ng-if="!curId">Loading...</span>
     <img id="viewer-img" ng-src="{{'gvypics/pic/'+curId+'?sz=lg'}}" ng-if="curId">
   </div>
