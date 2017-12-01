@@ -89,12 +89,12 @@ body {
     width: 640px;
   }
 }
- .pic-viewer {
-   width: 100%;
-   height: 100%;
-   margin: 0px;
-   background-color: black;
- }
+.pic-viewer {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  background-color: black;
+}
 .pic-viewer .pic-tile-pic {
   width: 100%;
   height: 100%;
@@ -129,6 +129,12 @@ body {
 }
 .btn[disabled].btn-dim {
   opacity: 0.1;
+}
+.btn-out {
+  transition: opacity 1s linear;
+}
+.btn-out.btn-out-out {
+  opacity: 0;
 }
 .btn-bottom-left {
   position: absolute;

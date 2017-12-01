@@ -14,6 +14,10 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.curFold = placeholder;
     var viewer = document.getElementById('viewer');
     var image = null;
+    var buttons = ['viewer-close', 'viewer-prev', 'viewer-next', 'viewer-caption'].map(function(id) {
+      return document.getElementById(id);
+    });
+    var buttonOutTimer = null;
     
     function setCurId(id) {
       var i = $scope.curFold.pictures.indexOf(id);
@@ -28,6 +32,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $scope.curId = id;
       $scope.nextId = $scope.curFold.pictures[i+1];
       $scope.prevId = $scope.curFold.pictures[i-1];
+      buttonOutReset();
     }
 
     gvypics.getFolder($stateParams.id).then(function(folder) {
@@ -84,8 +89,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       } else if (!isFullScreen()) {
         requestFullScreen(viewer);
       } else {
-        //exitFullScreen();
-        //$state.go('picviewer', makeGoParams($scope.curId), {reload: true});
+        buttonOutReset();
       }
     };
   
@@ -115,6 +119,33 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $state.go('picbrowser', makeGoParams($scope.curId));
     };
     
+    $scope.mouseMove = function() {
+      buttonOutReset();
+    };
+    
+    function buttonOutReset() {
+      buttons.forEach(function(elem) {
+        angular.element(elem).removeClass("btn-out btn-out-out");
+      });
+      cancelButtonOutTimer();
+      buttonOutTimer = $timeout(function() {
+        buttons.forEach(function(elem) {
+          angular.element(elem).addClass("btn-out btn-out-out");
+        });
+      }, 2500);
+    }
+    
+    function cancelButtonOutTimer() {
+      if (buttonOutTimer) {
+        $timeout.cancel(buttonOutTimer);
+        buttonOutTimer = null;
+      }
+    }
+    
+    $scope.$on('$destroy', function() {
+      cancelButtonOutTimer();
+    });
+
     var mc = new Hammer.Manager(viewer);
     var swipe = new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONTAL});
     var press = new Hammer.Press({time: 500});
