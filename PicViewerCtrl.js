@@ -14,10 +14,13 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.curFold = placeholder;
     var viewer = document.getElementById('viewer');
     var image = null;
-    var buttons = ['viewer-close', 'viewer-prev', 'viewer-next', 'viewer-caption'].map(function(id) {
+    var buttons = ['viewer-close', 'viewer-prev', 'viewer-next'].map(function(id) {
       return document.getElementById(id);
     });
     var buttonOutTimer = null;
+    var caption = document.getElementById('viewer-caption');
+    var buttonsVisible = true;
+    var captionShown = false;
     
     function setCurId(id) {
       var i = $scope.curFold.pictures.indexOf(id);
@@ -88,8 +91,11 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         resetTransforms();
       } else if (!isFullScreen()) {
         requestFullScreen(viewer);
+      } else if (!buttonsVisible && captionShown) {
+        showCaption(false);
       } else {
         buttonOutReset();
+        showCaption(true);
       }
     };
   
@@ -119,19 +125,33 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $state.go('picbrowser', makeGoParams($scope.curId));
     };
     
+    function showCaption(show) {
+      caption.style.display = show ? "block" : "none";
+      captionShown = show;
+    }
+    
     $scope.mouseMove = function() {
       buttonOutReset();
     };
     
     function buttonOutReset() {
+      // redisplay the buttons
       buttons.forEach(function(elem) {
         angular.element(elem).removeClass("btn-out btn-out-out");
       });
+      buttonsVisible = true;
+      // start inactivity timer
       cancelButtonOutTimer();
       buttonOutTimer = $timeout(function() {
+        // timer expired, start fadeout using CSS animation
         buttons.forEach(function(elem) {
           angular.element(elem).addClass("btn-out btn-out-out");
         });
+        // start fadeout timer
+        buttonOutTimer = $timeout(function() {
+          // animation is finished, buttons now out
+          buttonsVisible = false;
+        }, 1000);
       }, 2000);
     }
     
