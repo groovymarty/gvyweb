@@ -41,9 +41,11 @@
                  ng-click="collapse()">Family Album</a></li>
           <li><a ui-sref="slideshows" ui-sref-active="active"
                  ng-click="collapse()">Slide Shows</a></li>
-          <li ng-show="!gvypics.userId"><a ui-sref="login" ui-sref-active="active"
+          <li ng-show="!gvypics.userId" class="ng-hide">
+              <a ui-sref="login" ui-sref-active="active"
                  ng-click="collapse()">Sign In</a></li>
-          <li ng-show="gvypics.userId"><a ui-sref="logout" ui-sref-active="active"
+          <li ng-show="gvypics.userId" class="ng-hide">
+              <a ui-sref="logout" ui-sref-active="active"
                  ng-click="collapse()">Sign Out</a></li>
         </ul>
       </div>
