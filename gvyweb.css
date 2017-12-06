@@ -33,6 +33,12 @@ body {
 #my-navbar .navbar-nav :hover {
   color: deeppink;
 }
+#my-alerts {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 999999;
+}
 .btn-primary.btn-purple, .btn-primary.btn-purple :focus {
   background-color: darkviolet;
  }

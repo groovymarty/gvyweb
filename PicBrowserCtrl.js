@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics',
-  function($scope, $stateParams, $state, $timeout, gvypics) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert',
+  function($scope, $stateParams, $state, $timeout, gvypics, alert) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -116,6 +116,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           return buildPath(folder.parent);
         }
       }).catch(function(err) {
+        alert.addAlert(err.message);
         console.log(err.message);
       });
     }

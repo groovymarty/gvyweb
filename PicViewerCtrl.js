@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicViewerCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics',
-  function($scope, $stateParams, $state, $timeout, gvypics) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert',
+  function($scope, $stateParams, $state, $timeout, gvypics, alert) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -43,6 +43,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       setCurId($stateParams.id);
       buttonOutReset();
     }).catch(function(err) {
+      alert.addAlert(err.message);
       console.log(err.message);
     });
     

@@ -68,6 +68,8 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
       }).catch(function(resp) {
         if (typeof resp.data === 'string' && !resp.data.startsWith("<!DOCTYPE")) {
           throw new Error(resp.data);
+        } else if (resp.status === -1) {
+          throw new Error("Server not responding, try again later");
         } else {
           throw new Error(resp.status+" "+resp.statusText);
         }
