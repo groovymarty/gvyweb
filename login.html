@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="panel panel-default col-md-6">
+      <div class="panel-body">
+        <h2 class="curly-font">Please sign in</h2>
+        <p class="text-danger" ng-show="tryAgain">
+          Incorrect entry, try again
+        </p>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label for="user-id" class="col-md-3">User ID</label>
+            <div class="col-md-9">
+              <input id="user-id" ng-model="userId">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-md-3">Password</label>
+            <div class="col-md-9">
+              <input type="password" id="password" ng-model="password">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-offset-3 col-md-9">
+              <button class="btn btn-default" ng-click="loginClick()">Sign In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

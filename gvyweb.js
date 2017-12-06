@@ -5,6 +5,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     .state('home', {
       displayName: "Home",
       url: "/home",
+      controller: "HomeCtrl",
       templateUrl: "home.html"
     })
     .state('picbrowser', {
@@ -27,18 +28,34 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       url: "/slideshows",
       controller: "SlideShowsCtrl",
       templateUrl: "slideShows.html"
+    })
+    .state('login', {
+      displayName: "Sign In",
+      url: "/login",
+      controller: "LoginCtrl",
+      templateUrl: "login.html"
+    })
+    .state('logout', {
+      displayName: "Sign Out",
+      url: "/logout",
+      controller: "LoginCtrl",
+      templateUrl: "logout.html"
     });
     
   $urlRouterProvider.otherwise("/home");
 });
 
-myApp.controller('NavBarCtrl', ['$scope', '$state', function($scope, $state) {
-  $scope.$state = $state;
-  $scope.isCollapsed = true;
-  $scope.collapse = function() {
+myApp.controller('NavBarCtrl', [
+  '$scope', '$state', 'gvypics',
+  function($scope, $state, gvypics) {
+    $scope.$state = $state;
+    $scope.gvypics = gvypics;
     $scope.isCollapsed = true;
-  };
-  $scope.toggleCollapsed = function() {
-    $scope.isCollapsed = !$scope.isCollapsed;
-  };
-}]);
+    $scope.collapse = function() {
+      $scope.isCollapsed = true;
+    };
+    $scope.toggleCollapsed = function() {
+      $scope.isCollapsed = !$scope.isCollapsed;
+    };
+  }
+]);

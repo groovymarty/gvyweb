@@ -41,6 +41,10 @@
                  ng-click="collapse()">Family Album</a></li>
           <li><a ui-sref="slideshows" ui-sref-active="active"
                  ng-click="collapse()">Slide Shows</a></li>
+          <li ng-show="!gvypics.userId"><a ui-sref="login" ui-sref-active="active"
+                 ng-click="collapse()">Sign In</a></li>
+          <li ng-show="gvypics.userId"><a ui-sref="logout" ui-sref-active="active"
+                 ng-click="collapse()">Sign Out</a></li>
         </ul>
       </div>
     </div>
@@ -67,5 +71,7 @@
   <script src="SlideShowsCtrl.js"></script>
   <script src="PicBrowserCtrl.js"></script>
   <script src="PicViewerCtrl.js"></script>
+  <script src="HomeCtrl.js"></script>
+  <script src="LoginCtrl.js"></script>
 </body>
 </html>

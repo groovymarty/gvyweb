@@ -1,5 +1,7 @@
 angular.module('gvyweb').service('gvypics', ['$http', '$location', function($http, $location) {
   var folderCache = {};
+  var token = null;
+  this.userId = null;
   
   // extend array1 with contents of array2
   // like concat but modifies array1 rather than returning a copy of it
@@ -49,6 +51,24 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
     });
     return folder;
   }
+  
+  function makeUrl(meat) {
+    var url = "http://" + $location.host();
+    if ($location.port() != 80) {
+      url += ":" + $location.port();
+    }
+    return url + "/gvypics/" + meat;
+  }
+  
+  function handleFailure(resp) {
+    if (resp.status === -1) {
+      throw new Error("Server not responding, try again later");
+    } else if (typeof resp.data === 'string' && resp.data && !resp.data.startsWith("<!DOCTYPE")) {
+      throw new Error(resp.data);
+    } else {
+      throw new Error(resp.status+" "+resp.statusText);
+    }
+  }
 
   // get specified folder
   // return from cache if possible, otherwise fetch from server and add to cache
@@ -56,24 +76,39 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
     if (id in folderCache) {
       return Promise.resolve(folderCache[id]);
     } else {
-      var url = "http://" + $location.host();
-      if ($location.port() != 80) {
-        url += ":" + $location.port();
-      }
-      url += "/gvypics/ls/" + id;
+      var url = makeUrl("ls/" + id);
       return $http.get(url).then(function(resp) {
         var folder = reduceFolder(resp.data);
         folderCache[id] = folder;
         return folder;
-      }).catch(function(resp) {
-        if (typeof resp.data === 'string' && !resp.data.startsWith("<!DOCTYPE")) {
-          throw new Error(resp.data);
-        } else if (resp.status === -1) {
-          throw new Error("Server not responding, try again later");
-        } else {
-          throw new Error(resp.status+" "+resp.statusText);
-        }
-      });
+      }).catch(handleFailure);
     }
+  };
+  
+  this.login = function(userId, password) {
+    var self = this;
+    var url = makeUrl("login?user=" + userId + "&pw=" + password);
+    return $http.get(url).then(function(resp) {
+      token = resp.data;
+      self.userId = userId;
+      return true;
+    }).catch(function(resp) {
+      if (resp.status === 403) {
+        // incorrect user ID or password
+        return false;
+      } else {
+        handleFailure(resp);
+      }
+    });
+  };
+  
+  this.logout = function() {
+    var self = this;
+    var url = makeUrl("logout");
+    return $http.get(url).then(function() {
+      token = null;
+      self.userId = null;
+      return true;
+    }).catch(handleFailure);
   };
 }]);
