@@ -13,7 +13,7 @@ angular.module('gvyweb').directive('rating', function() {
         },
         function() { //what to do when it changes
           var innerHTML = [
-            "&check;",
+            "&EmptySmallSquare;",
             "&cross;",
             "&approx;",
             "&check;",
@@ -25,8 +25,9 @@ angular.module('gvyweb').directive('rating', function() {
             "glyphicon glyphicon-heart rating-heart"
           ];
           if (scope.show) {
-            element[0].innerHTML = innerHTML[scope.level] || "";
-            element[0].className = className[scope.level] || "";
+            var i = scope.level || 0;
+            element[0].innerHTML = innerHTML[i] || "";
+            element[0].className = className[i] || "";
           } else {
             element[0].innerHTML = "";
             element[0].className = "";
