@@ -22,8 +22,15 @@
           <span class="glyphicon glyphicon-arrow-up groovy-logo-color"></span> Back</a> &nbsp;
         <a ui-sref="picbrowser({id: nextId, sz: sz, i: null})" class="btn btn-default" ng-show="nextId">
           <span class="glyphicon glyphicon-arrow-right groovy-logo-color"></span> Next</a>
-        <button class="btn btn-default pull-right" ng-show="curFold.pictures.length" ng-click="rotateTileSz()">
-          {{tileSzBtnText}}</button>
+        <div class="btn-group pull-right" uib-dropdown is-open="optionsMenuIsOpen">
+          <button class="btn btn-default" uib-dropdown-toggle>
+            Options <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" uib-dropdown-menu>
+            <li><a ng-click="rotateTileSz()">{{tileSzBtnText}}</a></li>
+            <li><a ng-click="toggleRatings()">{{ratingsBtnText}}</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -56,7 +63,7 @@
     <div class="pic-tile-pic" ng-click="clickPic(id)">
       <img ng-src="{{'gvypics/pic/'+id+'?sz='+sz}}">
     </div>
-    <p class="pic-tile-text">{{curFold.names[id]}}</p>
+    <p class="pic-tile-text"><rating level="$index % 6" show="showRatings"></rating> {{curFold.names[id]}}</p>
   </div>
   <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="curFold.pictures.length > istart+nlimit">
     <div class="pic-tile-text btn-primary btn-purple" ng-click="moreFwd()">

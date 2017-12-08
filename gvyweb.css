@@ -174,10 +174,15 @@ body {
     opacity: 0;
   }
 }
-@media(max-width: 767px) {
 .panel-footer-drippy {
   margin-top: -20px;
   margin-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
+}
+.rating-heart {
+  color: red;
+}
+.rating-star {
+  color: darkviolet;
 }

@@ -48,6 +48,12 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     };
     $scope.rotateTileSz($stateParams.sz);
     
+    $scope.toggleRatings = function(newShowRatings) {
+      $scope.showRatings = (typeof newShowRatings !== "undefined") ? newShowRatings : !$scope.showRatings;
+      $scope.ratingsBtnText = $scope.showRatings ? "Hide Ratings" : "Show Ratings";
+    };
+    $scope.toggleRatings(!!$stateParams.showRatings);
+    
     function makeGoParams(id) {
       var i = $scope.curFold.pictures.indexOf(id);
       if (i < $scope.curFold.numNativePics) {
@@ -222,7 +228,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     }
     
     function findInView() {
-      if (!curPic || !isInView(curPic)) {
+      if ((!curPic || !isInView(curPic)) && $scope.curFold.length) {
         var inViewState = {};
         if (!$scope.curFold.pictures.some(function(id) {
           var elem = document.getElementById(id);
