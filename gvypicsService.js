@@ -31,7 +31,7 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
       // contents.meta overrides regular meta, on a individual property basis
       // for example you can provide a different caption for a picture in a collection
       if (folder.contents.meta) {
-        Object.keys(folder.contents.meta).forEach(function (id) {
+        Object.keys(folder.contents.meta).forEach(function(id) {
           if (id in folder.meta) {
             Object.assign(folder.meta[id], folder.contents.meta[id]);
           } else {
@@ -48,8 +48,6 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
     Object.keys(folder.meta).forEach(function(id) {
       if (folder.meta[id].caption) {
         folder.names[id] = folder.meta[id].caption;
-        // so we don't need caption anymore
-        delete folder.meta[id].caption;
       }
     });
     return folder;

@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert',
-  function($scope, $stateParams, $state, $timeout, gvypics, alert) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings',
+  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -41,18 +41,19 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
       $scope.istart = Math.floor(i / moreBump) * moreBump;
       $scope.nlimit = moreBump;
-      $stateParams.sz = $scope.sz;
+      appSettings.tileSize = $scope.sz;
       if (curPic) {
         $scope.$applyAsync(setSticky);
       }
     };
-    $scope.rotateTileSz($stateParams.sz);
+    $scope.rotateTileSz($stateParams.sz || appSettings.tileSize);
     
-    $scope.toggleRatings = function(newShowRatings) {
-      $scope.showRatings = (typeof newShowRatings !== "undefined") ? newShowRatings : !$scope.showRatings;
-      $scope.ratingsBtnText = $scope.showRatings ? "Hide Ratings" : "Show Ratings";
+    $scope.toggleRatings = function(newShowRating) {
+      $scope.showRating = (typeof newShowRating !== "undefined") ? newShowRating : !$scope.showRating;
+      $scope.ratingsBtnText = $scope.showRating ? "Hide Ratings" : "Show Ratings";
+      appSettings.showRating = $scope.showRating;
     };
-    $scope.toggleRatings(!!$stateParams.showRatings);
+    $scope.toggleRatings(appSettings.showRating);
     
     function makeGoParams(id) {
       var i = $scope.curFold.pictures.indexOf(id);
