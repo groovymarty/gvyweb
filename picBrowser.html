@@ -63,7 +63,7 @@
     <div class="pic-tile-pic" ng-click="clickPic(id)">
       <img ng-src="{{'gvypics/pic/'+id+'?sz='+sz}}">
     </div>
-    <p class="pic-tile-text"><rating level="$index % 6" show="showRatings"></rating> {{curFold.names[id]}}</p>
+    <p class="pic-tile-text"><rating level="curFold.meta[id].rating" show="showRatings"></rating> {{curFold.names[id]}}</p>
   </div>
   <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="curFold.pictures.length > istart+nlimit">
     <div class="pic-tile-text btn-primary btn-purple" ng-click="moreFwd()">

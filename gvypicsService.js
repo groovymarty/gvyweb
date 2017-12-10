@@ -15,8 +15,9 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
 
   // transform folder object for faster access and to save memory
   function reduceFolder(folder) {
-    var meta = folder.meta || {};
-    delete folder.meta;
+    if (!folder.meta) {
+      folder.meta = {};
+    }
     // remember how many pictures were in pictures array originally
     folder.numNativePics = folder.pictures.length;
     if (folder.contents) {
@@ -26,15 +27,15 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
       append(folder.pictures, folder.contents.pictures);
       // merge content names and meta into the main folder
       Object.assign(folder.names, folder.contNames);
-      Object.assign(meta, folder.contMeta);
+      Object.assign(folder.meta, folder.contMeta);
       // contents.meta overrides regular meta, on a individual property basis
       // for example you can provide a different caption for a picture in a collection
       if (folder.contents.meta) {
         Object.keys(folder.contents.meta).forEach(function (id) {
-          if (id in meta) {
-            Object.assign(meta[id], folder.contents.meta[id]);
+          if (id in folder.meta) {
+            Object.assign(folder.meta[id], folder.contents.meta[id]);
           } else {
-            meta[id] = folder.contents.meta[id];
+            folder.meta[id] = folder.contents.meta[id];
           }
         });
       }
@@ -44,9 +45,11 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
       delete folder.contMeta;
     }
     // if caption exists, replace name with caption
-    Object.keys(meta).forEach(function(id) {
-      if (meta[id].caption) {
-        folder.names[id] = meta[id].caption;
+    Object.keys(folder.meta).forEach(function(id) {
+      if (folder.meta[id].caption) {
+        folder.names[id] = folder.meta[id].caption;
+        // so we don't need caption anymore
+        delete folder.meta[id].caption;
       }
     });
     return folder;
