@@ -229,7 +229,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     }
     
     function findInView() {
-      if ((!curPic || !isInView(curPic)) && $scope.curFold.length) {
+      if ((!curPic || !isInView(curPic)) && $scope.curFold.pictures.length) {
         var inViewState = {};
         if (!$scope.curFold.pictures.some(function(id) {
           var elem = document.getElementById(id);
