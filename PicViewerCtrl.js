@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicViewerCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert',
-  function($scope, $stateParams, $state, $timeout, gvypics, alert) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings',
+  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -12,6 +12,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.nextId = null;
     $scope.prevId = null;
     $scope.curFold = placeholder;
+    $scope.appSettings = appSettings;
     var viewer = document.getElementById('viewer');
     var image = null;
     var buttons = ['viewer-close', 'viewer-prev', 'viewer-next'].map(function(id) {
