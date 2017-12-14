@@ -6,13 +6,13 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       displayName: "Home",
       url: "/home",
       controller: "HomeCtrl",
-      templateUrl: "home.html"
+      templateUrl: "homeView.html"
     })
     .state('picbrowser', {
       displayName: "Pictures",
       url: "/picbrowser/:id?i?sz",
       controller: "PicBrowserCtrl",
-      templateUrl: "picBrowser.html",
+      templateUrl: "picBrowserView.html",
       params: {i: null, sz: null}
     })
     .state('picviewer', {
@@ -20,26 +20,26 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       hideNavBar: true,
       url: "/picviewer/:id?i",
       controller: "PicViewerCtrl",
-      templateUrl: "picViewer.html",
+      templateUrl: "picViewerView.html",
       params: {i: null}
     })
     .state('slideshows', {
       displayName: "Slide Shows",
       url: "/slideshows",
       controller: "SlideShowsCtrl",
-      templateUrl: "slideShows.html"
+      templateUrl: "slideShowsView.html"
     })
     .state('login', {
       displayName: "Sign In",
       url: "/login",
       controller: "LoginCtrl",
-      templateUrl: "login.html"
+      templateUrl: "loginView.html"
     })
     .state('logout', {
       displayName: "Sign Out",
       url: "/logout",
       controller: "LoginCtrl",
-      templateUrl: "logout.html"
+      templateUrl: "logoutView.html"
     });
     
   $urlRouterProvider.otherwise("/home");
