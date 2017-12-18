@@ -176,7 +176,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     });
 
     var mc = new Hammer.Manager(viewer);
-    var swipe = new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONTAL});
+    var swipe = new Hammer.Swipe({direction: Hammer.DIRECTION_ALL});
     var press = new Hammer.Press({time: 500});
     mc.add([swipe, press]);
     
@@ -188,6 +188,14 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     mc.on("swiperight", function() {
       doPrev();
       $scope.$apply(); //to reload image if full screen
+    });
+    
+    mc.on("swipeup", function() {
+      $scope.doClose();
+    });
+    
+    mc.on("swipedown", function() {
+      $scope.doClose();
     });
     
     mc.on("press", function() {

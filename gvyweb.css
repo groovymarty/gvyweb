@@ -131,10 +131,10 @@ body {
   border-color: deeppink;
 }
 .btn-dim {
-  opacity: 0.3;
+  opacity: 0.6;
 }
 .btn[disabled].btn-dim {
-  opacity: 0.1;
+  opacity: 0.3;
 }
 @media(max-width: 767px) {
   .btn-out {
