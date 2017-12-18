@@ -1,4 +1,4 @@
-var myApp = angular.module('gvyweb', ['ui.router', 'ui.bootstrap', 'ngAnimate']);
+var myApp = angular.module('gvyweb', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'shContextMenu']);
 
 myApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

@@ -22,6 +22,13 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     var userScroll = false;
     var inViewCount = 0;
     
+    $scope.menuOptions = [{
+      label: "Hello",
+      onClick: function(ev) {
+        console.log("you clicked "+ev.option.label);
+      }
+    }];
+    
     $scope.rotateTileSz = function(newSz) {
       $scope.sz = newSz || (($scope.sz === "sm") ? "md" : "sm");
       switch ($scope.sz) {

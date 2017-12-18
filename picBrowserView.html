@@ -59,6 +59,7 @@
     </div>
   </div>
   <div class="pic-tile" ng-class="'pic-tile-'+sz" id="{{id}}"
+       sh-context-menu menu-options="menuOptions" context-data="id"
        ng-repeat="id in curFold.pictures | limitTo: nlimit : istart">
     <div class="pic-tile-pic" ng-click="clickPic(id)">
       <img ng-src="{{'gvypics/pic/'+id+'?sz='+sz}}">
