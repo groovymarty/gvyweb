@@ -95,10 +95,17 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       } else if (!isFullScreen()) {
         requestFullScreen(viewer);
       } else if (!buttonsVisible && captionShown) {
+        // cycle (second click): buttons off, captions on -> both off
         showCaption(false);
       } else {
-        buttonOutReset();
         showCaption(true);
+        if (!buttonsVisible) {
+          // cycle (third click): both off ->both on
+          buttonOutReset();
+        } else {
+          // cycle (first click): both on -> buttons off, captions on
+          setButtonOutNoFade();
+        }
       }
     };
     
@@ -146,22 +153,34 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     function buttonOutReset() {
       // redisplay the buttons
       buttons.forEach(function(elem) {
-        angular.element(elem).removeClass("btn-out btn-out-out");
+        angular.element(elem).removeClass("btn-out btn-out-out btn-out-out-out");
       });
       buttonsVisible = true;
       // start inactivity timer
       cancelButtonOutTimer();
+      buttonOutTimer = $timeout(setButtonOut, 2000);
+    }
+    
+    function setButtonOut() {
+      // start fadeout using CSS animation
+      buttons.forEach(function(elem) {
+        angular.element(elem).addClass("btn-out btn-out-out");
+      });
+      // start fadeout timer
+      cancelButtonOutTimer();
       buttonOutTimer = $timeout(function() {
-        // timer expired, start fadeout using CSS animation
-        buttons.forEach(function(elem) {
-          angular.element(elem).addClass("btn-out btn-out-out");
-        });
-        // start fadeout timer
-        buttonOutTimer = $timeout(function() {
-          // animation is finished, buttons now out
-          buttonsVisible = false;
-        }, 1000);
-      }, 2000);
+        // animation is finished, buttons now out
+        buttonsVisible = false;
+      }, 1000);
+    }
+    
+    function setButtonOutNoFade() {
+      // no fadeout
+      buttons.forEach(function(elem) {
+        angular.element(elem).addClass("btn-out btn-out-out btn-out-out-out");
+      });
+      buttonsVisible = false;
+      cancelButtonOutTimer();
     }
     
     function cancelButtonOutTimer() {

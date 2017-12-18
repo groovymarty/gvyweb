@@ -144,6 +144,9 @@ body {
   .btn[disabled].btn-dim.btn-out.btn-out-out {
     opacity: 0;
   }
+  .btn-out-out-out {
+    transition: none;
+  }
 }
 .btn-bottom-left {
   position: absolute;
