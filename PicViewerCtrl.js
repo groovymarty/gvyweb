@@ -213,10 +213,6 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $scope.doClose();
     });
     
-    mc.on("swipedown", function() {
-      $scope.doClose();
-    });
-    
     mc.on("press", function() {
       enableClickPic = false; //avoid interference with click handler
       resetTransforms();
