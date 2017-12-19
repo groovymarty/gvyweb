@@ -23,16 +23,15 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     var inViewCount = 0;
     
     $scope.menuOptions = [{
-      label: "Rotate Tile Size", //label replaced below
-      onClick: function(ev) {
-        var id = ev.dataContext;
-        setCurPic(id);
+      text: "Rotate Tile Size", //label replaced below
+      click: function($itemScope) {
+        setCurPic($itemScope.id);
         setSticky();
         $scope.rotateTileSz();
       }
     },{
-      label: "Toggle Ratings", //label replaced below
-      onClick: function() {
+      text: "Toggle Ratings", //label replaced below
+      click: function() {
         $scope.toggleRatings();
       }
     }];
@@ -49,7 +48,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           $scope.tileSzOptionText = "Small Tiles";
           break;
       }
-      $scope.menuOptions[0].label = $scope.tileSzOptionText; //replace context menu label
+      $scope.menuOptions[0].text = $scope.tileSzOptionText; //replace context menu label
 
       // reset range to include current picture
       var i = $scope.curFold.pictures.indexOf(curPicId);
@@ -68,7 +67,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.toggleRatings = function(newShowRating) {
       $scope.showRating = (typeof newShowRating !== "undefined") ? newShowRating : !$scope.showRating;
       $scope.ratingsOptionText = $scope.showRating ? "Hide Ratings" : "Show Ratings";
-      $scope.menuOptions[1].label = $scope.ratingsOptionText; //replace context menu label
+      $scope.menuOptions[1].text = $scope.ratingsOptionText; //replace context menu label
       appSettings.showRating = $scope.showRating;
     };
     $scope.toggleRatings(appSettings.showRating);
