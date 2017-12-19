@@ -22,18 +22,45 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     var userScroll = false;
     var inViewCount = 0;
     
-    $scope.menuOptions = [{
-      text: "Rotate Tile Size", //label replaced below
+    $scope.contextMenuOptions = [{
+      text: function() {
+        return $scope.tileSzOptionText;
+      },
       click: function($itemScope) {
         setCurPic($itemScope.id);
         setSticky();
         $scope.rotateTileSz();
       }
     },{
-      text: "Toggle Ratings", //label replaced below
+      text: function() {
+        return $scope.ratingsOptionText;
+      },
       click: function() {
         $scope.toggleRatings();
       }
+    },{
+      text: "Download",
+      children: [{
+        text: "Small",
+        click: function($itemScope) {
+          doDownload($itemScope.id, "sm");
+        }
+      },{
+        text: "Medium",
+        click: function($itemScope) {
+          doDownload($itemScope.id, "md");
+        }
+      },{
+        text: "Large",
+        click: function($itemScope) {
+          doDownload($itemScope.id, "lg");
+        }
+      },{
+        text: "Full resolution",
+        click: function($itemScope) {
+          doDownload($itemScope.id, "");
+        }
+      }]
     }];
     
     $scope.rotateTileSz = function(newSz) {
@@ -48,7 +75,6 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           $scope.tileSzOptionText = "Small Tiles";
           break;
       }
-      $scope.menuOptions[0].text = $scope.tileSzOptionText; //replace context menu label
 
       // reset range to include current picture
       var i = $scope.curFold.pictures.indexOf(curPicId);
@@ -67,10 +93,17 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.toggleRatings = function(newShowRating) {
       $scope.showRating = (typeof newShowRating !== "undefined") ? newShowRating : !$scope.showRating;
       $scope.ratingsOptionText = $scope.showRating ? "Hide Ratings" : "Show Ratings";
-      $scope.menuOptions[1].text = $scope.ratingsOptionText; //replace context menu label
       appSettings.showRating = $scope.showRating;
     };
     $scope.toggleRatings(appSettings.showRating);
+    
+    function doDownload(id, sz) {
+      var url = "gvypics/pic/"+id+"?dl=1";
+      if (sz) {
+        url += "&sz="+sz;
+      }
+      window.location = url;
+    }
     
     function makeGoParams(id) {
       var i = $scope.curFold.pictures.indexOf(id);
@@ -82,15 +115,6 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     }
 
     $scope.clickPic = function(id) {
-      /*
-      setCurPic(id);
-      if ($scope.sz !== "md") {
-        $scope.rotateTileSz();
-      } else {
-        $state.go('picviewer', {id: id});
-      }
-      setSticky();
-      */
       $state.go('picviewer', makeGoParams(id));
     };
 
