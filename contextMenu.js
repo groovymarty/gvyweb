@@ -225,6 +225,8 @@
                     if(res === undefined || res) {
                       cleanupFunction();
                     }
+                  } else if (nestedMenu) { //mhs added
+                    openNestedMenu($event); //mhs added
                   } else {
                     cleanupFunction();
                   }
