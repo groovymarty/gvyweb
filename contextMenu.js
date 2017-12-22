@@ -211,6 +211,7 @@
                 $scope.$apply(function () {
 
                   var cleanupFunction = function () {
+                    console.log("cleanupFunction"); //mhs added
                     $(event.currentTarget).removeClass('context');
                     removeAllContextMenus();
                   };
@@ -226,7 +227,9 @@
                       cleanupFunction();
                     }
                   } else if (nestedMenu) { //mhs added
-                    openNestedMenu($event); //mhs added
+                    if (!removeContextMenus(level + 1)) { //mhs added
+                      openNestedMenu($event); //mhs added
+                    }
                   } else {
                     cleanupFunction();
                   }
@@ -480,8 +483,10 @@
          * are removed.
          */
         function removeContextMenus (level) {
+          var result = false; //mhs added
           console.log("removeContextMenus level "+level); //mhs added
           while (_contextMenus.length && (!level || _contextMenus.length > level)) {
+            result = true; //mhs added
             var cm = _contextMenus.pop();
             $rootScope.$broadcast(ContextMenuEvents.ContextMenuClosed, { context: _clickedElement, contextMenu: cm });
             cm.remove();
@@ -489,9 +494,11 @@
           if(!level) {
             $rootScope.$broadcast(ContextMenuEvents.ContextMenuAllClosed, { context: _clickedElement });
           }
+          return result; //mhs added
         }
 
         function removeOnScrollEvent(e) {
+          console.log("removeOnScrollEvent"); //mhs added
           removeAllContextMenus(e);
         }
 
@@ -509,6 +516,7 @@
             }
           }
           if (shouldRemove) {
+            console.log("removeOnOutsideClickEvent"); //mhs temp
             removeAllContextMenus(e);
           }
         }
@@ -617,6 +625,7 @@
 
               // Remove all context menus if the scope is destroyed
               $scope.$on('$destroy', function () {
+                console.log("on destroy"); //mhs temp
                 removeAllContextMenus();
               });
             });
