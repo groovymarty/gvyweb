@@ -1,0 +1,3 @@
+[submodule "ui.bootstrap.contextMenu"]
+	path = ui.bootstrap.contextMenu
+	url = git@github.com:groovymarty/ui.bootstrap.contextMenu.git
