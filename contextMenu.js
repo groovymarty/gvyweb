@@ -167,6 +167,7 @@
 
           if (enabled) {
             var openNestedMenu = function ($event) {
+              console.log("removeContextMenus in openNestedMenu"); //mhs temp
               removeContextMenus(level + 1);
               /*
                * The object here needs to be constructed and filled with data
@@ -228,6 +229,7 @@
                       cleanupFunction();
                     }
                   } else if (nestedMenu) { //mhs added
+                    console.log("my removeContextMenus"); //mhs temp
                     if (!removeContextMenus(level + 1)) { //mhs added
                       openNestedMenu($event); //mhs added
                     }
@@ -243,6 +245,7 @@
                 if (nestedMenu) {
                   openNestedMenu($event);
                 } else {
+                  console.log("mouseover removeContextMenus"); //mhs added
                   removeContextMenus(level + 1);
                 }
               });
