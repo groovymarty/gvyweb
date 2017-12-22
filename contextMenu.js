@@ -600,6 +600,8 @@
               if(isTouchDevice() && element.attr('draggable') === 'true') {
                 return false;
               }
+              
+              removeAllContextMenus(); //mhs added, prevent double menus
 
               // Remove if the user clicks outside
               $document.find('body').on('mousedown', removeOnOutsideClickEvent);
