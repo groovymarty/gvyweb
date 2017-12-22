@@ -206,6 +206,7 @@
               });
             };
 
+            var justOpened = false; //mhs added
             $li.on('click', function ($event) {
               if($event.which == 1) {
                 $event.preventDefault();
@@ -230,9 +231,10 @@
                     }
                   } else if (nestedMenu) { //mhs added
                     console.log("my removeContextMenus"); //mhs temp
-                    if (!removeContextMenus(level + 1)) { //mhs added
+                    if (!justOpened && !removeContextMenus(level + 1)) { //mhs added
                       openNestedMenu($event); //mhs added
                     }
+                    justOpened = false; //mhs added
                   } else {
                     cleanupFunction();
                   }
@@ -244,6 +246,7 @@
               $scope.$apply(function () {
                 if (nestedMenu) {
                   openNestedMenu($event);
+                  justOpened = true; //mhs added
                 } else {
                   console.log("mouseover removeContextMenus"); //mhs added
                   removeContextMenus(level + 1);
