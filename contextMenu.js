@@ -208,6 +208,7 @@
             $li.on('click', function ($event) {
               if($event.which == 1) {
                 $event.preventDefault();
+                $event.stopPropagation(); //mhs added
                 $scope.$apply(function () {
 
                   var cleanupFunction = function () {
@@ -428,6 +429,12 @@
             } else {
               if (leftCoordinate > menuWidth && winWidth - leftCoordinate - padding < menuWidth) {
                 leftCoordinate = winWidth - menuWidth - padding;
+                if (level && (event.pageX - leftCoordinate) > menuWidth) { //mhs added
+                  leftCoordinate -= (menuWidth - padding*2); //mhs added
+                  if (leftCoordinate < 0) { //mhs added
+                    leftCoordinate = 0; //mhs added
+                  }
+                }
               } else if(winWidth - leftCoordinate < menuWidth) {
                 var reduceThresholdX = 5;
                 if(leftCoordinate < reduceThresholdX + padding) {
