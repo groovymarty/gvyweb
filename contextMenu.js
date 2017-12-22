@@ -302,6 +302,7 @@
           var modelValue = params.modelValue;
           var level = params.level;
           var customClass = params.customClass;
+          console.log("renderContextMenu level "+level); //mhs added
 
           // Initialize the container. This will be passed around
           var $ul = initContextMenuContainer(params);
@@ -479,6 +480,7 @@
          * are removed.
          */
         function removeContextMenus (level) {
+          console.log("removeContextMenus level "+level); //mhs added
           while (_contextMenus.length && (!level || _contextMenus.length > level)) {
             var cm = _contextMenus.pop();
             $rootScope.$broadcast(ContextMenuEvents.ContextMenuClosed, { context: _clickedElement, contextMenu: cm });
