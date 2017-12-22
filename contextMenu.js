@@ -167,7 +167,6 @@
 
           if (enabled) {
             var openNestedMenu = function ($event) {
-              console.log("removeContextMenus in openNestedMenu"); //mhs temp
               removeContextMenus(level + 1);
               /*
                * The object here needs to be constructed and filled with data
@@ -206,15 +205,17 @@
               });
             };
 
+            // mhs for touch screen you get mouseover event before click event
+            // mouseover event will open child menu, so we don't want click handler to toggle it off again
             var justOpened = false; //mhs added
             $li.on('click', function ($event) {
               if($event.which == 1) {
                 $event.preventDefault();
+                // mhs click that opens child menu might also select something in the menu, so suppress it
                 $event.stopPropagation(); //mhs added
                 $scope.$apply(function () {
 
                   var cleanupFunction = function () {
-                    console.log("cleanupFunction"); //mhs added
                     $(event.currentTarget).removeClass('context');
                     removeAllContextMenus();
                   };
@@ -229,8 +230,7 @@
                     if(res === undefined || res) {
                       cleanupFunction();
                     }
-                  } else if (nestedMenu) { //mhs added
-                    console.log("my removeContextMenus"); //mhs temp
+                  } else if (nestedMenu) { //mhs added click to toggle child menu on/off
                     if (!justOpened && !removeContextMenus(level + 1)) { //mhs added
                       openNestedMenu($event); //mhs added
                     }
@@ -248,7 +248,6 @@
                   openNestedMenu($event);
                   justOpened = true; //mhs added
                 } else {
-                  console.log("mouseover removeContextMenus"); //mhs added
                   removeContextMenus(level + 1);
                 }
               });
@@ -312,7 +311,6 @@
           var modelValue = params.modelValue;
           var level = params.level;
           var customClass = params.customClass;
-          console.log("renderContextMenu level "+level); //mhs added
 
           // Initialize the container. This will be passed around
           var $ul = initContextMenuContainer(params);
@@ -435,6 +433,8 @@
             } else {
               if (leftCoordinate > menuWidth && winWidth - leftCoordinate - padding < menuWidth) {
                 leftCoordinate = winWidth - menuWidth - padding;
+                // mhs the following moves the child menu farther to the left when
+                // you are close to the right edge of the screen
                 if (level && (event.pageX - leftCoordinate) > menuWidth) { //mhs added
                   leftCoordinate -= (menuWidth - padding*2); //mhs added
                   if (leftCoordinate < 0) { //mhs added
@@ -496,8 +496,8 @@
          * are removed.
          */
         function removeContextMenus (level) {
+          // mhs return true if any menus were removed
           var result = false; //mhs added
-          console.log("removeContextMenus level "+level); //mhs added
           while (_contextMenus.length && (!level || _contextMenus.length > level)) {
             result = true; //mhs added
             var cm = _contextMenus.pop();
@@ -511,7 +511,6 @@
         }
 
         function removeOnScrollEvent(e) {
-          console.log("removeOnScrollEvent"); //mhs added
           removeAllContextMenus(e);
         }
 
@@ -529,7 +528,6 @@
             }
           }
           if (shouldRemove) {
-            console.log("removeOnOutsideClickEvent"); //mhs temp
             removeAllContextMenus(e);
           }
         }
@@ -638,7 +636,6 @@
 
               // Remove all context menus if the scope is destroyed
               $scope.$on('$destroy', function () {
-                console.log("on destroy"); //mhs temp
                 removeAllContextMenus();
               });
             });
