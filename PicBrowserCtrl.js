@@ -61,6 +61,18 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           doDownload($itemScope.id, "");
         }
       }]
+    },{
+      text: "Set Rating",
+      displayed: function() {return gvypics.userId;},
+      hasTopDivider: true,
+      children: [5, 4, 3, 2, 1].map(function(r) {
+        return {
+          text: r.toString(),
+          click: function($itemScope) {
+            setRating($itemScope.$parent, $itemScope.id, r);
+          }
+        };
+      })
     }];
     
     $scope.rotateTileSz = function(newSz) {
@@ -96,6 +108,14 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       appSettings.showRating = $scope.showRating;
     };
     $scope.toggleRatings(appSettings.showRating);
+    
+    function setRating($scope, id, r) {
+      if (!$scope.curFold.meta[id]) {
+        $scope.curFold.meta[id] = {};
+      }
+      $scope.curFold.meta[id].rating = r;
+      $scope.toggleRatings(true);
+    }
     
     function doDownload(id, sz) {
       var url = "gvypics/pic/"+id+"?dl=1";
