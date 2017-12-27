@@ -36,7 +36,6 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $scope.curId = id;
       $scope.nextId = $scope.curFold.pictures[i+1];
       $scope.prevId = $scope.curFold.pictures[i-1];
-      showCaption(true);
     }
 
     gvypics.getFolder($stateParams.id).then(function(folder) {
@@ -114,9 +113,9 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       doPrev();
     };
   
-    function doPrev() {
+    function doPrev(fsRequested) {
       if ($scope.prevId) {
-        if (isFullScreen()) {
+        if (isFullScreen() || fsRequested) {
           setCurId($scope.prevId);
           resetTransforms();
         } else {
@@ -130,9 +129,9 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       doNext();
     };
     
-    function doNext() {
+    function doNext(fsRequested) {
       if ($scope.nextId) {
-        if (isFullScreen()) {
+        if (isFullScreen() || fsRequested) {
           setCurId($scope.nextId);
           resetTransforms();
         } else {
@@ -200,12 +199,18 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     mc.add([swipe, press]);
     
     mc.on("swipeleft", function() {
-      doNext();
+      if (!isFullScreen()) {
+        requestFullScreen(viewer);
+      }
+      doNext(true);
       $scope.$apply(); //to reload image if full screen
     });
   
     mc.on("swiperight", function() {
-      doPrev();
+      if (!isFullScreen()) {
+        requestFullScreen(viewer);
+      }
+      doPrev(true);
       $scope.$apply(); //to reload image if full screen
     });
     
