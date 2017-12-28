@@ -11,6 +11,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.curId = null;
     $scope.nextId = null;
     $scope.prevId = null;
+    $scope.tooFar = false;
     $scope.curFold = placeholder;
     $scope.appSettings = appSettings;
     var viewer = document.getElementById('viewer');
@@ -37,8 +38,23 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $scope.curId = id;
       $scope.nextId = $scope.curFold.pictures[i+1];
       $scope.prevId = $scope.curFold.pictures[i-1];
+      setTooFar(false);
     }
 
+    // set tooFar flag to specified value
+    // when true, the red "stop" icon appears on the screen and then fades out
+    function setTooFar(val) {
+      if (val && $scope.tooFar) {
+        // already true, set false briefly to restart animation
+        $scope.tooFar = false;
+        $timeout(function() {
+          $scope.tooFar = true;
+        }, 0);
+      } else {
+        $scope.tooFar = val;
+      }
+    }
+    
     gvypics.getFolder($stateParams.id).then(function(folder) {
       $scope.curFold = folder;
       setCurId($stateParams.id);
@@ -116,7 +132,6 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
   
     function doPrev(fsRequested) {
       if ($scope.prevId) {
-        showStopIcon(false);
         if (isFullScreen() || fsRequested) {
           setCurId($scope.prevId);
           resetTransforms();
@@ -133,7 +148,6 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     
     function doNext(fsRequested) {
       if ($scope.nextId) {
-        showStopIcon(false);
         if (isFullScreen() || fsRequested) {
           setCurId($scope.nextId);
           resetTransforms();
@@ -195,18 +209,6 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.$on('$destroy', function() {
       cancelButtonOutTimer();
     });
-    
-    function showStopIcon(show) {
-      if (show) {
-        angular.element(stopIcon).removeClass("icon-fade icon-fade-out icon-out-out");
-        $timeout(function() {
-          angular.element(stopIcon).addClass("icon-fade icon-fade-out");
-        }, 10);
-      } else {
-        angular.element(stopIcon).addClass("icon-out-out");
-        angular.element(stopIcon).removeClass("icon-fade icon-fade-out");
-      }
-    }
 
     var mc = new Hammer.Manager(viewer);
     var swipe = new Hammer.Swipe({direction: Hammer.DIRECTION_ALL});
@@ -219,10 +221,10 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       }
       if ($scope.nextId) {
         doNext(true);
-        $scope.$apply(); //to reload image if full screen
       } else {
-        showStopIcon(true);
+        setTooFar(true);
       }
+      $scope.$apply(); //to reload image if full screen
     });
   
     mc.on("swiperight", function() {
@@ -231,10 +233,10 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       }
       if ($scope.prevId) {
         doPrev(true);
-        $scope.$apply(); //to reload image if full screen
       } else {
-        showStopIcon(true);
+        setTooFar(true);
       }
+      $scope.$apply(); //to reload image if full screen
     });
     
     mc.on("swipeup", function() {
