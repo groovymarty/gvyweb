@@ -178,6 +178,7 @@ body {
 }
 .icon-fade {
   transition: opacity 1s linear;
+  opacity: 1;
 }
 .icon-fade.icon-fade-out {
   opacity: 0;
