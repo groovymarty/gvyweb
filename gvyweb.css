@@ -163,6 +163,29 @@ body {
   right: 15px;
   top: 15px;
 }
+.glyphicon-lg {
+  font-size: 2em;
+}
+.icon-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -22px;
+  margin-left: -25px;
+}
+#viewer-stop {
+  color: red;
+}
+.icon-fade {
+  transition: opacity 1s linear;
+}
+.icon-fade.icon-fade-out {
+  opacity: 0;
+}
+.icon-out-out {
+  transition: none;
+  opacity: 0;
+}
 .caption-bottom {
   position: absolute;
   bottom: 0;

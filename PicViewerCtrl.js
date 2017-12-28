@@ -20,6 +20,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     });
     var buttonOutTimer = null;
     var caption = document.getElementById('viewer-caption');
+    var stopIcon = document.getElementById('viewer-stop');
     var buttonsVisible = true;
     var captionShown = true;
     
@@ -115,6 +116,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
   
     function doPrev(fsRequested) {
       if ($scope.prevId) {
+        showStopIcon(false);
         if (isFullScreen() || fsRequested) {
           setCurId($scope.prevId);
           resetTransforms();
@@ -131,6 +133,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     
     function doNext(fsRequested) {
       if ($scope.nextId) {
+        showStopIcon(false);
         if (isFullScreen() || fsRequested) {
           setCurId($scope.nextId);
           resetTransforms();
@@ -192,6 +195,18 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.$on('$destroy', function() {
       cancelButtonOutTimer();
     });
+    
+    function showStopIcon(show) {
+      if (show) {
+        angular.element(stopIcon).removeClass("icon-fade icon-fade-out icon-out-out");
+        $timeout(function() {
+          angular.element(stopIcon).addClass("icon-fade icon-fade-out");
+        }, 10);
+      } else {
+        angular.element(stopIcon).addClass("icon-out-out");
+        angular.element(stopIcon).removeClass("icon-fade icon-fade-out");
+      }
+    }
 
     var mc = new Hammer.Manager(viewer);
     var swipe = new Hammer.Swipe({direction: Hammer.DIRECTION_ALL});
@@ -202,16 +217,24 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       if (!isFullScreen()) {
         requestFullScreen(viewer);
       }
-      doNext(true);
-      $scope.$apply(); //to reload image if full screen
+      if ($scope.nextId) {
+        doNext(true);
+        $scope.$apply(); //to reload image if full screen
+      } else {
+        showStopIcon(true);
+      }
     });
   
     mc.on("swiperight", function() {
       if (!isFullScreen()) {
         requestFullScreen(viewer);
       }
-      doPrev(true);
-      $scope.$apply(); //to reload image if full screen
+      if ($scope.prevId) {
+        doPrev(true);
+        $scope.$apply(); //to reload image if full screen
+      } else {
+        showStopIcon(true);
+      }
     });
     
     mc.on("swipeup", function() {
