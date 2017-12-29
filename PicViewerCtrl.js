@@ -12,6 +12,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.nextId = null;
     $scope.prevId = null;
     $scope.tooFar = false;
+    $scope.loading = false;
     $scope.curFold = placeholder;
     $scope.appSettings = appSettings;
     var viewer = document.getElementById('viewer');
@@ -21,7 +22,6 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     });
     var buttonOutTimer = null;
     var caption = document.getElementById('viewer-caption');
-    var stopIcon = document.getElementById('viewer-stop');
     var buttonsVisible = true;
     var captionShown = true;
     
@@ -39,6 +39,21 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $scope.nextId = $scope.curFold.pictures[i+1];
       $scope.prevId = $scope.curFold.pictures[i-1];
       setTooFar(false);
+      // delay one digest cycle for ng-if to create the image element
+      $timeout(function() {
+        // image element should be there by now
+        if (getImage()) {
+          // add handler before we check image.complete
+          image.onload = function() {
+            // image is loaded, clear loading flag and trigger digest cycle
+            $scope.$apply(function() {
+              $scope.loading = false;
+            });
+          };
+          // update current loading status
+          $scope.loading = !image.complete;
+        }
+      }, 0);
     }
 
     // set tooFar flag to specified value
@@ -53,6 +68,14 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       } else {
         $scope.tooFar = val;
       }
+    }
+
+    // image element is not created until ng-if sees curId has been set    
+    function getImage() {
+      if (!image) {
+        image = document.getElementById("viewer-img");
+      }
+      return image;
     }
     
     gvypics.getFolder($stateParams.id).then(function(folder) {
@@ -293,10 +316,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         var transforms = [];
         transforms.push("scale("+currentScale+")");
         transforms.push("translate("+currentDeltaX+"px,"+currentDeltaY+"px)");
-        if (!image) {
-          image = document.getElementById("viewer-img");
-        }
-        if (image) {
+        if (getImage()) {
           image.style.transform = transforms.join(" ");
         }
       }
