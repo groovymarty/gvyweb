@@ -61,15 +61,15 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       if (typeof maxLoops === 'undefined') {
         maxLoops = 10;
       }
-      if (!maxLoops) {
-        console.log("waitForImage giving up!");
-      } else if (getImage()) {
-        f();
-      } else {
-        $timeout(function() {
+      $timeout(function() {
+        if (getImage()) {
+          f();
+        } else if (!maxLoops) {
+          console.log("waitForImage giving up!");        
+        } else {
           waitForImage(f, maxLoops-1);
-        });
-      }
+        }
+      });
     }
 
     // set tooFar flag to specified value
