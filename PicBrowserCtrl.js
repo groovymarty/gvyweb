@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings',
-  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings', 'rating',
+  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings, rating) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -67,7 +67,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       hasTopDivider: true,
       children: [5, 4, 3, 2, 1].map(function(r) {
         return {
-          text: r.toString(),
+          text: rating.iconHtml[r] + " " + rating.description[r] + " (" + r + ")",
           click: function($itemScope) {
             setRating($itemScope.$parent, $itemScope.id, r);
           }

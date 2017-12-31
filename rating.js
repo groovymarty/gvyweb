@@ -1,3 +1,16 @@
+var ratingInnerHTML = [
+  "&EmptySmallSquare;",
+  "&cross;",
+  "&approx;",
+  "&check;",
+  "", ""
+];
+var ratingClassName = [
+  "", "", "", "",
+  "glyphicon glyphicon-star rating-star",
+  "glyphicon glyphicon-heart rating-heart"
+];
+
 angular.module('gvyweb').directive('rating', function() {
   return {
     restrict: 'E',
@@ -12,22 +25,10 @@ angular.module('gvyweb').directive('rating', function() {
           return scope.show && scope.level;
         },
         function() { //what to do when it changes
-          var innerHTML = [
-            "&EmptySmallSquare;",
-            "&cross;",
-            "&approx;",
-            "&check;",
-            "", ""
-          ];
-          var className = [
-            "", "", "", "",
-            "glyphicon glyphicon-star rating-star",
-            "glyphicon glyphicon-heart rating-heart"
-          ];
           if (scope.show) {
             var i = scope.level || 0;
-            element[0].innerHTML = innerHTML[i] || "";
-            element[0].className = className[i] || "";
+            element[0].innerHTML = ratingInnerHTML[i] || "";
+            element[0].className = ratingClassName[i] || "";
           } else {
             element[0].innerHTML = "";
             element[0].className = "";
@@ -35,5 +36,26 @@ angular.module('gvyweb').directive('rating', function() {
         }
       );
     }
+  };
+})
+.service('rating', function() {
+  return {
+    iconHtml: [0,1,2,3,4,5].map(function(r) {
+      var innerHTML = ratingInnerHTML[r] || "";
+      var className = ratingClassName[r] || "";
+      var s = "<span";
+      if (className) {
+        s += " class=\"" + className + "\"";
+      }
+      return s + ">" + innerHTML + "</span>";
+    }),
+    description: [
+      "No Rating",
+      "Delete Me",
+      "Poor But Keep",
+      "Good",
+      "Better",
+      "Love It!"
+    ]
   };
 });
