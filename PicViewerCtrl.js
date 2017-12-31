@@ -11,6 +11,8 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.curId = null;
     $scope.nextId = null;
     $scope.prevId = null;
+    $scope.prefetchId = null;
+    var direction = 1;
     $scope.tooFar = false;
     $scope.loading = false;
     $scope.curFold = placeholder;
@@ -39,21 +41,35 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       $scope.nextId = $scope.curFold.pictures[i+1];
       $scope.prevId = $scope.curFold.pictures[i-1];
       setTooFar(false);
-      // delay one digest cycle for ng-if to create the image element
-      $timeout(function() {
-        // image element should be there by now
-        if (getImage()) {
-          // add handler before we check image.complete
-          image.onload = function() {
-            // image is loaded, clear loading flag and trigger digest cycle
-            $scope.$apply(function() {
-              $scope.loading = false;
-            });
-          };
-          // update current loading status
-          $scope.loading = !image.complete;
-        }
-      }, 0);
+      waitForImage(function() {
+        // add handler before we check image.complete
+        image.onload = function() {
+          // image is loaded, clear loading flag and trigger digest cycle
+          $scope.$apply(function() {
+            $scope.loading = false;
+            $scope.prefetchId = (direction > 0) ? $scope.nextId : $scope.prevId;
+          });
+        };
+        // update current loading status
+        $scope.loading = !image.complete;        
+      });
+    }
+    
+    // delay one or more digest cycles for ng-if to create the image element
+    // then execute specified function
+    function waitForImage(f, maxLoops) {
+      if (typeof maxLoops === 'undefined') {
+        maxLoops = 10;
+      }
+      if (!maxLoops) {
+        console.log("waitForImage giving up!");
+      } else if (getImage()) {
+        f();
+      } else {
+        $timeout(function() {
+          waitForImage(f, maxLoops-1);
+        });
+      }
     }
 
     // set tooFar flag to specified value
@@ -64,7 +80,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         $scope.tooFar = false;
         $timeout(function() {
           $scope.tooFar = true;
-        }, 0);
+        });
       } else {
         $scope.tooFar = val;
       }
@@ -154,6 +170,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     };
   
     function doPrev(fsRequested) {
+      direction = -1;
       if ($scope.prevId) {
         if (isFullScreen() || fsRequested) {
           setCurId($scope.prevId);
@@ -170,6 +187,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     };
     
     function doNext(fsRequested) {
+      direction = 1;
       if ($scope.nextId) {
         if (isFullScreen() || fsRequested) {
           setCurId($scope.nextId);

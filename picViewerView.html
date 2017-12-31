@@ -2,6 +2,7 @@
   <div class="pic-tile-pic" ng-click="clickPic()">
     <span ng-if="!curId">Loading...</span>
     <img id="viewer-img" ng-src="{{'gvypics/pic/'+curId+'?sz=lg'}}" ng-if="curId">
+    <img id="viewer-prefetch" ng-src="{{'gvypics/pic/'+prefetchId+'?sz=lg'}}" ng-if="prefetchId" class="ng-hide">
   </div>
   <div class="btn btn-default btn-lg btn-top-right btn-dim" id="viewer-close"
        ng-click="doClose()">
