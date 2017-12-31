@@ -38,7 +38,11 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         return {
           text: (r===0) ? "Show All Ratings" :
                 (r===-1) ? "Hide Ratings" :
-                "Show " + rating.iconHtml[r],
+                "Show " + [5,4,3,2,1].filter(function(rr) {
+                  return rr >= r;
+                }).map(function(rr) {
+                  return rating.iconHtml[rr];
+                }).join(" "),
           click: function() {
             $scope.setRatingFilter(r);
           }
