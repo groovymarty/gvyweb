@@ -8,6 +8,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       pictures: [],
       videos: []      
     };
+    $scope.appSettings = appSettings;
     $scope.root = placeholder;
     $scope.firstlevel = placeholder;
     $scope.path = [];
@@ -32,12 +33,17 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         $scope.rotateTileSz();
       }
     },{
-      text: function() {
-        return $scope.ratingsOptionText;
-      },
-      click: function() {
-        $scope.toggleRatings();
-      }
+      text: "Show Ratings",
+      children: [5,4,3,0,-1].map(function(r) {
+        return {
+          text: (r===0) ? "Show All Ratings" :
+                (r===-1) ? "Hide Ratings" :
+                "Show " + rating.iconHtml[r],
+          click: function() {
+            $scope.setRatingFilter(r);
+          }
+        };
+      })
     },{
       text: "Download",
       children: [{
@@ -102,19 +108,24 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     };
     $scope.rotateTileSz($stateParams.sz || appSettings.tileSize);
     
-    $scope.toggleRatings = function(newShowRating) {
-      $scope.showRating = (typeof newShowRating !== "undefined") ? newShowRating : !$scope.showRating;
-      $scope.ratingsOptionText = $scope.showRating ? "Hide Ratings" : "Show Ratings";
-      appSettings.showRating = $scope.showRating;
+    $scope.setRatingFilter = function(r) {
+      if (r < 0) {
+        appSettings.showRating = false;
+        appSettings.ratingFilter = 0;
+      } else {
+        appSettings.showRating = true;
+        appSettings.ratingFilter = r;
+      }
     };
-    $scope.toggleRatings(appSettings.showRating);
     
     function setRating($scope, id, r) {
       if (!$scope.curFold.meta[id]) {
         $scope.curFold.meta[id] = {};
       }
       $scope.curFold.meta[id].rating = r;
-      $scope.toggleRatings(true);
+      if (!appSettings.showRating) {
+        $scope.setRatingFilter(0);
+      }
     }
     
     function doDownload(id, sz) {

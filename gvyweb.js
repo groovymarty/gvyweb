@@ -64,5 +64,6 @@ myApp.service('appSettings',
   function() {
     this.tileSize = 'sm';
     this.showRating = false;
+    this.ratingFilter = 0;
   }
 );

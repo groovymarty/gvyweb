@@ -28,7 +28,11 @@
           </button>
           <ul class="dropdown-menu" uib-dropdown-menu>
             <li><a ng-click="rotateTileSz()">{{tileSzOptionText}}</a></li>
-            <li><a ng-click="toggleRatings()">{{ratingsOptionText}}</a></li>
+            <li><a ng-click="setRatingFilter(5)">Show <rating level="5" show="true"></rating></a></li>
+            <li><a ng-click="setRatingFilter(4)">Show <rating level="4" show="true"></rating></a></li>
+            <li><a ng-click="setRatingFilter(3)">Show <rating level="3" show="true"></rating></a></li>
+            <li><a ng-click="setRatingFilter(0)">Show All Ratings</a></li>
+            <li ng-show="appSettings.showRating"><a ng-click="setRatingFilter(-1)">Hide Ratings</a></li>
           </ul>
         </div>
       </div>
@@ -51,6 +55,21 @@
       </div>
     </div>
   </div>
+  <div class="row" ng-show="appSettings.ratingFilter">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading" ng-click="setRatingFilter(0)">
+          <div class="panel-title">
+            <span class="groovy-logo">Showing only</span>
+            <span ng-repeat="r in [1,2,3,4,5]" ng-show="r >= appSettings.ratingFilter">
+              <rating level="r" show="true"></rating>
+            </span>
+            <span class="curly-font">click here to see all pictures</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="pic-tile-panel">
   <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="istart > 0">
@@ -60,11 +79,14 @@
   </div>
   <div class="pic-tile" ng-class="'pic-tile-'+sz" id="{{id}}"
        context-menu="contextMenuOptions"
-       ng-repeat="id in curFold.pictures | limitTo: nlimit : istart">
+       ng-repeat="id in curFold.pictures | limitTo: nlimit : istart
+                                         | ratingFilter: curFold.meta : appSettings.ratingFilter">
     <div class="pic-tile-pic" ng-click="clickPic(id)">
       <img ng-src="{{'gvypics/pic/'+id+'?sz='+sz}}">
     </div>
-    <p class="pic-tile-text"><rating level="curFold.meta[id].rating" show="showRating"></rating> {{curFold.names[id]}}</p>
+    <p class="pic-tile-text">
+      <rating level="curFold.meta[id].rating" show="appSettings.showRating"></rating>
+      {{curFold.names[id]}}</p>
   </div>
   <div class="pic-tile" ng-class="'pic-tile-'+sz" ng-if="curFold.pictures.length > istart+nlimit">
     <div class="pic-tile-text btn-primary btn-purple" ng-click="moreFwd()">
