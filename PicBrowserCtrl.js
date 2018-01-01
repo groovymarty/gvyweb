@@ -250,6 +250,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           }
         }
       } else {
+        resetRange();
         userScroll = true;
       }
     }
