@@ -28,10 +28,11 @@
           </button>
           <ul class="dropdown-menu" uib-dropdown-menu>
             <li><a ng-click="rotateTileSz()">{{tileSzOptionText}}</a></li>
-            <li ng-repeat="r in [5,4,3]">
-              <a ng-click="setRatingFilter(r)">Show
-                <span ng-repeat="rr in [5,4,3,2,1]" ng-show="rr >= r">
-                  <rating level="rr" show="true"></rating>
+            <li ng-repeat="filt in rating.filterValues">
+              <a ng-click="setRatingFilter(filt)">Show
+                <span ng-repeat="r in [5,4,3,2,1,0]"
+                      ng-show="rating.filterHas(filt, r)">
+                  <rating level="r" show="true"></rating>
                 </span></a></li>
             <li><a ng-click="setRatingFilter(0)">Show All Ratings</a></li>
             <li ng-show="appSettings.showRating"><a ng-click="setRatingFilter(-1)">Hide Ratings</a></li>
@@ -63,8 +64,9 @@
         <div class="panel-heading" ng-click="setRatingFilter(0)">
           <div class="panel-title">
             <span class="groovy-logo">Showing only</span>
-            <span ng-repeat="rr in [5,4,3,2,1]" ng-show="rr >= appSettings.ratingFilter">
-              <rating level="rr" show="true"></rating>
+            <span ng-repeat="r in [5,4,3,2,1,0]"
+                  ng-show="rating.filterHas(appSettings.ratingFilter, r)">
+              <rating level="r" show="true"></rating>
             </span>
             <span class="curly-font">click here to see all pictures</span>
           </div>

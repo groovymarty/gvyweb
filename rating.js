@@ -38,6 +38,7 @@ angular.module('gvyweb').directive('rating', function() {
     }
   };
 })
+
 .service('rating', function() {
   this.iconHtml = [0,1,2,3,4,5].map(function(r) {
     var innerHTML = ratingInnerHTML[r] || "";
@@ -56,14 +57,19 @@ angular.module('gvyweb').directive('rating', function() {
     "Better",
     "Love It!"
   ];
+  this.filterValues = [32, 48, 56, 12, 6, 1];
+  this.filterHas = function(bits, level) {
+    return bits & (1 << level);
+  };
 })
+
 .filter('ratingFilter', function() {
-  return function(input, meta, level) {
-    level = parseInt(level) || 0;
+  return function(input, meta, bits) {
+    bits = parseInt(bits) || 255;
     if (angular.isArray(input) && angular.isObject(meta)) {
       return input.filter(function(id) {
-        var rating = meta[id] && meta[id].rating;
-        return (parseInt(rating) || 0) >= level;
+        var level = meta[id] && meta[id].rating;
+        return bits & (1 << (parseInt(level) || 0));
       });
     } else {
       return input;

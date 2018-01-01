@@ -9,6 +9,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       videos: []      
     };
     $scope.appSettings = appSettings;
+    $scope.rating = rating;
     $scope.root = placeholder;
     $scope.firstlevel = placeholder;
     $scope.path = [];
@@ -34,17 +35,17 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
     },{
       text: "Show Ratings",
-      children: [5,4,3,0,-1].map(function(r) {
+      children: rating.filterValues.concat([0, -1]).map(function(filt) {
         return {
-          text: (r===0) ? "Show All Ratings" :
-                (r===-1) ? "Hide Ratings" :
-                "Show " + [5,4,3,2,1].filter(function(rr) {
-                  return rr >= r;
-                }).map(function(rr) {
-                  return rating.iconHtml[rr];
+          text: (filt===0) ? "Show All Ratings" :
+                (filt===-1) ? "Hide Ratings" :
+                "Show " + [5,4,3,2,1,0].filter(function(r) {
+                  return rating.filterHas(filt, r);
+                }).map(function(r) {
+                  return rating.iconHtml[r];
                 }).join(" "),
           click: function() {
-            $scope.setRatingFilter(r);
+            $scope.setRatingFilter(filt);
           }
         };
       })
@@ -75,7 +76,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       text: "Set Rating",
       displayed: function() {return gvypics.userId;},
       hasTopDivider: true,
-      children: [5, 4, 3, 2, 1].map(function(r) {
+      children: [5,4,3,2,1,0].map(function(r) {
         return {
           text: rating.iconHtml[r] + " " + rating.description[r] + " (" + r + ")",
           click: function($itemScope) {
@@ -112,21 +113,21 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     };
     $scope.rotateTileSz($stateParams.sz || appSettings.tileSize);
     
-    $scope.setRatingFilter = function(r) {
-      if (r < 0) {
+    $scope.setRatingFilter = function(filt) {
+      if (filt < 0) {
         appSettings.showRating = false;
         appSettings.ratingFilter = 0;
       } else {
         appSettings.showRating = true;
-        appSettings.ratingFilter = r;
+        appSettings.ratingFilter = filt;
       }
     };
     
-    function setRating($scope, id, r) {
+    function setRating($scope, id, level) {
       if (!$scope.curFold.meta[id]) {
         $scope.curFold.meta[id] = {};
       }
-      $scope.curFold.meta[id].rating = r;
+      $scope.curFold.meta[id].rating = level;
       if (!appSettings.showRating) {
         $scope.setRatingFilter(0);
       }
