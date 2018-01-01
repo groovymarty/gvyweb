@@ -18,7 +18,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.nlimit = 0;
     var curPic = null; //DOM pic-tile element
     var curPicId = null;
-    var moreBump;
+    var moreBump = 10;
     var scrollTimer = null;
     var lastScrollY = 0;
     var userScroll = false;
@@ -88,6 +88,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     
     $scope.rotateTileSz = function(newSz) {
       $scope.sz = newSz || (($scope.sz === "sm") ? "md" : "sm");
+      appSettings.tileSize = $scope.sz;
       switch ($scope.sz) {
         case "sm":
           moreBump = 100;
@@ -98,17 +99,8 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           $scope.tileSzOptionText = "Small Tiles";
           break;
       }
-
-      // reset range to include current picture
-      var i = $scope.curFold.pictures.indexOf(curPicId);
-      if (i < 0) {
-        i = 0;
-      }
-      $scope.istart = Math.floor(i / moreBump) * moreBump;
-      $scope.nlimit = moreBump;
-      appSettings.tileSize = $scope.sz;
-      if (curPic) {
-        $scope.$applyAsync(setSticky);
+      if (curPicId) {
+        resetRange();
       }
     };
     $scope.rotateTileSz($stateParams.sz || appSettings.tileSize);
@@ -120,6 +112,9 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       } else {
         appSettings.showRating = true;
         appSettings.ratingFilter = filt;
+      }
+      if (curPicId) {
+        resetRange();
       }
     };
     
@@ -156,8 +151,9 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
 
     $scope.moreBack = function() {
       if ($scope.istart > moreBump) {
-        $scope.istart -= moreBump;
-        $scope.nlimit += moreBump;
+        var result = extendRange($scope.istart, moreBump, -1);
+        $scope.istart -= result.len;
+        $scope.nlimit += result.len;
       } else {
         $scope.nlimit += $scope.istart;
         $scope.istart = 0;
@@ -165,7 +161,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     };
  
     $scope.moreFwd = function() {
-      $scope.nlimit += moreBump;
+      $scope.nlimit += extendRange($scope.nlimit, moreBump).len;
     };
  
     $scope.showVideo = false;
@@ -242,8 +238,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       if (i >= 0) {
         if (i < $scope.istart || i >= $scope.istart+$scope.nlimit) {
           // reset range to include current picture
-          $scope.istart = Math.floor(i / moreBump) * moreBump;
-          $scope.nlimit = moreBump;
+          resetRange(i);
           // give angular a chance to respond to istart/nlimit change then try again
           $scope.$applyAsync(initCurPic);
         } else {
@@ -274,6 +269,58 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
     }
     
+    // reset range to include current picture
+    function resetRange(i) {
+      if (typeof i === 'undefined') {
+        i = $scope.curFold.pictures.indexOf(curPicId);
+        if (i < 0) {
+          i = 0;
+        }
+      }
+      // bracket current picture in range based on current "bump" size
+      $scope.istart = Math.floor(i / moreBump) * moreBump;
+      // possibly extend range higher to find enough pictures if we're filtering
+      var result = extendRange($scope.istart, moreBump);
+      $scope.nlimit = result.len;
+      // did we find enough?
+      if (result.nfound < moreBump) {
+        // extend range lower as well
+        var result2 = extendRange($scope.istart, moreBump-result.nfound, -1);
+        $scope.istart -= result2.len;
+        $scope.nlimit += result2.len;
+      }
+      if (curPic) {
+        $scope.$applyAsync(setSticky);
+      }
+    }
+    
+    // determine length of range needed to include specified number of displayed pictures
+    // returns object with "len" and "nfound" properties
+    function extendRange(istart, nwanted, direction) {
+      if (!appSettings.ratingFilter) {
+        // no filtering, all pictures are displayed
+        return {len: nwanted, nfound: nwanted};
+      } else {
+        var meta = $scope.curFold.meta || {};
+        var accum = {len: 0, nfound: 0};
+        var reduceFunc = function(accum, id) {
+          if (accum.nfound < nwanted) {
+            var level = (meta[id] && meta[id].rating) || 0;
+            if (rating.filterHas(appSettings.ratingFilter, level)) {
+              accum.nfound += 1;
+            }
+            accum.len += 1;
+          }
+          return accum;
+        };
+        if ((direction || 1) > 0) {
+          return $scope.curFold.pictures.slice(istart).reduce(reduceFunc, accum);
+        } else {
+          return $scope.curFold.pictures.slice(0, istart).reduceRight(reduceFunc, accum);
+        }
+      }
+    }
+
     function isInView(elem, state) {
       var top = elem.getBoundingClientRect().top;
       var bottom = elem.getBoundingClientRect().bottom;
