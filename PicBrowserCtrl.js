@@ -16,9 +16,11 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.curFold = placeholder;
     $scope.istart = 0;
     $scope.nlimit = 0;
+    $scope.showRocket = false;
     var curPic = null; //DOM pic-tile element
     var curPicId = null;
     var moreBump = 10;
+    var rocketTimer = null;
     var scrollTimer = null;
     var lastScrollY = 0;
     var userScroll = false;
@@ -419,14 +421,33 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
     }
     
+    function startRocketTimer(f, t) {
+      cancelRocketTimer();
+      rocketTimer = $timeout(f, t);
+    }
+    
+    function cancelRocketTimer() {
+      if (rocketTimer) {
+        $timeout.cancel(rocketTimer);
+        rocketTimer = null;
+      }
+    }
+    
     $scope.$on('$destroy', function() {
       cancelScrollTimer();
+      cancelRocketTimer();
     });
     
     angular.element(window).on('scroll', function() {
       var scrollY = window.scrollY;
       if (userScroll) {
-        //var delta = scrollY - lastScrollY;
+        var delta = scrollY - lastScrollY;
+        if (scrollY && delta < -50) {
+          $scope.showRocket = true;
+          startRocketTimer(function() {
+            $scope.showRocket = false;
+          }, 1000);
+        }
         $scope.$applyAsync(findInView);
       }
       lastScrollY = scrollY;
@@ -449,5 +470,11 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         fixScrollOnce();
       }
     });
+    
+    $scope.rocketClick = function() {
+      window.scrollTo(0, 0);
+      cancelRocketTimer();
+      $scope.showRocket = false;
+    };
   }
 ]);

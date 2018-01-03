@@ -163,6 +163,15 @@ body {
   right: 15px;
   top: 15px;
 }
+.btn-bottom-right-fixed {
+ position: fixed;
+  right: 15px;
+  bottom: 15px;
+}
+.btn-fade.ng-hide {
+  transition: opacity 0.3s linear;
+  opacity: 0;
+}
 .spinner {
   position: absolute;
   top: 50%;
