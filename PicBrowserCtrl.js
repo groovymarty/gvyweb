@@ -94,6 +94,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         appSettings.ratingFilter = 0;
         $scope.showAllText = "Show Ratings";
         $scope.showFilter = false;
+        $scope.showFilterSticky = false;
       } else {
         appSettings.showRating = true;
         appSettings.ratingFilter = filt;
@@ -162,6 +163,9 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.showFilter = false;
     $scope.toggleShowFilter = function() {
       $scope.showFilter = !$scope.showFilter;
+      if ($scope.showFilter) {
+        $scope.showFilterSticky = true;
+      }
     };
 
     // get specified folder and insert at beginning of path

@@ -45,7 +45,7 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading" ng-if="$first" ng-click="toggleShowVideo()">
-          <div class="panel-title">
+          <div class="panel-title clearfix">
             <span class="groovy-logo">{{curFold.videos.length}} Video{{curFold.videos.length > 1 ? "s" : ""}}</span>
             <div class="curly-font pull-right">
               Click here to {{showVideo ? "hide" : "see"}} {{curFold.videos.length > 1 ? "them" : "it"}}
@@ -59,18 +59,18 @@
       </div>
     </div>
   </div>
-  <div class="row" ng-show="appSettings.ratingFilter || showFilter">
+  <div class="row" ng-show="appSettings.ratingFilter || showFilterSticky">
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading" ng-click="toggleShowFilter()">
-          <div class="panel-title">
+          <div class="panel-title clearfix">
             <span class="groovy-logo">Now showing</span>
             <span ng-repeat="r in [5,4,3,2,1,0]"
                   ng-show="rating.filterHas(appSettings.ratingFilter, r)">
               <rating level="r" show="true"></rating>
             </span>
-            <div class="curly-font pull-right">
-              Click here {{showFilter ? "to hide" : "for more"}} options
+            <div class="curly-font pull-right" ng-hide="showFilter">
+              Click here for more options
             </div>
           </div>
         </div>
@@ -79,10 +79,10 @@
             <div class="btn" ng-click="toggleRatingFilter(r)"
                  ng-class="rating.filterHas(appSettings.ratingFilter, r) ? 'btn-gold' : 'btn-default'">
               <rating level="r" show="true"></rating>
-            </div> &nbsp;
+            </div>
           </span>
           <p>
-            <div class="btn btn-default" ng-click="setRatingFilter(0)">{{showAllText}}</div> &nbsp;
+            <div class="btn btn-default" ng-click="setRatingFilter(0)">{{showAllText}}</div>
             <div class="btn btn-default" ng-click="setRatingFilter(-1)">Hide Ratings</div>
           </p>
         </div>
