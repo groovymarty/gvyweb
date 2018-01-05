@@ -12,7 +12,8 @@ body {
   font-family: 'Griffy', cursive;
 }
 #my-navbar,
-#my-navbar .navbar-toggle:hover {
+#my-navbar .navbar-toggle:hover,
+.btn-gold {
   background-color: gold;
 }
 #my-navbar .navbar-toggle {

@@ -36,22 +36,6 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         $scope.rotateTileSz();
       }
     },{
-      text: "Show Ratings",
-      children: rating.filterValues.concat([0, -1]).map(function(filt) {
-        return {
-          text: (filt===0) ? "Show All Ratings" :
-                (filt===-1) ? "Hide Ratings" :
-                "Show " + [5,4,3,2,1,0].filter(function(r) {
-                  return rating.filterHas(filt, r);
-                }).map(function(r) {
-                  return rating.iconHtml[r];
-                }).join(" "),
-          click: function() {
-            $scope.setRatingFilter(filt);
-          }
-        };
-      })
-    },{
       text: "Download",
       children: [{
         text: "Small",
@@ -74,19 +58,16 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           doDownload($itemScope.id, "");
         }
       }]
-    },{
-      text: "Set Rating",
-      displayed: function() {return gvypics.userId;},
-      hasTopDivider: true,
-      children: [5,4,3,2,1,0].map(function(r) {
-        return {
-          text: rating.iconHtml[r] + " " + rating.description[r] + " (" + r + ")",
-          click: function($itemScope) {
-            setRating($itemScope.$parent, $itemScope.id, r);
-          }
-        };
-      })
-    }];
+    }].concat([5,4,3,2,1,0].map(function(r) {
+      return {
+        text: "Set: " + rating.iconHtml[r] + " = " + rating.description[r] + " (" + r + ")",
+        displayed: function() {return gvypics.userId;},
+        hasTopDivider: r===5,
+        click: function($itemScope) {
+          setRating($itemScope.$parent, $itemScope.id, r);
+        }
+      };
+    }));
     
     $scope.rotateTileSz = function(newSz) {
       $scope.sz = newSz || (($scope.sz === "sm") ? "md" : "sm");
@@ -111,13 +92,21 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       if (filt < 0) {
         appSettings.showRating = false;
         appSettings.ratingFilter = 0;
+        $scope.showAllText = "Show Ratings";
+        $scope.showFilter = false;
       } else {
         appSettings.showRating = true;
         appSettings.ratingFilter = filt;
+        $scope.showAllText = "Show All Pictures";
       }
       if (curPicId) {
         resetRange();
       }
+    };
+    $scope.setRatingFilter(appSettings.showRating ? appSettings.ratingFilter : -1);
+    
+    $scope.toggleRatingFilter = function(level) {
+      $scope.setRatingFilter(rating.filterToggle(appSettings.ratingFilter, level));
     };
     
     function setRating($scope, id, level) {
@@ -167,8 +156,12 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     };
  
     $scope.showVideo = false;
-    $scope.toggleVideo = function() {
+    $scope.toggleShowVideo = function() {
       $scope.showVideo = !$scope.showVideo;
+    };
+    $scope.showFilter = false;
+    $scope.toggleShowFilter = function() {
+      $scope.showFilter = !$scope.showFilter;
     };
 
     // get specified folder and insert at beginning of path
