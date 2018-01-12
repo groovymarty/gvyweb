@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicViewerCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings',
-  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings', 'rating',
+  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings, rating) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -38,8 +38,8 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         }
       }
       $scope.curId = id;
-      $scope.nextId = $scope.curFold.pictures[i+1];
-      $scope.prevId = $scope.curFold.pictures[i-1];
+      $scope.nextId = findNextId(i);
+      $scope.prevId = findNextId(i, -1);
       setTooFar(false);
       waitForImage(function() {
         // add handler before we check image.complete
@@ -54,7 +54,25 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         $scope.loading = !image.complete;        
       });
     }
-    
+ 
+    // find ID of next picture in specified direction (1 or -1)   
+    function findNextId(i, direction=1) {
+      if (!appSettings.ratingFilter) {
+        // no filtering, all pictures are displayed
+        return $scope.curFold.pictures[i+direction];
+      } else {
+        var meta = $scope.curFold.meta || {};
+        var id;
+        while ((id = $scope.curFold.pictures[i += direction]) && true) { //avoid assignment stmt warning
+          var level = (meta[id] && meta[id].rating) || 0;
+          if (rating.filterHas(appSettings.ratingFilter, level)) {
+            break;
+          }
+        }
+        return id;
+      }
+    }
+
     // delay one or more digest cycles for ng-if to create the image element
     // then execute specified function
     function waitForImage(f, maxLoops) {
