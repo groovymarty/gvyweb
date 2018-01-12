@@ -22,12 +22,13 @@
           <span class="glyphicon glyphicon-arrow-up groovy-logo-color"></span> Back</a> &nbsp;
         <a ui-sref="picbrowser({id: nextId, i: null, sz: null})" class="btn btn-default" ng-show="nextId">
           <span class="glyphicon glyphicon-arrow-right groovy-logo-color"></span> Next</a>
-        <div class="btn-group pull-right" uib-dropdown is-open="optionsMenuIsOpen">
-          <button class="btn btn-default" uib-dropdown-toggle>
+        <div uib-dropdown class="btn-group pull-right" is-open="optionsMenuIsOpen">
+          <button uib-dropdown-toggle class="btn btn-default">
             Options <span class="caret"></span>
           </button>
-          <ul class="dropdown-menu" uib-dropdown-menu>
+          <ul uib-dropdown-menu class="dropdown-menu">
             <li><a ng-click="rotateTileSz()">{{tileSzOptionText}}</a></li>
+            <li class="divider"></li>
             <li ng-repeat="filt in rating.filterValues">
               <a ng-click="setRatingFilter(filt)">Show
                 <span ng-repeat="r in [5,4,3,2,1,0]"
@@ -36,6 +37,8 @@
                 </span></a></li>
             <li><a ng-click="setRatingFilter(0)">{{showAllText}}</a></li>
             <li ng-show="appSettings.showRating"><a ng-click="setRatingFilter(-1)">Hide Ratings</a></li>
+            <li class="divider"></li>
+            <li><a ng-click=""><span class="glyphicon glyphicon-remove"></span> Close Menu</a></li>
           </ul>
         </div>
       </div>

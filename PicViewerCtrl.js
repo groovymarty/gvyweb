@@ -15,8 +15,11 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     var direction = 1;
     $scope.tooFar = false;
     $scope.loading = false;
+    $scope.menuIsOpen = false;
     $scope.curFold = placeholder;
     $scope.appSettings = appSettings;
+    $scope.rating = rating;
+    $scope.gvypics = gvypics;
     var viewer = document.getElementById('viewer');
     var image = null;
     var buttons = ['viewer-menu', 'viewer-close', 'viewer-prev', 'viewer-next'].map(function(id) {
@@ -161,7 +164,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
 
     var enableClickPic = true;
     $scope.clickPic = function() {
-      if (!enableClickPic) {
+      if (!enableClickPic || $scope.menuIsOpen) {
         //ignore
       } else if (isTransformed()) {
         resetTransforms();
@@ -379,5 +382,17 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         image.style.transform = "";
       }
     }
+    
+    $scope.setRating = function(level) {
+      var meta = $scope.curFold.meta;
+      if (!meta[$scope.curId]) {
+        meta[$scope.curId] = {};
+      }
+      meta[$scope.curId].rating = level;
+      if (!appSettings.showRating) {
+        appSettings.showRating = true;
+        appSettings.ratingFilter = 0;
+      }
+    };
   }
 ]);

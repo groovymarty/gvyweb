@@ -67,7 +67,10 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           setRating($itemScope.$parent, $itemScope.id, r);
         }
       };
-    }));
+    }).concat([{
+      text: "<span class=\"glyphicon glyphicon-remove\"></span> Close Menu",
+      hasTopDivider: true
+    }]));
     
     $scope.rotateTileSz = function(newSz) {
       $scope.sz = newSz || (($scope.sz === "sm") ? "md" : "sm");

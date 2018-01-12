@@ -3,20 +3,23 @@
     <span ng-if="!curId">Loading...</span>
     <img id="viewer-img" ng-src="{{'gvypics/pic/'+curId+'?sz=lg'}}" ng-if="curId">
   </div>
-  <div class="btn-top-right">
-    <span uib-dropdown is-open="optionsMenuIsOpen">
-      <div class="btn btn-default btn-lg btn-dim" id="viewer-menu" uib-dropdown-toggle>
-        <span class="glyphicon glyphicon-menu-hamburger"></span>
-      </div>
-      <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
-        <li><a>Hello</a></li>
-        <li><a>World</a></li>
-      </ul>
-    </span> &nbsp;
-    <div class="btn btn-default btn-lg btn-dim" id="viewer-close"
-         ng-click="doClose()">
-      <span class="glyphicon glyphicon-remove"></span>
+  <div uib-dropdown class="btn-top-left" is-open="menuIsOpen">
+    <div uib-dropdown-toggle class="btn btn-default btn-lg btn-dim" id="viewer-menu">
+      <span class="glyphicon glyphicon-menu-hamburger"></span>
     </div>
+    <ul uib-dropdown-menu class="dropdown-menu">
+      <li><a ng-click="doClose()">Return To Pictures</a></li>
+      <li class="divider" ng-if="gvypics.userId"></li>
+      <li ng-repeat="r in [5,4,3,2,1,0]" ng-if="gvypics.userId">
+        <a ng-click="setRating(r)">Set: <rating level="r" show="true"></rating> = {{rating.description[r]}} ({{r}})</a>
+      </li>
+      <li class="divider"></li>
+      <li><a ng-click=""><span class="glyphicon glyphicon-remove"></span> Close Menu</a></li>
+    </ul>
+  </div>
+  <div class="btn btn-default btn-top-right btn-lg btn-dim" id="viewer-close"
+       ng-click="doClose()">
+    <span class="glyphicon glyphicon-remove"></span>
   </div>
   <div class="btn btn-default btn-lg btn-bottom-left btn-dim" id="viewer-prev"
        ng-click="prevClick()" ng-disabled="!prevId">
