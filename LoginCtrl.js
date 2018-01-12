@@ -9,7 +9,7 @@ angular.module('gvyweb').controller('LoginCtrl', [
       if (!$scope.userId || !$scope.password) {
         $scope.tryAgain = true;
       } else {
-        gvypics.login($scope.userId, $scope.password).then(function(result) {
+        gvypics.login($scope.userId.toLowerCase(), $scope.password).then(function(result) {
           if (result) {
             $state.go('home');
           } else {
