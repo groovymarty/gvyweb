@@ -19,7 +19,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.appSettings = appSettings;
     var viewer = document.getElementById('viewer');
     var image = null;
-    var buttons = ['viewer-close', 'viewer-prev', 'viewer-next'].map(function(id) {
+    var buttons = ['viewer-menu', 'viewer-close', 'viewer-prev', 'viewer-next'].map(function(id) {
       return document.getElementById(id);
     });
     var buttonOutTimer = null;
