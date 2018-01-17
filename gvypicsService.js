@@ -1,4 +1,5 @@
 angular.module('gvyweb').service('gvypics', ['$http', '$location', function($http, $location) {
+  var self = this;
   var folderCache = {};
   var token = null;
   this.userId = null;
@@ -64,6 +65,10 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
   function handleFailure(resp) {
     if (resp.status === -1) {
       throw new Error("Server not responding, try again later");
+    } else if (resp.status === 401) {
+      token = null;
+      self.userId = null;
+      throw new Error("Please sign in again");
     } else if (typeof resp.data === 'string' && resp.data && !resp.data.startsWith("<!DOCTYPE")) {
       throw new Error(resp.data);
     } else {
@@ -113,6 +118,17 @@ angular.module('gvyweb').service('gvypics', ['$http', '$location', function($htt
     return $http.get(url).then(function() {
       token = null;
       self.userId = null;
+      return true;
+    }).catch(handleFailure);
+  };
+  
+  this.postMetaChgs = function(chgs) {
+    var url = makeUrl("metachgs");
+    var body = {
+      token: token,
+      chgs: chgs
+    };
+    return $http.post(url, body).then(function(resp) {
       return true;
     }).catch(handleFailure);
   };

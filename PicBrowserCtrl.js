@@ -118,6 +118,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         $scope.curFold.meta[id] = {};
       }
       $scope.curFold.meta[id].rating = level;
+      gvypics.postMetaChgs([{id: id, rating: level}]);
       if (!appSettings.showRating) {
         $scope.setRatingFilter(0);
       }
