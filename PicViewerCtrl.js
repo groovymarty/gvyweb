@@ -59,14 +59,15 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     }
  
     // find ID of next picture in specified direction (1 or -1)   
-    function findNextId(i, direction=1) {
+    function findNextId(i, direction) {
+      var dir = direction || 1;
       if (!appSettings.ratingFilter) {
         // no filtering, all pictures are displayed
-        return $scope.curFold.pictures[i+direction];
+        return $scope.curFold.pictures[i+dir];
       } else {
         var meta = $scope.curFold.meta || {};
         var id;
-        while ((id = $scope.curFold.pictures[i += direction]) && true) { //avoid assignment stmt warning
+        while ((id = $scope.curFold.pictures[i += dir]) && true) { //avoid assignment stmt warning
           var level = (meta[id] && meta[id].rating) || 0;
           if (rating.filterHas(appSettings.ratingFilter, level)) {
             break;
