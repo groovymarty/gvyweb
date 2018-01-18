@@ -47,6 +47,11 @@
           <li ng-show="gvypics.userId" class="ng-hide">
               <a ui-sref="logout" ui-sref-active="active"
                  ng-click="collapse()">Sign Out</a></li>
+          <li ng-show="gvypics.numMetaChgs || gvypics.metaBatchLen" class="ng-hide">
+              <a ui-sref="changes" ui-sref-active="active"
+                 ng-click="collapse()">Changes {{gvypics.numMetaChgs}}
+                 <span ng-show="gvypics.metaBatchLen">/ {{gvypics.metaBatchLen}}</span></a>            
+          </li>
         </ul>
       </div>
     </div>
