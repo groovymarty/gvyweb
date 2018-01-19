@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings', 'rating',
-  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings, rating) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings', 'rating', 'metaChg',
+  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings, rating, metaChg) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -118,7 +118,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         $scope.curFold.meta[id] = {};
       }
       $scope.curFold.meta[id].rating = level;
-      gvypics.addMetaChg(id, {rating: level});
+      metaChg.addChange(id, {rating: level});
       if (!appSettings.showRating) {
         $scope.setRatingFilter(0);
       }

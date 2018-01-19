@@ -46,10 +46,11 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
 });
 
 myApp.controller('NavBarCtrl', [
-  '$scope', '$state', 'gvypics',
-  function($scope, $state, gvypics) {
+  '$scope', '$state', 'gvypics', 'metaChg',
+  function($scope, $state, gvypics, metaChg) {
     $scope.$state = $state;
     $scope.gvypics = gvypics;
+    $scope.metaChg = metaChg;
     $scope.isCollapsed = true;
     $scope.collapse = function() {
       $scope.isCollapsed = true;

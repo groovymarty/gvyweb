@@ -1,12 +1,8 @@
 angular.module('gvyweb').service('gvypics', [
-  '$http', '$location', '$timeout', 'alert',
-  function($http, $location, $timeout, alert) {
+  '$http', '$location',
+  function($http, $location) {
     var self = this;
     var folderCache = {};
-    var metaChgs = [];
-    this.numMetaChgs = 0;
-    var metaBatch = null;
-    this.metaBatchLen = 0;
     var token = null;
     this.userId = null;
     
@@ -127,50 +123,6 @@ angular.module('gvyweb').service('gvypics', [
         return true;
       }).catch(handleFailure);
     };
-    
-    this.addMetaChg = function(id, chg) {
-      chg.id = id;
-      // add change to list
-      metaChgs.push(chg);
-      this.numMetaChgs = metaChgs.length;
-      // possibly do a batch now
-      if (!metaBatch) {
-        doMetaBatch();
-      }
-    };
-    
-    function doMetaBatch() {
-      if (metaChgs.length) {
-        // start a batch with our list of meta changes
-        metaBatch = metaChgs;
-        self.metaBatchLen = metaBatch.length;
-        // continue to accumulate meta changes for next batch
-        metaChgs = [];
-        self.numMetaChgs = 0;
-        // post the batch to the server
-        console.log("posting batch of "+self.metaBatchLen);
-        self.postMetaChgs(metaBatch).then(function() {
-          // success, throw away batch
-          console.log("batch accepted");
-          self.metaBatchLen = 0;
-          // delay before sending next batch
-          $timeout(doMetaBatch, 15000);
-        }).catch(function(err) {
-          // failure, put the batch back into the list
-          console.log("batch rejected, "+err.message);
-          alert.addAlert(err.message);
-          metaChgs = metaBatch.concat(metaChgs);
-          self.numMetaChgs = metaChgs.length;
-          self.metaBatchLen = 0;
-          // try again after delay
-          $timeout(doMetaBatch, 60000);
-        });
-      } else {
-        // no changes to send now
-        metaBatch = null;
-        self.metaBatchLen = 0;
-      }
-    }
     
     this.postMetaChgs = function(chgs) {
       var url = makeUrl("metachgs");
