@@ -47,10 +47,10 @@
           <li ng-show="gvypics.userId" class="ng-hide">
               <a ui-sref="logout" ui-sref-active="active"
                  ng-click="collapse()">Sign Out</a></li>
-          <li ng-show="metaChg.numChanges || metaChg.batchLen" class="ng-hide">
+          <li ng-show="metaChg.changes.length" class="ng-hide">
               <a ui-sref="changes" ui-sref-active="active"
-                 ng-click="collapse()">Changes {{metaChg.numChanges}}
-                 <span ng-show="metaChg.batchLen">/ {{metaChg.batchLen}}</span></a>            
+                 ng-click="collapse()">Changes {{metaChg.changes.length - metaChg.activeBatchLen}}
+                 <span ng-show="metaChg.activeBatchLen">/ {{metaChg.activeBatchLen}}</span></a>            
           </li>
         </ul>
       </div>
@@ -83,6 +83,7 @@
   <script src="PicViewerCtrl.js"></script>
   <script src="HomeCtrl.js"></script>
   <script src="LoginCtrl.js"></script>
+  <script src="ChangesCtrl.js"></script>
   <script src="rating.js"></script>
 </body>
 </html>

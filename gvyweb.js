@@ -40,6 +40,12 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       url: "/logout",
       controller: "LoginCtrl",
       templateUrl: "logoutView.html"
+    })
+    .state('changes', {
+      displayName: "Changes",
+      url: "/changes",
+      controller: "ChangesCtrl",
+      templateUrl: "changesView.html"
     });
     
   $urlRouterProvider.otherwise("/home");
