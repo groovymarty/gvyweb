@@ -2,7 +2,15 @@
   <div class="row">
     <div class="panel panel-default col-md-6">
       <div class="panel-body">
-        <p>Metadata change list...</p>
+        <h2 class="curly-font">Metadata changes</h2>
+        <p>
+          <div class="btn btn-default" ng-click="metaChg.toggleAutoSend()">Auto Send {{metaChg.autoSend ? "Off" : "On"}}</div> &nbsp;
+          <div class="btn btn-default" ng-click="metaChg.sendNow()">Send Now</div>
+        </p>
+        <p ng-repeat="chg in metaChg.changes"
+           ng-class="($index < metaChg.batchLen) ? ((metaChg.batchStatus < 0) ? 'bg-pink' : 'bg-yellow') : ''">
+          {{chg | json}}
+        </p>
       </div>
     </div>
   </div>
