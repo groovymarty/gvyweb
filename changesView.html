@@ -4,7 +4,14 @@
       <div class="panel-body">
         <h2 class="curly-font">Metadata changes</h2>
         <p>
-          <div class="btn btn-default" ng-click="metaChg.toggleAutoSend()">Auto Send {{metaChg.autoSend ? "Off" : "On"}}</div> &nbsp;
+          <div class="btn-group">
+            <div class="btn btn-default" ng-click="metaChg.setAutoSend(true)"
+                 ng-disabled="metaChg.autoSend"
+                 ng-class="{'btn-success': metaChg.autoSend}">Auto Send On</div>
+            <div class="btn btn-default" ng-click="metaChg.setAutoSend(false)"
+                 ng-disabled="!metaChg.autoSend"
+                 ng-class="{'btn-danger': !metaChg.autoSend}">Auto Send Off</div>
+          </div> &nbsp;
           <div class="btn btn-default" ng-click="metaChg.sendNow()">Send Now</div>
         </p>
         <p ng-repeat="chg in metaChg.changes"

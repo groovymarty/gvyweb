@@ -58,9 +58,9 @@ angular.module('gvyweb').service('metaChg', [
       }
     }
     
-    this.toggleAutoSend = function() {
+    this.setAutoSend = function(val) {
       cancelTimer();
-      this.autoSend = !this.autoSend;
+      this.autoSend = val;
       if (this.autoSend && !this.activeBatchLen) {
         doBatch();
       }
