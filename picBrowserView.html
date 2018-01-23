@@ -4,23 +4,25 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <p style="display: inline-block" ng-repeat="id in root.folders">
-            <a ui-sref="picbrowser({id: id, i: null, sz: null})" class="btn"
+            <a ui-sref="picbrowser({id: id, i: null, sz: null, showid: null})" class="btn"
                ng-class="id === firstlevel.id ? 'btn-primary btn-purple' : 'btn-default'">{{id}}</a> &nbsp;
           </p>
           <p ng-repeat="folder in path">
-            <a ui-sref="picbrowser({id: folder.id, i: null, sz: null})"
+            <a ui-sref="picbrowser({id: folder.id, i: null, sz: null, showid: null})"
                ng-class="$last ? 'cur-folder' : 'higher-folder'">{{folder.name}}</a>
           </p>
           <p ng-if="curFold !== root" ng-repeat="id in curFold.folders">
-            <a ui-sref="picbrowser({id: id, i: null, sz: null})"
+            <a ui-sref="picbrowser({id: id, i: null, sz: null, showid: null})"
                class="lower-folder">{{curFold.names[id]}}</a>
           </p>
         </div>
       </div>
       <div class="panel-footer-drippy">
-        <a ui-sref="picbrowser({id: curFold.parent, i: null, sz: null})" class="btn btn-default" ng-show="curFold !== root">
+        <a ui-sref="picbrowser({id: curFold.parent, i: null, sz: null, showid: null})"
+           class="btn btn-default" ng-show="curFold !== root">
           <span class="glyphicon glyphicon-arrow-up groovy-logo-color"></span> Back</a> &nbsp;
-        <a ui-sref="picbrowser({id: nextId, i: null, sz: null})" class="btn btn-default" ng-show="nextId">
+        <a ui-sref="picbrowser({id: nextId, i: null, sz: null, showid: null})"
+           class="btn btn-default" ng-show="nextId">
           <span class="glyphicon glyphicon-arrow-right groovy-logo-color"></span> Next</a>
         <div uib-dropdown class="btn-group pull-right" is-open="optionsMenuIsOpen">
           <button uib-dropdown-toggle class="btn btn-default">
@@ -28,6 +30,7 @@
           </button>
           <ul uib-dropdown-menu class="dropdown-menu">
             <li><a ng-click="rotateTileSz()">{{tileSzOptionText}}</a></li>
+            <li><a ng-click="toggleShowId()">{{showIdOptionText}}</a></li>
             <li class="divider"></li>
             <li ng-repeat="filt in rating.filterValues">
               <a ng-click="setRatingFilter(filt)">Show

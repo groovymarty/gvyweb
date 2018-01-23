@@ -10,10 +10,10 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('picbrowser', {
       displayName: "Pictures",
-      url: "/picbrowser/:id?i?sz",
+      url: "/picbrowser/:id?i?sz?showid",
       controller: "PicBrowserCtrl",
       templateUrl: "picBrowserView.html",
-      params: {i: null, sz: null}
+      params: {i: null, sz: null, showid: null}
     })
     .state('picviewer', {
       displayName: "Pictures",
@@ -72,5 +72,6 @@ myApp.service('appSettings',
     this.tileSize = 'sm';
     this.showRating = false;
     this.ratingFilter = 0;
+    this.showId = true;
   }
 );

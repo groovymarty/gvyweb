@@ -6,7 +6,8 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       id: "",
       folders: [],
       pictures: [],
-      videos: []      
+      videos: [],
+      meta: {}
     };
     $scope.appSettings = appSettings;
     $scope.rating = rating;
@@ -34,6 +35,15 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         setCurPic($itemScope.id);
         setSticky();
         $scope.rotateTileSz();
+      }
+    },{
+      text: function() {
+        return $scope.showIdOptionText;
+      },
+      click: function($itemScope) {
+        setCurPic($itemScope.id);
+        setSticky();
+        $scope.toggleShowId();
       }
     },{
       text: "Download",
@@ -124,6 +134,24 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
     }
     
+    $scope.toggleShowId = function(val) {
+      appSettings.showId = typeof val === 'boolean' ? val : !appSettings.showId;
+      $scope.showIdOptionText = appSettings.showId ? "Captions Without ID" : "Captions With ID";
+      gvypics.copyCaptionsToNames($scope.curFold, appSettings.showId);
+    };
+    function parseBool(val, dflt) {
+      if (typeof val === 'boolean') {
+        return val;
+      } else if (typeof val === 'number') {
+        return !!val;
+      } else if (typeof val === 'string') {
+        return val === "true" || !!parseInt(val);
+      } else {
+        return dflt ? true : false;
+      }
+    }
+    $scope.toggleShowId(parseBool($stateParams.showid, appSettings.showId));
+    
     function doDownload(id, sz) {
       var url = "gvypics/pic/"+id+"?dl=1";
       if (sz) {
@@ -177,6 +205,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     function buildPath(id) {
       return gvypics.getFolder(id).then(function(folder) {
         if ($scope.curFold.isPlaceholder) {
+          gvypics.copyCaptionsToNames(folder, appSettings.showId);
           $scope.curFold = folder;
           initCurPic();
         }

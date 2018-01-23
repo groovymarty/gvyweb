@@ -117,6 +117,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     }
     
     gvypics.getFolder($stateParams.id).then(function(folder) {
+      gvypics.copyCaptionsToNames(folder, appSettings.showId);
       $scope.curFold = folder;
       setCurId($stateParams.id);
       buttonOutReset();

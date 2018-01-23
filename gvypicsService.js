@@ -47,14 +47,23 @@ angular.module('gvyweb').service('gvypics', [
         delete folder.contNames;
         delete folder.contMeta;
       }
-      // if caption exists, replace name with caption
-      Object.keys(folder.meta).forEach(function(id) {
-        if (folder.meta[id].caption) {
-          folder.names[id] = folder.meta[id].caption;
-        }
-      });
       return folder;
     }
+
+    // if caption exists, replace name with caption
+    // captions may change but are never deleted, so ok to overwrite name
+    this.copyCaptionsToNames = function(folder, showId) {
+      Object.keys(folder.meta).forEach(function(id) {
+        var caption = folder.meta[id].caption;
+        if (caption) {
+          if (showId) {
+            folder.names[id] = id + " | " + caption;
+          } else {
+            folder.names[id] = caption;
+          }
+        }
+      });
+    };
     
     function makeUrl(meat) {
       var url = "http://" + $location.host();
