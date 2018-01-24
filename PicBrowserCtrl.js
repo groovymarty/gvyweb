@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings', 'rating', 'metaChg',
-  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings, rating, metaChg) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings', 'rating', 'metaChg', 'fold',
+  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings, rating, metaChg, fold) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -18,6 +18,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.istart = 0;
     $scope.nlimit = 0;
     $scope.showRocket = false;
+    $scope.capText = {};
     var curPic = null; //DOM pic-tile element
     var curPicId = null;
     var moreBump = 10;
@@ -137,7 +138,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.toggleShowId = function(val) {
       appSettings.showId = typeof val === 'boolean' ? val : !appSettings.showId;
       $scope.showIdOptionText = appSettings.showId ? "Captions Without ID" : "Captions With ID";
-      gvypics.copyCaptionsToNames($scope.curFold, appSettings.showId);
+      $scope.capText = fold.buildCapText($scope.curFold, appSettings.showId);
     };
     function parseBool(val, dflt) {
       if (typeof val === 'boolean') {
@@ -205,7 +206,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     function buildPath(id) {
       return gvypics.getFolder(id).then(function(folder) {
         if ($scope.curFold.isPlaceholder) {
-          gvypics.copyCaptionsToNames(folder, appSettings.showId);
+          $scope.capText = fold.buildCapText(folder, appSettings.showId);
           $scope.curFold = folder;
           initCurPic();
         }

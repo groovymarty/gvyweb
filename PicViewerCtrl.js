@@ -1,6 +1,6 @@
 angular.module('gvyweb').controller('PicViewerCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings', 'rating', 'metaChg',
-  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings, rating, metaChg) {
+  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings', 'rating', 'metaChg', 'fold',
+  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings, rating, metaChg, fold) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -20,6 +20,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.appSettings = appSettings;
     $scope.rating = rating;
     $scope.gvypics = gvypics;
+    $scope.capText = {};
     var viewer = document.getElementById('viewer');
     var image = null;
     var buttons = ['viewer-menu', 'viewer-close', 'viewer-prev', 'viewer-next'].map(function(id) {
@@ -117,8 +118,8 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     }
     
     gvypics.getFolder($stateParams.id).then(function(folder) {
-      gvypics.copyCaptionsToNames(folder, appSettings.showId);
       $scope.curFold = folder;
+      $scope.capText = fold.buildCapText(folder, appSettings.showId);
       setCurId($stateParams.id);
       buttonOutReset();
     }).catch(function(err) {
