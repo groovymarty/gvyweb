@@ -7,6 +7,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       folders: [],
       pictures: [],
       videos: [],
+      names: {},
       meta: {}
     };
     $scope.appSettings = appSettings;
@@ -45,6 +46,15 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         setCurPic($itemScope.id);
         setSticky();
         $scope.toggleShowId();
+      }
+    },{
+      text: function() {
+        return appSettings.showRating ? "Hide Ratings" : "Show Ratings";
+      },
+      click: function($itemScope) {
+        setCurPic($itemScope.id);
+        setSticky();
+        $scope.setRatingFilter(appSettings.showRating ? -1 : 0);
       }
     },{
       text: "Download",

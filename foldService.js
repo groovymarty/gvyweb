@@ -47,8 +47,8 @@ angular.module('gvyweb').service('fold', [
     // build caption text array for folder
     this.buildCapText = function(folder, showId) {
       var capText = {};
-      Object.keys(folder.meta).forEach(function(id) {
-        var caption = folder.meta[id].caption;
+      Object.keys(folder.names).forEach(function(id) {
+        var caption = folder.meta[id] && folder.meta[id].caption;
         if (caption) {
           if (showId) {
             capText[id] = id + " | " + caption;
