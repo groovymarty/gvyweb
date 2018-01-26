@@ -48,13 +48,15 @@
     </div>
   </div>
   <div class="panel panel-default panel-cap-edit ng-hide" ng-show="showCapEdit">
-    <h2><span class="curly-font">Edit Caption for</span>
-        <span class="groovy-logo-color">{{capEditId}}</span>:</h2>
-    <p><input class="form-control" type="text" ng-model="capEditText"></p>
-    <p>
-      <div class="btn btn-default" ng-click="closeCapEdit(true)">OK</div>
-      <div class="btn btn-default pull-right" ng-click="closeCapEdit()">Cancel</div>
-    </p>
+    <form>
+      <h2><span class="curly-font">Edit Caption for</span>
+          <span class="groovy-logo-color">{{capEditId}}</span>:</h2>
+      <p><input class="form-control" type="text" ng-model="capEditText"></p>
+      <p>
+        <button class="btn btn-default" type="submit" ng-click="closeCapEdit(true)">OK</button>
+        <button class="btn btn-default pull-right" ng-click="closeCapEdit()">Cancel</button>
+      </p>
+    </form>
   </div>
   <div class="row" ng-repeat="id in curFold.videos" ng-show="$first || showVideo">
     <div class="col-md-6">
