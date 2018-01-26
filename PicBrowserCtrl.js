@@ -180,7 +180,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.closeCapEdit = function(apply) {
       if (apply) {
         var id = $scope.capEditId;
-        if ($scope.curFold.meta[id]) {
+        if (!$scope.curFold.meta[id]) {
           $scope.curFold.meta[id] = {};
         }
         $scope.curFold.meta[id].caption = $scope.capEditText;
