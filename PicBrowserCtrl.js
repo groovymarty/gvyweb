@@ -514,7 +514,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           $scope.showRocket = true;
           startRocketTimer(function() {
             $scope.showRocket = false;
-          }, 1000);
+          }, 3000);
         }
         $scope.$applyAsync(findInView);
       }
