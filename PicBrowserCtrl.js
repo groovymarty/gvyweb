@@ -20,6 +20,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.nlimit = 0;
     $scope.showRocket = false;
     $scope.capText = {};
+    $scope.showCapEdit = false;
     var curPic = null; //DOM pic-tile element
     var curPicId = null;
     var moreBump = 10;
@@ -89,6 +90,13 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         }
       };
     }).concat([{
+      text: "Edit Caption",
+      displayed: function() {return gvypics.userId;},
+      hasTopDivider: true,
+      click: function($itemScope) {
+        openCapEdit($itemScope.$parent, $itemScope.id);
+      }
+    },{
       text: "<span class=\"glyphicon glyphicon-remove\"></span> Close Menu",
       hasTopDivider: true
     }]));
@@ -162,6 +170,25 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       }
     }
     $scope.toggleShowId(parseBool($stateParams.showid, appSettings.showId));
+    
+    function openCapEdit($scope, id) {
+      $scope.capEditId = id;
+      $scope.capEditText = ($scope.curFold.meta[id] && $scope.curFold.meta[id].caption) || "";
+      $scope.showCapEdit = true;
+    }
+    
+    $scope.closeCapEdit = function(apply) {
+      if (apply) {
+        var id = $scope.capEditId;
+        if ($scope.curFold.meta[id]) {
+          $scope.curFold.meta[id] = {};
+        }
+        $scope.curFold.meta[id].caption = $scope.capEditText;
+        metaChg.addChange(id, {caption: $scope.capEditText});
+        $scope.capText = fold.buildCapText($scope.curFold, appSettings.showId);
+      }
+      $scope.showCapEdit = false;
+    };
     
     function doDownload(id, sz) {
       var url = "gvypics/pic/"+id+"?dl=1";

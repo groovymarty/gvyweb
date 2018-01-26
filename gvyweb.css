@@ -251,3 +251,13 @@ body {
 .bg-pink {
   background-color: pink;
 }
+.panel-cap-edit {
+  position: fixed;
+  top: 40%;
+  left: 5%;
+  z-index: 9999;
+  width: 90%;
+  border: solid 10px gold;
+  padding-left: 15px;
+  padding-right: 15px;
+}

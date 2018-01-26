@@ -13,7 +13,7 @@
           </p>
           <p ng-if="curFold !== root" ng-repeat="id in curFold.folders">
             <a ui-sref="picbrowser({id: id, i: null, sz: null, showid: null})"
-               class="lower-folder">{{curFold.names[id]}}</a>
+               class="lower-folder">{{capText[id]}}</a>
           </p>
         </div>
       </div>
@@ -46,6 +46,15 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="panel panel-default panel-cap-edit ng-hide" ng-show="showCapEdit">
+    <h2><span class="curly-font">Edit Caption for</span>
+        <span class="groovy-logo-color">{{capEditId}}</span>:</h2>
+    <p><input class="form-control" type="text" ng-model="capEditText"></p>
+    <p>
+      <div class="btn btn-default" ng-click="closeCapEdit(true)">OK</div>
+      <div class="btn btn-default pull-right" ng-click="closeCapEdit()">Cancel</div>
+    </p>
   </div>
   <div class="row" ng-repeat="id in curFold.videos" ng-show="$first || showVideo">
     <div class="col-md-6">
