@@ -21,6 +21,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.rating = rating;
     $scope.gvypics = gvypics;
     $scope.capText = {};
+    $scope.showCapEdit = false;
     var viewer = document.getElementById('viewer');
     var image = null;
     var buttons = ['viewer-menu', 'viewer-close', 'viewer-prev', 'viewer-next'].map(function(id) {
@@ -397,6 +398,25 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         appSettings.showRating = true;
         appSettings.ratingFilter = 0;
       }
+    };
+    
+    $scope.openCapEdit = function() {
+      var id = $scope.curId;
+      $scope.capEditText = ($scope.curFold.meta[id] && $scope.curFold.meta[id].caption) || "";
+      $scope.showCapEdit = true;
+    };
+    
+    $scope.closeCapEdit = function(apply) {
+      if (apply) {
+        var id = $scope.curId;
+        if (!$scope.curFold.meta[id]) {
+          $scope.curFold.meta[id] = {};
+        }
+        $scope.curFold.meta[id].caption = $scope.capEditText;
+        metaChg.addChange(id, {caption: $scope.capEditText});
+        $scope.capText = fold.buildCapText($scope.curFold, appSettings.showId);
+      }
+      $scope.showCapEdit = false;
     };
   }
 ]);
