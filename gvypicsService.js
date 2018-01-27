@@ -41,10 +41,23 @@ angular.module('gvyweb').service('gvypics', [
         var url = makeUrl("ls/" + id);
         return $http.get(url).then(function(resp) {
           var folder = fold.reduceFolder(resp.data);
+          folder.ts = new Date();
           folderCache[id] = folder;
           return folder;
         }).catch(handleFailure);
       }
+    };
+
+    // delete folders from cache after timeout
+    this.cleanFolderCache = function() {
+      var now = new Date();
+      Object.keys(folderCache).forEach(function(id) {
+        var tmax = id ? 60000 : 300000; //1 min all folders except root, 5 min for root
+        if ((now - folderCache[id].ts) > tmax) {
+          console.log("cache timeout "+id);
+          delete folderCache[id];
+        }
+      });
     };
     
     this.login = function(userId, password) {

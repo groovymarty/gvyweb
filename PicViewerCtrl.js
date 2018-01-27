@@ -118,6 +118,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
       return image;
     }
     
+    gvypics.cleanFolderCache();
     gvypics.getFolder($stateParams.id).then(function(folder) {
       $scope.curFold = folder;
       $scope.capText = fold.buildCapText(folder, appSettings.showId);

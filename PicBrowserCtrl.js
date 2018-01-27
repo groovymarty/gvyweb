@@ -270,6 +270,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         console.log(err.message);
       });
     }
+    gvypics.cleanFolderCache();
     buildPath($stateParams.id);
 
     // pick target for "next" button
