@@ -1,0 +1,7 @@
+/* Heidi's stylesheet */
+
+p.happy {
+  background-color: pink;
+  border: solid 20px fuchsia;
+  padding: 20px;
+}
