@@ -243,7 +243,10 @@ body {
   color: red;
 }
 .rating-star {
-  color: darkviolet;
+  color: deepskyblue;
+}
+.rating-remove {
+  color: fuchsia;
 }
 .bg-yellow {
   background-color: yellow;

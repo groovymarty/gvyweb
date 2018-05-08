@@ -1,12 +1,14 @@
 var ratingInnerHTML = [
   "&EmptySmallSquare;",
-  "&cross;",
+  "",
   "&approx;",
   "&check;",
   "", ""
 ];
 var ratingClassName = [
-  "", "", "", "",
+  "",
+  "glyphicon glyphicon-remove rating-remove",
+  "", "",
   "glyphicon glyphicon-star rating-star",
   "glyphicon glyphicon-heart rating-heart"
 ];
