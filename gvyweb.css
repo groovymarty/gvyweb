@@ -245,8 +245,14 @@ body {
 .rating-star {
   color: deepskyblue;
 }
+.rating-check {
+  color: green;
+}
 .rating-remove {
   color: fuchsia;
+}
+.rating-none {
+  color: gray;
 }
 .bg-yellow {
   background-color: yellow;

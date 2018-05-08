@@ -6,9 +6,10 @@ var ratingInnerHTML = [
   "", ""
 ];
 var ratingClassName = [
-  "",
+  "rating-none",
   "glyphicon glyphicon-remove rating-remove",
-  "", "",
+  "",
+  "rating-check",
   "glyphicon glyphicon-star rating-star",
   "glyphicon glyphicon-heart rating-heart"
 ];
