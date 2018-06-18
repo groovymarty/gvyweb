@@ -7,7 +7,7 @@ angular.module('gvyweb').service('gvypics', [
     this.userId = null;
     
     function makeUrl(meat) {
-      var url = "http://" + $location.host();
+      var url = $location.protocol() + "://" + $location.host();
       if ($location.port() != 80) {
         url += ":" + $location.port();
       }
