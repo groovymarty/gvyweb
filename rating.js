@@ -20,16 +20,20 @@ angular.module('gvyweb').directive('rating', function() {
     template: '<span></span>',
     scope: {
       level: '<',
-      show: '<'
+      show: '<',
+      dflt: '<?default'
     },
     link: function(scope, element) {
       scope.$watch(
         function(scope) { //what to watch
-          return scope.show && scope.level;
+          return scope.show && (scope.level || scope.dflt);
         },
         function() { //what to do when it changes
           if (scope.show) {
-            var i = parseInt(scope.level) || 0;
+            var i = parseInt(scope.level);
+            if (isNaN(i)) {
+              i = scope.dflt || 0;
+            }
             element[0].innerHTML = ratingInnerHTML[i] || "";
             element[0].className = ratingClassName[i] || "";
           } else {

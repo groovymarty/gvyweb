@@ -17,6 +17,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     $scope.loading = false;
     $scope.menuIsOpen = false;
     $scope.curFold = placeholder;
+    $scope.defaultRating = 0;
     $scope.appSettings = appSettings;
     $scope.rating = rating;
     $scope.gvypics = gvypics;
@@ -122,6 +123,7 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
     gvypics.getFolder($stateParams.id).then(function(folder) {
       $scope.curFold = folder;
       $scope.capText = fold.buildCapText(folder, appSettings.showId);
+      $scope.defaultRating = fold.getDefaultRating(folder);
       setCurId($stateParams.id);
       buttonOutReset();
     }).catch(function(err) {

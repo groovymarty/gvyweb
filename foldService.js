@@ -61,5 +61,12 @@ angular.module('gvyweb').service('fold', [
       });
       return capText;
     };
+    
+    // return default rating for folder
+    this.getDefaultRating = function(folder) {
+      var val= ('_folder' in folder.meta) && folder.meta._folder.rated ? 3 : 0;
+      console.log("getDefaultRating=", val);
+      return val;
+    };
   }
 ]);

@@ -16,6 +16,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     $scope.firstlevel = placeholder;
     $scope.path = [];
     $scope.curFold = placeholder;
+    $scope.defaultRating = 0;
     $scope.istart = 0;
     $scope.nlimit = 0;
     $scope.showRocket = false;
@@ -245,6 +246,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         if ($scope.curFold.isPlaceholder) {
           $scope.capText = fold.buildCapText(folder, appSettings.showId);
           $scope.curFold = folder;
+          $scope.defaultRating = fold.getDefaultRating(folder);
           initCurPic();
         }
         if (folder.id === "") {
