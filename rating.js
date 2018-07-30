@@ -1,14 +1,14 @@
 var ratingInnerHTML = [
   "&EmptySmallSquare;",
   "",
-  "&approx;",
+  "&bull;",
   "&check;",
   "", ""
 ];
 var ratingClassName = [
   "rating-none",
   "glyphicon glyphicon-remove rating-remove",
-  "",
+  "rating-dot",
   "rating-check",
   "glyphicon glyphicon-star rating-star",
   "glyphicon glyphicon-heart rating-heart"
@@ -59,7 +59,7 @@ angular.module('gvyweb').directive('rating', function() {
   this.description = [
     "No Rating",
     "Delete Me",
-    "Poor But Keep",
+    "Low Interest",
     "Good",
     "Better",
     "Love It!"

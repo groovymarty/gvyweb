@@ -247,6 +247,11 @@ body {
 }
 .rating-check {
   color: green;
+  font-weight: bold;
+}
+.rating-dot {
+  color: gray;
+  font-weight: bold;
 }
 .rating-remove {
   color: fuchsia;
