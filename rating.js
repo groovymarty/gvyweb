@@ -74,12 +74,15 @@ angular.module('gvyweb').directive('rating', function() {
 })
 
 .filter('ratingFilter', function() {
-  return function(input, meta, filt) {
+  return function(input, meta, filt, dflt) {
     filt = parseInt(filt) || 255;
     if (angular.isArray(input) && angular.isObject(meta)) {
       return input.filter(function(id) {
-        var level = meta[id] && meta[id].rating;
-        return filt & (1 << (parseInt(level) || 0));
+        var level = parseInt(meta[id] && meta[id].rating);
+        if (isNaN(level)) {
+          level = dflt || 0;
+        }
+        return filt & (1 << level);
       });
     } else {
       return input;

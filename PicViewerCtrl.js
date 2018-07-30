@@ -71,7 +71,10 @@ angular.module('gvyweb').controller('PicViewerCtrl', [
         var meta = $scope.curFold.meta || {};
         var id;
         while ((id = $scope.curFold.pictures[i += dir]) && true) { //avoid assignment stmt warning
-          var level = (meta[id] && meta[id].rating) || 0;
+          var level = parseInt(meta[id] && meta[id].rating);
+          if (isNaN(level)) {
+            level = $scope.defaultRating;
+          }
           if (rating.filterHas(appSettings.ratingFilter, level)) {
             break;
           }
