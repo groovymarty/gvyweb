@@ -1,6 +1,8 @@
 angular.module('gvyweb').controller('PicBrowserCtrl', [
-  '$scope', '$stateParams', '$state', '$timeout', 'gvypics', 'alert', 'appSettings', 'rating', 'metaChg', 'fold',
-  function($scope, $stateParams, $state, $timeout, gvypics, alert, appSettings, rating, metaChg, fold) {
+  '$scope', '$stateParams', '$state', '$location', '$timeout',
+  'gvypics', 'alert', 'appSettings', 'rating', 'metaChg', 'fold',
+  function($scope, $stateParams, $state, $location, $timeout,
+           gvypics, alert, appSettings, rating, metaChg, fold) {
     var placeholder = {
       isPlaceholder: true,
       id: "",
@@ -137,9 +139,13 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         resetRange();
       }
     };
-    var level = parseInt($stateParams.filt);
-    level = !isNaN(level) ? level : (appSettings.showRating ? appSettings.ratingFilter : -1);
-    $scope.setRatingFilter(level);
+    // process filt query parameter, not part of state
+    var filt = parseInt($location.search().filt);
+    if (!isNaN(filt)) {
+      appSettings.showRating = true;
+      appSettings.ratingFilter = filt;
+    }
+    $scope.setRatingFilter(appSettings.showRating ? appSettings.ratingFilter : -1);
     
     $scope.toggleRatingFilter = function(level) {
       $scope.setRatingFilter(rating.filterToggle(appSettings.ratingFilter, level));

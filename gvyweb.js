@@ -10,10 +10,10 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('picbrowser', {
       displayName: "Pictures",
-      url: "/picbrowser/:id?i?sz?showid?filt",
+      url: "/picbrowser/:id?i?sz?showid",
       controller: "PicBrowserCtrl",
       templateUrl: "picBrowserView.html",
-      params: {i: null, sz: null, showid: null, filt: null}
+      params: {i: null, sz: null, showid: null}
     })
     .state('picviewer', {
       displayName: "Pictures",
