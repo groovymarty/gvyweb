@@ -137,7 +137,9 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
         resetRange();
       }
     };
-    $scope.setRatingFilter(appSettings.showRating ? appSettings.ratingFilter : -1);
+    var level = parseInt($stateParams.filt);
+    level = !isNaN(level) ? level : (appSettings.showRating ? appSettings.ratingFilter : -1);
+    $scope.setRatingFilter(level);
     
     $scope.toggleRatingFilter = function(level) {
       $scope.setRatingFilter(rating.filterToggle(appSettings.ratingFilter, level));
