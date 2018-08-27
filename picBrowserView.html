@@ -58,7 +58,6 @@
       </p>
     </form>
   </div>
-  <!--
   <div class="row" ng-repeat="id in curFold.videos" ng-show="$first || showVideo">
     <div class="col-md-6">
       <div class="panel panel-default">
@@ -71,13 +70,11 @@
           </div>
         </div>
         <div class="panel-body" ng-show="showVideo">
-          <video style="width:100%" controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video>
-          <p>{{curFold.names[id]}}</p>
+          <a ng-href="{{'gvypics/vid/'+id}}">{{curFold.names[id]}}</a>
         </div>
       </div>
     </div>
   </div>
-  -->
   <div class="row" ng-show="appSettings.ratingFilter || showFilterSticky">
     <div class="col-md-6">
       <div class="panel panel-default">
