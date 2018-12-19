@@ -70,7 +70,10 @@
           </div>
         </div>
         <div class="panel-body" ng-show="showVideo">
-          <a ng-href="{{'gvypics/vid/'+id}}">{{curFold.names[id]}}</a>
+          <p>{{curFold.names[id]}}</p>
+          <video controls preload="none">
+             <source ng-src="{{'gvypics/vid/'+id}}" type="video/mp4"></video>
+          </video>
         </div>
       </div>
     </div>
