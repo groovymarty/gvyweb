@@ -19,63 +19,63 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     caption: "Travel through the decades in reverse, from the Pfeifles' retirement years to their courtship. Iowa scenery.",
     dbxlink: "https://www.dropbox.com/s/7oq74stm9zo73o3/KR01%20-%20Opening.mp4?dl=0",
     titlepic: "D14P-182",
-    collection: "C01+1"
+    collection: "C01+01"
   },{
     id: "KR02",
     title: "KR02 - Kermit's Youth, Parents & Family",
     caption: "After their mother died, Kermit, Don, Wayne and Phylo grew up with grandparents, aunts and uncles. Aunt Anna and cousin Phyllis.",  
     dbxlink: "https://www.dropbox.com/s/y14xln47swih8e8/KR02%20-%20Kermit%27s%20Youth%2C%20Parents%20%26%20Family.mp4?dl=0",
     titlepic: "E203-1A",
-    collection: "C01+2"
+    collection: "C01+02"
   },{
     id: "KR03",
     title: "KR03 - Ruth's Youth, Parents & Family",
     caption: "Casterline and Shaver family photos going back many generations. Baby and kid photos of Rae, Cleo, Jim and Ruth.",  
     dbxlink: "https://www.dropbox.com/s/kavmm7ttk75ficm/KR03%20-%20Ruth%27s%20Youth%2C%20Parents%20%26%20Family.mp4?dl=0",
     titlepic: "F101-5A",
-    collection: "C01+3"
+    collection: "C01+03"
   },{
     id: "KR04",
     title: "KR04 - Courtship & Marriage",
     caption: "A Montana cowboy comes to town and sweeps Ruth off her feet.",  
     dbxlink: "https://www.dropbox.com/s/ju8k9bj2mbm091b/KR04%20-%20Courtship%20%26%20Marriage.mp4?dl=0",
     titlepic: "E220-5A",
-    collection: "C01+4"
+    collection: "C01+04"
   },{
     id: "KR05",
     title: "KR05 - Germany Years",
     caption: "Where life-long friendships began with the Koppels, Uccellanis and Seuberts. Photos of European travels.",  
     dbxlink: "https://www.dropbox.com/s/11cow9r3ogwe9y6/KR05%20-%20Germany%20Years.mp4?dl=0",
     titlepic: "S001-12",
-    collection: "C01+5"
+    collection: "C01+05"
   },{
     id: "KR06",
     title: "KR06 - Weddings and Babies",
     caption: "Marriages of brothers and sisters; births of nieces and nephews.",  
     dbxlink: "https://www.dropbox.com/s/pyvcrhcnntfx8ri/KR06%20-%20Weddings%20and%20Babies.mp4?dl=0",
     titlepic: "A19-331A",
-    collection: "C01+6"
+    collection: "C01+06"
   },{
     id: "KR07",
     title: "KR07 - A Home and a Daughter",
     caption: "They build the Red House and adopt Jill. Jill’s early childhood.",  
     dbxlink: "https://www.dropbox.com/s/tffe5wpzcm260s8/KR07%20-%20A%20Home%20and%20a%20Daughter.mp4?dl=0",
     titlepic: "S040-9A",
-    collection: "C01+7"
+    collection: "C01+07"
   },{
     id: "KR08",
     title: "KR08 - Raising Jill",
     caption: "The 50s and 60s. Jill grades 1-5. Mary Janice and Jill.",  
     dbxlink: "https://www.dropbox.com/s/5puhc04kvbypoo5/KR08%20-%20Raising%20Jill.mp4?dl=0",
     titlepic: "A33-6",
-    collection: "C01+8"
+    collection: "C01+08"
   },{
     id: "KR09",
     title: "KR09 - Our Home Town",
     caption: "All about Tipton. Burning down the church. 125th Anniversary parade.",  
     dbxlink: "https://www.dropbox.com/s/5lrlm630k867h14/KR09%20-%20Our%20Home%20Town.mp4?dl=0",
     titlepic: "A33-13A",
-    collection: "C01+9"
+    collection: "C01+09"
   },{
     id: "KR10",
     title: "KR10 - Hitting the Road",
