@@ -113,7 +113,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
           $scope.tileSzOptionText = "Large Tiles";
           break;
         case "md":
-          moreBump = 20;
+          moreBump = 50;
           $scope.tileSzOptionText = "Small Tiles";
           break;
       }
