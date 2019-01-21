@@ -116,6 +116,10 @@ body {
   max-height: 100%;
   border-bottom: none;
 }
+.pic-viewer .pic-tile-pic img {
+  display: block;
+  margin: 0 auto;
+}
 .pic-tile-text {
   float: left;
   max-width: 100%;
