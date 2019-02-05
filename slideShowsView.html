@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row" ng-repeat="show in shows">
+  <div class="row" ng-repeat="show in shows track by $index">
     <div class="panel panel-default col-md-8">
       <div class="panel-body">
         <p><b>{{show.title}}</b></p>

@@ -3,15 +3,15 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-body">
-          <p style="display: inline-block" ng-repeat="id in root.folders">
+          <p style="display: inline-block" ng-repeat="id in root.folders track by $index">
             <a ui-sref="picbrowser({id: id, i: null, sz: null, showid: null})" class="btn"
                ng-class="id === firstlevel.id ? 'btn-primary btn-purple' : 'btn-default'">{{id}}</a> &nbsp;
           </p>
-          <p ng-repeat="folder in path">
+          <p ng-repeat="folder in path track by $index">
             <a ui-sref="picbrowser({id: folder.id, i: null, sz: null, showid: null})"
                ng-class="$last ? 'cur-folder' : 'higher-folder'">{{folder.name}}</a>
           </p>
-          <p ng-if="curFold !== root" ng-repeat="id in curFold.folders">
+          <p ng-if="curFold !== root" ng-repeat="id in curFold.folders track by $index">
             <a ui-sref="picbrowser({id: id, i: null, sz: null, showid: null})"
                class="lower-folder">{{capText[id]}}</a>
           </p>
@@ -32,9 +32,9 @@
             <li><a ng-click="rotateTileSz()">{{tileSzOptionText}}</a></li>
             <li><a ng-click="toggleShowId()">{{showIdOptionText}}</a></li>
             <li class="divider"></li>
-            <li ng-repeat="filt in rating.filterValues">
+            <li ng-repeat="filt in rating.filterValues track by $index">
               <a ng-click="setRatingFilter(filt)">Show
-                <span ng-repeat="r in [5,4,3,2,1,0]"
+                <span ng-repeat="r in [5,4,3,2,1,0] track by $index"
                       ng-show="rating.filterHas(filt, r)">
                   <rating level="r" show="true"></rating>
                 </span></a></li>
@@ -58,7 +58,7 @@
       </p>
     </form>
   </div>
-  <div class="row" ng-repeat="id in curFold.videos" ng-show="$first || showVideo">
+  <div class="row" ng-repeat="id in curFold.videos track by $index" ng-show="$first || showVideo">
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading" ng-if="$first" ng-click="toggleShowVideo()">
@@ -82,7 +82,7 @@
         <div class="panel-heading" ng-click="toggleShowFilter()">
           <div class="panel-title clearfix">
             <span class="groovy-logo">Now showing</span>
-            <span ng-repeat="r in [5,4,3,2,1,0]"
+            <span ng-repeat="r in [5,4,3,2,1,0] track by $index"
                   ng-show="rating.filterHas(appSettings.ratingFilter, r)">
               <rating level="r" show="true"></rating>
             </span>
@@ -92,7 +92,7 @@
           </div>
         </div>
         <div class="panel-body" ng-show="showFilter">
-          <span ng-repeat="r in [5,4,3,2,1,0]">
+          <span ng-repeat="r in [5,4,3,2,1,0] track by $index">
             <div class="btn" ng-click="toggleRatingFilter(r)"
                  ng-class="rating.filterHas(appSettings.ratingFilter, r) ? 'btn-gold' : 'btn-default'">
               <rating level="r" show="true"></rating>
@@ -116,7 +116,8 @@
   <div class="pic-tile" ng-class="'pic-tile-'+sz" id="{{id}}"
        context-menu="contextMenuOptions"
        ng-repeat="id in curFold.pictures | limitTo: nlimit : istart
-                                         | ratingFilter: curFold.meta : appSettings.ratingFilter : defaultRating">
+                                         | ratingFilter: curFold.meta : appSettings.ratingFilter : defaultRating
+                                         track by $index">
     <div class="pic-tile-pic" ng-click="clickPic(id)">
       <img ng-src="{{'gvypics/pic/'+id+'?sz='+sz}}">
     </div>

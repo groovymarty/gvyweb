@@ -10,7 +10,7 @@
     <ul uib-dropdown-menu class="dropdown-menu">
       <li><a ng-click="doClose()">Return To Pictures</a></li>
       <li class="divider" ng-if="gvypics.userId"></li>
-      <li ng-repeat="r in [5,4,3,2,1,0]" ng-if="gvypics.userId">
+      <li ng-repeat="r in [5,4,3,2,1,0] track by $index" ng-if="gvypics.userId">
         <a ng-click="setRating(r)">Set: <rating level="r" show="true"></rating> = {{rating.description[r]}} ({{r}})</a>
       </li>
       <li class="divider" ng-if="gvypics.userId"></li>
