@@ -160,5 +160,12 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     dbxlink: "https://www.dropbox.com/s/kk327razkgeflyg/KR21%20-%20Epilogue.mp4?dl=0",
     titlepic: "D15J4-85",
     collection: "C01+21"
+  },{
+    id: "MG01",
+    title: "MG01 - Opening",
+    caption: "Martin & Greg Colson recording session, pictures of Martin & Grace.",
+    dbxlink: "https://www.dropbox.com/s/t8topcl5h98g4fd/M%26G%20Opening.mp4?dl=0",
+    titlepic: "D19I-440",
+    collection: "C01+31"
   }];
 }]);
