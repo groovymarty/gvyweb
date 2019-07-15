@@ -164,8 +164,15 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     id: "MG01",
     title: "MG01 - Opening",
     caption: "Martin & Greg Colson recording session, pictures of Martin & Grace.",
-    dbxlink: "https://www.dropbox.com/s/t8topcl5h98g4fd/M%26G%20Opening.mp4?dl=0",
+    dbxlink: "https://www.dropbox.com/s/4cygaow4dv7paef/MG01%20Opening.mp4?dl=0",
     titlepic: "D19I-440",
     collection: "C01+31"
+  },{
+    id: "MG02",
+    title: "MG02 - Sausers & Rosenows",
+    caption: "Martin's parents, grandparents, aunts and uncles.",
+    dbxlink: "https://www.dropbox.com/s/2s3g3ej4am67vmm/MG02%20-%20Sausers%20%26%20Rosenows.mp4?dl=0",
+    titlepic: "D19I-540A",
+    collection: "C01+32"
   }];
 }]);
