@@ -3,10 +3,10 @@
     <div class="panel panel-default col-md-8">
       <div class="panel-body">
         <p><b>{{show.title}}</b></p>
-        <a ng-href="{{show.dbxlink}}">
+        <a ng-href="{{show.vidid ? 'gvypics/vid/'+show.vidid : show.dbxlink}}">
           <img class="img-responsive" src="gvypics/pic/{{show.titlepic}}?sz=sm" alt="{{show.title}}"></a>
         <p>{{show.caption}}</p>
-        <a ng-href="{{show.dbxlink}}">Click here to view slideshow</a>
+        <a ng-href="{{show.vidid ? 'gvypics/vid/'+show.vidid : show.dbxlink}}">Click here to view slideshow</a>
         <p><a ui-sref="picbrowser({id: '{{show.collection}}', i: null, sz: 'sm', showid: 1})">
           (Here are all the pictures)</a></p>
       </div>
