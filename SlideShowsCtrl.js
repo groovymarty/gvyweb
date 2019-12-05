@@ -199,5 +199,12 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     vidid: "SS-V82",
     titlepic: "D19I-540A",
     collection: "C01+32"
+  },{
+    id: "MG03",
+    title: "MG03 - Martin's Remarkable Childhood",
+    caption: "Baby and school pictures.  Martin learns to play the violin.",
+    vidid: "SS-V83",
+    titlepic: "D19I-930",
+    collection: "C01+33"
   }];
 }]);
