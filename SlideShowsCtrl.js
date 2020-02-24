@@ -209,9 +209,9 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
   },{
     id: "MG04",
     title: "MG04 - Martin's Army Adventure",
-    caption: "The 231st Station Hospital.",
+    caption: "Martin fiddles his way through the war while working at a hospital in England.",
     vidid: "SS-V84",
-    titlepic: "F204-14",
+    titlepic: "F201-14",
     collection: "C01+34"
   }];
 }]);
