@@ -194,7 +194,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
   },{
     id: "MG02",
     title: "MG02 - Sausers & Rosenows",
-    caption: "Martin's parents, grandparents, aunts and uncles.",
+    caption: "Martin's parents, grandparents, aunts and uncles.  Elsie and the hat factory.",
     dbxlink: "https://www.dropbox.com/s/2s3g3ej4am67vmm/MG02%20-%20Sausers%20%26%20Rosenows.mp4?dl=0",
     vidid: "SS-V82",
     titlepic: "D19I-540A",
@@ -213,5 +213,12 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     vidid: "SS-V84",
     titlepic: "F201-14",
     collection: "C01+34"
+  },{
+    id: "MG05",
+    title: "MG05 - Cochrans & Crabtrees",
+    caption: "Grace's parents, grandparents, aunts and uncles.  The adventures of Byrd and Ray.",
+    vidid: "SS-V85",
+    titlepic: "E431-1",
+    collection: "C01+35"
   }];
 }]);
