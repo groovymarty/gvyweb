@@ -220,5 +220,12 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     vidid: "SS-V85",
     titlepic: "E431-1",
     collection: "C01+35"
+  },{
+    id: "MG06",
+    title: "MG06 - Sweetbaby",
+    caption: "How her father's death shaped Grace's childhood.  Her brothers and sisters.",
+    vidid: "SS-V86",
+    titlepic: "E434-6A",
+    collection: "C01+36"
   }];
 }]);
