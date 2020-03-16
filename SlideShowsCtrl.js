@@ -1,7 +1,7 @@
 angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope) {
   $scope.shows = [{
-  },{
     id: "MG01",
+    groupTitle: "Something Very Nice: The Story of Martin & Grace Sauser",
     title: "MG01 - Opening",
     caption: "Martin & Greg Colson recording session, pictures of Martin & Grace.",
     dbxlink: "https://www.dropbox.com/s/4cygaow4dv7paef/MG01%20Opening.mp4?dl=0",
@@ -52,23 +52,8 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "F206-1",
     collection: "C01+37"
   },{
-    id: "JJ01",
-    title: "Jeff & Jaimye",
-    caption: "Jeff & Jaimye's fun slideshow for their wedding.",
-    dbxlink: "https://www.dropbox.com/s/eyela8erym11s3j/Jeff%20%26%20Jaimye.mp4?dl=0",
-    vidid: "SS-V01",
-    titlepic: "D12T-87",
-    collection: "C01+23"
-  },{
-    id: "HM01",
-    title: "Heidi & Michael",
-    caption: "Heidi and Mike's baby pictures and how they met!",
-    dbxlink: "https://www.dropbox.com/s/tsyc9lb6v6xz6gt/Heidi%20%26%20Mike.mp4?dl=0",
-    vidid: "SS-V02",
-    titlepic: "A27-229",
-    collection: "C01+24"
-  },{
     id: "KR01",
+    groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
     caption: "Travel through the decades in reverse, from the Pfeifles' retirement years to their courtship. Iowa scenery.",
     dbxlink: "https://www.dropbox.com/s/7oq74stm9zo73o3/KR01%20-%20Opening.mp4?dl=0",
@@ -235,5 +220,22 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     vidid: "SS-V71",
     titlepic: "D15J4-85",
     collection: "C01+21"
+  },{
+    id: "JJ01",
+    groupTitle: "Our Family",
+    title: "Jeff & Jaimye",
+    caption: "Jeff & Jaimye's fun slideshow for their wedding.",
+    dbxlink: "https://www.dropbox.com/s/eyela8erym11s3j/Jeff%20%26%20Jaimye.mp4?dl=0",
+    vidid: "SS-V01",
+    titlepic: "D12T-87",
+    collection: "C01+23"
+  },{
+    id: "HM01",
+    title: "Heidi & Michael",
+    caption: "Heidi and Mike's baby pictures and how they met!",
+    dbxlink: "https://www.dropbox.com/s/tsyc9lb6v6xz6gt/Heidi%20%26%20Mike.mp4?dl=0",
+    vidid: "SS-V02",
+    titlepic: "A27-229",
+    collection: "C01+24"
   }];
 }]);
