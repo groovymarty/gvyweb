@@ -3,7 +3,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     id: "MG01",
     groupTitle: "Something Very Nice: The Story of Martin & Grace Sauser",
     title: "MG01 - Opening",
-    caption: "Martin & Greg Colson recording session, pictures of Martin & Grace.",
+    caption: "Martin & Greg Colson recording session.  Martin & Grace, through each other's eyes.",
     dbxlink: "https://www.dropbox.com/s/4cygaow4dv7paef/MG01%20Opening.mp4?dl=0",
     vidid: "SS-V81",
     titlepic: "D19I-440",
