@@ -47,7 +47,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
   },{
     id: "MG07",
     title: "MG07 - The Year Everything Happened",
-    caption: "Beginning in summer of '47, the story of their courtship and marriage.  Address your letters carefully.",
+    caption: "Beginning in Summer of '47, the story of their courtship and marriage.  Address your letters carefully.",
     vidid: "SS-V87",
     titlepic: "F206-1",
     collection: "C01+37"

@@ -40,6 +40,9 @@ body {
   right: 0;
   z-index: 999999;
 }
+.bare-heading {
+  margin-left: 10px;
+}
 .btn-primary.btn-purple, .btn-primary.btn-purple :focus {
   background-color: darkviolet;
  }
