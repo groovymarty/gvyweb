@@ -6,7 +6,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     caption: "Martin & Greg Colson recording session.  Martin & Grace, through each other's eyes.",
     dbxlink: "https://www.dropbox.com/s/4cygaow4dv7paef/MG01%20Opening.mp4?dl=0",
     vidid: "SS-V81",
-    titlepic: "D19I-440",
+    titlepic: "D19I-340",
     collection: "C01+31"
   },{
     id: "MG02",
@@ -14,28 +14,28 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     caption: "Martin's parents, grandparents, aunts and uncles.  Elsie and the hat factory.",
     dbxlink: "https://www.dropbox.com/s/2s3g3ej4am67vmm/MG02%20-%20Sausers%20%26%20Rosenows.mp4?dl=0",
     vidid: "SS-V82",
-    titlepic: "D19I-540A",
+    titlepic: "F215-11A",
     collection: "C01+32"
   },{
     id: "MG03",
     title: "MG03 - Martin's Remarkable Childhood",
     caption: "Baby and school pictures.  Martin learns to play the violin.",
     vidid: "SS-V83",
-    titlepic: "D19I-930",
+    titlepic: "E400-1",
     collection: "C01+33"
   },{
     id: "MG04",
     title: "MG04 - Martin's Army Adventure",
     caption: "Martin fiddles his way through the war while working at a hospital in England.",
     vidid: "SS-V84",
-    titlepic: "F201-14",
+    titlepic: "E410-1",
     collection: "C01+34"
   },{
     id: "MG05",
     title: "MG05 - Cochrans & Crabtrees",
     caption: "Grace's parents, grandparents, aunts and uncles.  The adventures of Byrd and Ray.",
     vidid: "SS-V85",
-    titlepic: "E431-1",
+    titlepic: "F220-1A",
     collection: "C01+35"
   },{
     id: "MG06",
