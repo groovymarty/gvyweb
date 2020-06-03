@@ -29,6 +29,12 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       controller: "SlideShowsCtrl",
       templateUrl: "slideShowsView.html"
     })
+    .state('docs', {
+      displayName: "Documents",
+      url: "/docs",
+      controller: "DocsCtrl",
+      templateUrl: "docsView.html"
+    })
     .state('heidi', {
       displayName: "Heidi's Page",
       url: "/heidi",
