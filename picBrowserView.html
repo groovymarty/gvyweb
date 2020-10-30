@@ -58,10 +58,10 @@
       </p>
     </form>
   </div>
-  <div class="row" ng-repeat="id in curFold.videos track by $index" ng-show="$first || showVideo">
+  <div class="row" ng-if="curFold.videos.length">
     <div class="col-md-6">
       <div class="panel panel-default">
-        <div class="panel-heading" ng-if="$first" ng-click="toggleShowVideo()">
+        <div class="panel-heading" ng-click="toggleShowVideo()">
           <div class="panel-title clearfix">
             <span class="groovy-logo">{{curFold.videos.length}} Video{{curFold.videos.length > 1 ? "s" : ""}}</span>
             <div class="curly-font pull-right">
@@ -70,8 +70,10 @@
           </div>
         </div>
         <div class="panel-body" ng-show="showVideo">
-          <p>{{curFold.names[id]}}</p>
-          <p><video controls preload="none" ng-src="{{'gvypics/vid/'+id}}"></video></p>
+          <h4 ng-repeat="id in curFold.videos track by $index">
+            <a class="underline" ng-class="id == selectedVideo ? 'groovy-logo' : 'black'"
+               ng-click="selectVideo(id)">{{curFold.names[id]}}</a><p>&nbsp;</p></h4>
+          <p ng-if="showVideo"><video controls autoplay ng-src="{{selectedVideoSrc}}"></video></p>
         </div>
       </div>
     </div>

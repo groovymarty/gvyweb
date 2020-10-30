@@ -236,8 +236,18 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     };
  
     $scope.showVideo = false;
+    $scope.selectedVideo = '';
+    $scope.selectedVideoSrc = '';
     $scope.toggleShowVideo = function() {
       $scope.showVideo = !$scope.showVideo;
+      if (!$scope.showVideo) {
+        $scope.selectedVideo = '';
+        $scope.selectedVideoSrc = '';
+      }
+    };
+    $scope.selectVideo = function(id) {
+      $scope.selectedVideo = id;
+      $scope.selectedVideoSrc = "https://gvypics.groovymarty.com/" + id;
     };
     $scope.showFilter = false;
     $scope.toggleShowFilter = function() {
