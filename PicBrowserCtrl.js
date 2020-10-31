@@ -235,7 +235,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
       $scope.nlimit += extendRange($scope.nlimit, moreBump).len;
     };
  
-    $scope.showVideo = false;
+    $scope.showVideo = true;
     $scope.selectedVideo = '';
     $scope.selectedVideoSrc = '';
     $scope.toggleShowVideo = function() {

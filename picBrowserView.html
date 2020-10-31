@@ -70,10 +70,11 @@
           </div>
         </div>
         <div class="panel-body" ng-show="showVideo">
-          <h4 ng-repeat="id in curFold.videos track by $index">
-            <a class="underline" ng-class="id == selectedVideo ? 'groovy-logo' : 'black'"
-               ng-click="selectVideo(id)">{{curFold.names[id]}}</a><p>&nbsp;</p></h4>
-          <p ng-if="showVideo"><video controls autoplay ng-src="{{selectedVideoSrc}}"></video></p>
+          <p ng-repeat="id in curFold.videos track by $index">
+            <a ng-class="id == selectedVideo ? 'higher-folder' : 'lower-folder'"
+               ng-click="selectVideo(id)">{{curFold.names[id]}}</a>
+          </p>
+          <p ng-if="selectedVideoSrc"><video controls autoplay ng-src="{{selectedVideoSrc}}"></video></p>
         </div>
       </div>
     </div>

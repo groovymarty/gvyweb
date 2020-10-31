@@ -55,12 +55,6 @@ body {
   font-size: 150%;
   text-decoration: underline;
 }
-.underline {
-  text-decoration: underline;
-}
-.black {
-  color: black;
-}
 @media(max-width:767px) {
   .lower-folder {
     font-size: 125%;
