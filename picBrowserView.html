@@ -70,11 +70,15 @@
           </div>
         </div>
         <div class="panel-body" ng-show="showVideo">
-          <p ng-repeat="id in curFold.videos track by $index">
-            <a ng-class="id == selectedVideo ? 'higher-folder' : 'lower-folder'"
-               ng-click="selectVideo(id)">{{curFold.names[id]}}</a>
-          </p>
-          <p ng-if="selectedVideoSrc"><video controls autoplay ng-src="{{selectedVideoSrc}}"></video></p>
+          <div ng-repeat="id in curFold.videos track by $index">
+            <p ng-if="curFold.meta[id].titlepic" ng-click="selectVideo(id)">
+              <img class="img-responsive" ng-src="{{'gvypics/pic/'+curFold.meta[id].titlepic+'?sz=md'}}"></p>
+            <p ng-click="selectVideo(id)">
+              <a ng-class="id == selectedVideo ? 'higher-folder' : 'lower-folder'">
+                {{curFold.names[id]}}</a></p>
+          </div>
+          <p ng-if="selectedVideoSrc">
+            <video controls autoplay ng-src="{{selectedVideoSrc}}"></video></p>
         </div>
       </div>
     </div>
