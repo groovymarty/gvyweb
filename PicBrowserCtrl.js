@@ -247,7 +247,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     };
     $scope.selectVideo = function(id) {
       $scope.selectedVideo = id;
-      $scope.selectedVideoSrc = "https://gvypics.groovymarty.com/" + id;
+      $scope.selectedVideoSrc = "gvypics/vid/" + id;
     };
     $scope.showFilter = false;
     $scope.toggleShowFilter = function() {
