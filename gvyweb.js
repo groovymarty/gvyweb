@@ -10,10 +10,10 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
     })
     .state('picbrowser', {
       displayName: "Pictures",
-      url: "/picbrowser/:id?i?sz?showid",
+      url: "/picbrowser/:id?i?sz?showid?res",
       controller: "PicBrowserCtrl",
       templateUrl: "picBrowserView.html",
-      params: {i: null, sz: null, showid: null}
+      params: {i: null, sz: null, showid: null, res: null}
     })
     .state('picviewer', {
       displayName: "Pictures",
@@ -84,5 +84,6 @@ myApp.service('appSettings',
     this.showRating = false;
     this.ratingFilter = 0;
     this.showId = true;
+    this.videoRes = 'std';
   }
 );

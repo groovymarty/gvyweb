@@ -4,21 +4,21 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <p style="display: inline-block" ng-repeat="id in root.folders track by $index">
-            <a ui-sref="picbrowser({id: id, i: null, sz: null, showid: null})" class="btn"
+            <a ui-sref="picbrowser({id: id, i: null, sz: null, showid: null, res: null})" class="btn"
                ng-class="id === firstlevel.id ? 'btn-primary btn-purple' : 'btn-default'">{{id}}</a> &nbsp;
           </p>
           <p ng-repeat="folder in path track by $index">
-            <a ui-sref="picbrowser({id: folder.id, i: null, sz: null, showid: null})"
+            <a ui-sref="picbrowser({id: folder.id, i: null, sz: null, showid: null, res: null})"
                ng-class="$last ? 'cur-folder' : 'higher-folder'">{{folder.name}}</a>
           </p>
           <p ng-if="curFold !== root" ng-repeat="id in curFold.folders track by $index">
-            <a ui-sref="picbrowser({id: id, i: null, sz: null, showid: null})"
+            <a ui-sref="picbrowser({id: id, i: null, sz: null, showid: null, res: null})"
                class="lower-folder">{{capText[id]}}</a>
           </p>
         </div>
       </div>
       <div class="panel-footer-drippy">
-        <a ui-sref="picbrowser({id: curFold.parent, i: null, sz: null, showid: null})"
+        <a ui-sref="picbrowser({id: curFold.parent, i: null, sz: null, showid: null, res: null})"
            class="btn btn-default" ng-show="curFold !== root">
           <span class="glyphicon glyphicon-arrow-up groovy-logo-color"></span> Back</a> &nbsp;
         <a ui-sref="picbrowser({id: nextId, i: null, sz: null, showid: null})"
@@ -31,6 +31,7 @@
           <ul uib-dropdown-menu class="dropdown-menu">
             <li><a ng-click="rotateTileSz()">{{tileSzOptionText}}</a></li>
             <li><a ng-click="toggleShowId()">{{showIdOptionText}}</a></li>
+            <li><a ng-click="toggleVideoRes()">{{videoResOptionText}}</a></li>
             <li class="divider"></li>
             <li ng-repeat="filt in rating.filterValues track by $index">
               <a ng-click="setRatingFilter(filt)">Show
@@ -72,7 +73,10 @@
         <div class="panel-body" ng-show="showVideo">
           <div ng-repeat="id in curFold.videos track by $index">
             <p ng-if="id == selectedVideo">
-              <video controls autoplay ng-src="{{selectedVideoSrc}}"></video></p>
+              <video controls autoplay>
+                <source ng-src="{{selectedVideoSrc}}?res=hq" ng-if="res==='hq'">
+                <source ng-src="{{selectedVideoSrc}}">
+              </video></p>
             <p ng-if="id != selectedVideo && curFold.meta[id].titlepic" ng-click="selectVideo(id)">
               <img class="img-responsive" ng-src="{{'gvypics/pic/'+curFold.meta[id].titlepic+'?sz=md'}}"></p>
             <p ng-click="selectVideo(id)">

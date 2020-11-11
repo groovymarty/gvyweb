@@ -180,6 +180,13 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     }
     $scope.toggleShowId(parseBool($stateParams.showid, appSettings.showId));
     
+    $scope.toggleVideoRes = function(val) {
+      $scope.res = val ? val : $scope.res==='hq' ? 'std' : 'hq';
+      appSettings.videoRes = $scope.res;
+      $scope.videoResOptionText = $scope.res==='hq' ? "Standard Video" : "HQ Video";
+    };
+    $scope.toggleVideoRes($stateParams.res || appSettings.videoRes);
+    
     function openCapEdit($scope, id) {
       $scope.capEditId = id;
       $scope.capEditText = ($scope.curFold.meta[id] && $scope.curFold.meta[id].caption) || "";
