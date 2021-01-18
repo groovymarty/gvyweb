@@ -296,3 +296,32 @@ body {
     width: 620px;
   }
 }
+/* some classes from bootstrap 4 */
+.d-flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+/* house stuff */
+.house-box {
+  border: 2px black solid;
+  margin: 2px;
+  padding: 3px;
+}
+.house-box-sm {
+  height: 5em;
+  width: 5em;
+}
+.house-box-lg {
+  height: 10em;
+  width: 10em;
+}
+.heat {
+  color: white;
+  background-color: red;
+}
+.cool {
+  color: white;
+  background-color: blue;
+}

@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="panel panel-default col-md-8">
+      <div class="panel-body">
+        <h2 class="curly-font">Our House</h2>
+        <div class="d-flex flex-column">
+          <div class="house-box house-box-lg d-flex"
+               ng-class="{'heat': h_2nd, 'cool': c_2nd}">
+              <p>2nd Floor</p>
+              <p>{{h_2nd ? "HEAT" : c_2nd ? "COOL" : ""}}</p>
+          </div>
+          <div class="d-flex">
+            <div class="house-box house-box-lg d-flex"
+                 ng-class="{'heat': h_1st, 'cool': c_1st}">
+              <p>1st Floor<p>
+              <p>{{h_1st ? "HEAT" : c_1st ? "COOL" : ""}}</p>
+            </div>
+            <div class="house-box house-box-lg d-flex"
+                 ng-class="{'heat': h_mbr, 'cool': c_mbr}">
+              <p>MBR</p>
+              <p>{{h_mbr ? "HEAT" : c_mbr ? "COOL" : ""}}</p>
+            </div>
+          </div>
+          <div class="d-flex">
+            <div class="house-box house-box-sm d-flex"
+                 ng-class="{'heat': h_boil}">
+              <p>Boiler {{boil ? "ON" : "OFF"}}</p>
+            </div>
+            <div class="house-box house-box-sm d-flex"
+                 ng-class="{'heat': h_wh}">
+              <p>Water Heater {{h_wh ? "ON" : "OFF"}}</p>
+            </div>
+            <div class="house-box house-box-sm d-flex"
+                 ng-class="{'heat': hw_pump}">
+              <p>HW Pump {{hw_pump ? "ON" : "OFF"}}</p>
+            </div>
+            <div class="house-box house-box-sm d-flex"
+                 ng-class="{'cool': well}">
+              <p>Well Pump {{well ? "ON" : "OFF"}}</p>
+            </div>
+          </div>
+        </div>
+        <p></p>
+        <p>Outdooor Temp: {{weather.temp}} Humidity: {{weather.humid}}</p>
+        <p></p>
+        <div class="btn btn-default" ng-click="refresh()">Refresh</div>
+      </div>
+    </div>
+  </div>
+</div>

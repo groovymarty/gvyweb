@@ -35,10 +35,11 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       controller: "DocsCtrl",
       templateUrl: "docsView.html"
     })
-    .state('heidi', {
-      displayName: "Heidi's Page",
-      url: "/heidi",
-      templateUrl: "heidiView.html"
+    .state('house', {
+      displayName: "Our House",
+      url: "/house",
+      controller: "HouseCtrl",
+      templateUrl: "houseView.html"
     })
     .state('login', {
       displayName: "Sign In",
