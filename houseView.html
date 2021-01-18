@@ -4,18 +4,18 @@
       <div class="panel-body">
         <h2 class="curly-font">Our House</h2>
         <div class="d-flex flex-column">
-          <div class="house-box house-box-lg d-flex"
+          <div class="house-box house-box-lg d-flex flex-column"
                ng-class="{'heat': h_2nd, 'cool': c_2nd}">
               <p>2nd Floor</p>
               <p>{{h_2nd ? "HEAT" : c_2nd ? "COOL" : ""}}</p>
           </div>
           <div class="d-flex">
-            <div class="house-box house-box-lg d-flex"
+            <div class="house-box house-box-lg d-flex flex-column"
                  ng-class="{'heat': h_1st, 'cool': c_1st}">
               <p>1st Floor<p>
               <p>{{h_1st ? "HEAT" : c_1st ? "COOL" : ""}}</p>
             </div>
-            <div class="house-box house-box-lg d-flex"
+            <div class="house-box house-box-lg d-flex flex-column"
                  ng-class="{'heat': h_mbr, 'cool': c_mbr}">
               <p>MBR</p>
               <p>{{h_mbr ? "HEAT" : c_mbr ? "COOL" : ""}}</p>
@@ -23,7 +23,7 @@
           </div>
           <div class="d-flex">
             <div class="house-box house-box-sm d-flex"
-                 ng-class="{'heat': h_boil}">
+                 ng-class="{'heat': boil}">
               <p>Boiler {{boil ? "ON" : "OFF"}}</p>
             </div>
             <div class="house-box house-box-sm d-flex"
