@@ -5,7 +5,7 @@ angular.module('gvyweb').controller('HouseCtrl', [
     $scope.refresh = function() {
       $http.get("https://groovymarty.com/gvyhome/data/latest")
         .then(res => {
-          latest = res.data;
+          latest = res.data.latest;
           var inp = latest.ma1.inp || 0;
           $scope.h_wh = inp & 1;
           $scope.h_mbr = inp & 2;
