@@ -303,6 +303,9 @@ body {
 .flex-column {
   flex-direction: column;
 }
+.p-1 {
+  padding: .25rem;
+}
 /* house stuff */
 .house-box {
   border: 2px black solid;

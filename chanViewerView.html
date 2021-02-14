@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="panel panel-default col-md-6">
+      <div class="panel-body">
+        <form class="form">
+          <select class="form-control" ng-model="week" ng-options="item as item.label for item in weeks"></select>
+          <select class="form-control" ng-model="query" ng-options="item as item.label for item in queries"></select>
+          <button class="btn btn-default" ng-click="doSubmit()">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-if="qr">
+    <div class="d-flex">
+      <div class="panel panel-default d-flex flex-column p-1" ng-repeat="chan in qr.chans | orderBy: getChanOrder">
+        <p>{{chanInfo[chan.id].name || chan.id}}</p>
+        <div ng-if="chan.isOneBit"
+             ng-repeat="value in chan.values track by $index">{{value}}</div>
+        <div ng-if="!chan.isOneBit"
+             ng-repeat="value in chan.values track by $index">{{value}}</div>
+      </div>
+    </div>
+  </div>
+</div>

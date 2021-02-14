@@ -41,6 +41,12 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       controller: "HouseCtrl",
       templateUrl: "houseView.html"
     })
+    .state('chanviewer', {
+      displayName: "Our House",
+      url: "/chanviewer",
+      controller: "ChanViewerCtrl",
+      templateUrl: "chanViewerView.html"
+    })
     .state('login', {
       displayName: "Sign In",
       url: "/login",
