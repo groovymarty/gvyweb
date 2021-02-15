@@ -328,3 +328,11 @@ body {
   color: white;
   background-color: blue;
 }
+.channel .heat {
+  color: black;
+  background-color: red;
+}
+.channel .cool {
+  color: magenta;
+  background-color: blue;
+}

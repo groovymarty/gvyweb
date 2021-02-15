@@ -12,12 +12,20 @@
   </div>
   <div class="row" ng-if="qr">
     <div class="d-flex">
-      <div class="panel panel-default d-flex flex-column p-1" ng-repeat="chan in qr.chans | orderBy: getChanOrder">
+      <div ng-repeat="chan in qr.chans | orderBy: getChanOrder"
+           class="panel panel-default d-flex flex-column p-1">
         <p>{{chanInfo[chan.id].name || chan.id}}</p>
-        <div ng-if="chan.isOneBit"
-             ng-repeat="value in chan.values track by $index">{{value}}</div>
-        <div ng-if="!chan.isOneBit"
-             ng-repeat="value in chan.values track by $index">{{value}}</div>
+        <div ng-if="chan.isOneBit" class="channel">
+          <div ng-repeat="value in chan.values track by $index"
+               ng-class="chanInfo[chan.id].className",
+               ng-style="{height: value/msPerPx+'px',
+                         'margin-top': (chan.durations[$index]-value)/msPerPx+'px'}">{{msToMinSec(value)}}</div>
+        </div>
+        <div ng-if="!chan.isOneBit" class="channel">
+          <div ng-repeat="value in chan.values track by $index"
+               ng-class="chanInfo[chan.id].className",
+               ng-style="{height: chan.durations[$index]/msPerPx+'px'}">{{value}}</div>
+        </div>
       </div>
     </div>
   </div>
