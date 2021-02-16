@@ -2,11 +2,15 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
     '$scope', '$http',
     function($scope, $http) {
         $scope.msPerPx = 30000;
+        $scope.times = [];
+        $scope.timeHeight = "0";
+
         function msToMinSec(ms) {
             const sec = Math.round(ms/1000);
             return Math.floor(sec/60)+":"+(100+sec%60).toString().substring(1);
         }
         $scope.msToMinSec = msToMinSec;
+
         // gvyhome time standard is EST without daylight savings time correction
         // apply offset to change GMT to EST
         const estOffset = 5*60*60*1000;
@@ -45,69 +49,76 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
 
         // channel information
         $scope.chanInfo = {
-            "time": {
-                name: "Time",
-                className: "neutral",
-                order: 1
-            },
             "ma1)inp^1": {
                 name: "Water Heater",
-                className: "heat",
+                columnClassName: "water",
+                valueClassName: "heat",
                 order: 31
             },
             "ma1)inp^2": {
                 name: "MBR Heat",
-                className: "heat",
+                columnClassName: "",
+                valueClassName: "heat",
                 order: 20
             },
             "ma1)inp^4": {
                 name: "1st Floor Heat",
-                className: "heat",
+                columnClassName: "",
+                valueClassName: "heat",
                 order: 21
             },
             "ma1)inp^8": {
                 name: "2nd Floor Heat",
-                className: "heat",
+                columnClassName: "",
+                valueClassName: "heat",
                 order: 22
             },
             "ma1)inp^16": {
                 name: "Boiler",
-                className: "heat",
-                order: 40
+                columnClassName: "",
+                valueClassName: "heat",
+                order: 23
             },
             "ma1)inp^32": {
                 name: "MBR Cool",
-                className: "cool",
+                columnClassName: "",
+                valueClassName: "cool",
                 order: 10,
             },
             "ma1)inp^64": {
                 name: "1st Floor Cool",
-                className: "cool",
+                columnClassName: "",
+                valueClassName: "cool",
                 order: 11,
             },
             "ma1)inp^128": {
                 name: "2nd Floor Cool",
-                className: "cool",
+                columnClassName: "",
+                valueClassName: "cool",
                 order: 12
             },
             "ma1)inp^256": {
                 name: "Well Pump",
-                className: "cool",
-                order: 30
+                columnClassName: "water",
+                valueClassName: "cool",
+                order: 40
             },
             "ma1)inp^512": {
                 name: "HW Pump",
-                className: "heat",
+                columnClassName: "water",
+                valueClassName: "heat",
                 order: 32
             },
             "ow1)temp": {
                 name: "Outdoor Temp",
-                className: "neutral",
+                columnClassName: "",
+                valueClassName: "neutral",
                 order: 50
             },
             "ow1)humid": {
                 name: "Outdoor Humdity",
-                className: "neutral",
+                columnClassName: "",
+                valueClassName: "neutral",
                 order: 51
             }
         };
@@ -186,6 +197,7 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
         // query result
         $scope.qr = null;
 
+        // submit button clicked
         $scope.doSubmit = function() {
             // query the database
             let url = "https://groovymarty.com/gvyhome/data/chans";
@@ -196,14 +208,14 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
                 .then(res => {
                     $scope.qr = res.data;
                     addDefaultChanInfo();
-                    addTimeChannel();
+                    genTimes();
                 })
                 .catch(err => {
                     console.log("query failed", err);
                 });
         };
 
-        // make sure chan info exists for all channels
+        // make sure chan info exists for all channels in current query report
         function addDefaultChanInfo() {
             $scope.qr.chans.forEach(chan => {
                 if (!$scope.chanInfo[chan.id]) {
@@ -216,34 +228,49 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
             });
         }
 
-        // If midnight return month/day, else return hour:minute AM/PM
+        // format concise date/time string
         function dateToShortString(date) {
             const hour = date.getUTCHours();
             const min = date.getUTCMinutes();
             if (!hour && !min) {
+                // midnight, display date
                 return date.toLocaleDateString('en-US', {
                     timeZone: 'UTC', month: 'short', day: 'numeric'
                 });
-            } else if (hour < 12) {
-                return hour + ":" + (100+min).toString().substring(1) + "am";
-            } else if (hour == 12 && !min) {
-                return "noon";
+            } else if (!min) {
+                // top of hour, display hour am/pm
+                if (hour < 12) {
+                    return hour + " am";
+                } else if (hour == 12) {
+                    return "Noon";
+                } else {
+                    return (hour-12) + " pm";
+                }
             } else {
-                return (hour-12) + ":" + (100+min).toString().substring(1) + "pm";
+                // otherwise display HH:MM in 12-hour time
+                hour %= 12;
+                return (hour || 12) + ":" + (100+min).toString().substring(1) + "am";
             }
         }
 
-        function addTimeChannel() {
-            const chan = {id: "time", values: [], durations: []};
+        // generate times for current query report
+        function genTimes() {
             const qr = $scope.qr;
             const tm = fixDate(new Date(qr.t));
             const endpointMs = tm.getTime() + qr.totalMs;
+            // for now 1 hr increments, later compute this based on zoom factor
+            const timeBumpMs = 60*60*1000;
+            const timeHeight = timeBumpMs / $scope.msPerPx;
+            $scope.times.splice(0);
+            let h = 0;
             while (tm.getTime() < endpointMs) {
-                chan.values.push(dateToShortString(tm));
-                chan.durations.push(60*60*1000);
-                tm.setTime(tm.getTime() + 60*60*1000);
+                $scope.times.push(dateToShortString(tm));
+                tm.setTime(tm.getTime() + timeBumpMs);
+                h += timeHeight;
             }
-            qr.chans.push(chan);
+            $scope.timeHeight = timeHeight + "px";
+            $scope.totTimeHeight = h + "px";
+            $scope.totPanelHeight = h+100 + "px";
         }
     }
 ]);

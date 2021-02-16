@@ -306,6 +306,33 @@ body {
 .p-1 {
   padding: .25rem;
 }
+.mb-0 {
+  margin-bottom: 0;
+}
+.d-inline-block {
+  display: inline-block;
+}
+.d-inline-flex {
+  display: inline-flex;
+}
+.position-relative {
+  position: relative;
+}
+.position-absolute {
+  position: absolute;
+}
+.top-0 {
+  top: 0;
+}
+.border-top {
+  border-top: solid 1px black;
+}
+.w-100 {
+  width: 100%;
+}
+.font-weight-bold {
+  font-weight: bold;
+}
 /* house stuff */
 .house-box {
   border: 2px black solid;
@@ -328,6 +355,9 @@ body {
   color: white;
   background-color: blue;
 }
+.water {
+  background-color: lightblue;
+}
 .channel .heat {
   color: black;
   background-color: red;
@@ -335,4 +365,19 @@ body {
 .channel .cool {
   color: magenta;
   background-color: blue;
+}
+.panel-head {
+  font-weight: bold;
+  color: blue;
+}
+.time-bold {
+  font-weight: bold;
+  color: blue;
+}
+.time-stripe-light {
+  background-color: transparent;
+}
+.time-stripe-dark {
+  background-color: black;
+  opacity: 0.1;
 }
