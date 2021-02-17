@@ -41,7 +41,10 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
             ch: "ow1)temp)humid"
         },{
             label: "Network Outage",
-            ch: "*.net)trouble^1,*.boot)"
+            ch: "ma1.net)trouble^1,ma1.boot)"
+        },{
+            label: "Test",
+            ch: "tst)foo,*.net)trouble^1,*.boot)"
         }];
         // default query based on current season in CT
         const month = today.getMonth();
@@ -120,6 +123,18 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
                 columnClassName: "",
                 valueClassName: "neutral",
                 order: 51
+            },
+            "ma1.net)trouble^1": {
+                name: "MA1 Network Trouble",
+                columnClassName: "",
+                valueClassName: "heat",
+                order: 60
+            },
+            "ma1.boot)": {
+                name: "MA1 Reboot",
+                columnClassName: "",
+                valueClassName: "neutral",
+                order: 61
             }
         };
 
