@@ -367,8 +367,8 @@ body {
   background-color: blue;
 }
 .panel-head {
-  font-weight: bold;
   color: blue;
+  height: 2.5em;
 }
 .time-bold {
   font-weight: bold;
