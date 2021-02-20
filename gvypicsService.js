@@ -59,6 +59,22 @@ angular.module('gvyweb').service('gvypics', [
         }
       });
     };
+
+    // get video folders
+    this.getVideoFolders = function() {
+      var url = makeUrl("lsv");
+      return $http.get(url).then(function(resp) {
+        return resp.data.folders;
+      }).catch(handleFailure);
+    }
+
+    // get folder with video-only option
+    this.getVideoFolder = function(id) {
+      var url = makeUrl("ls/" + id + "?vo=1");
+      return $http.get(url).then(function(resp) {
+        return resp.data;
+      }).catch(handleFailure);
+    }
     
     this.login = function(userId, password) {
       var self = this;

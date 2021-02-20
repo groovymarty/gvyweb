@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row" ng-repeat="folder in folders">
+    <div class="panel panel-default col-md-8">
+      <div class="panel-body">
+        <p><b>{{folder.name || folder.id}}</b></p>
+        <p ng-repeat="vidid in folder.videos">
+          <a ng-href="{{'gvypics/vid/'+vidid}}">{{folder.names[vidid] || vidid}}</a>
+          &bull;
+          <a ng-href="{{'gvypics/vid/'+vidid+'?res=hq'}}">hq</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

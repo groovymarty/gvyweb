@@ -23,6 +23,12 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
       templateUrl: "picViewerView.html",
       params: {i: null}
     })
+    .state('vidfinder', {
+      displayName: "Videos",
+      url: "/vidfinder",
+      controller: "VidFinderCtrl",
+      templateUrl: "vidFinderView.html"
+    })
     .state('slideshows', {
       displayName: "Slide Shows",
       url: "/slideshows",

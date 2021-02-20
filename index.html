@@ -38,6 +38,8 @@
           <li><a ui-sref="picbrowser({id: '', i: null, sz: 'sm', showid: 1, res: 'std'})"
                  ng-class="{active: $state.current.displayName=='Pictures'}"
                  ng-click="collapse()">Pictures</a></li>
+          <li><a ui-sref="vidfinder"
+                 ng-click="collapse()">Videos</a></li>
           <li><a ui-sref="picbrowser({id: 'C02', i: null, sz: 'md', showid: 0})"
                  ng-click="collapse()">Family Album</a></li>
           <li><a ui-sref="slideshows" ui-sref-active="active"
@@ -88,6 +90,7 @@
   <script src="DocsCtrl.js"></script>
   <script src="PicBrowserCtrl.js"></script>
   <script src="PicViewerCtrl.js"></script>
+  <script src="VidFinderCtrl.js"></script>
   <script src="HomeCtrl.js"></script>
   <script src="HouseCtrl.js"></script>
   <script src="ChanViewerCtrl.js"></script>

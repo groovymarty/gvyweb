@@ -10,8 +10,8 @@ app.get('/gvypics/pic/*', function(req, res) {
 app.get('/gvypics/vid/*', function(req, res) {
   res.redirect("https://groovymarty.com"+req.path);
 });
-app.get('/gvypics/ls/*', function(req, res, next) {
-  axios.get("https://groovymarty.com"+req.path)
+app.get('/gvypics/*', function(req, res, next) {
+  axios.get("https://groovymarty.com"+req.url)
     .then(resp => res.json(resp.data))
     .catch(err => next(err));
 });
