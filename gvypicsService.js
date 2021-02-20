@@ -3,6 +3,7 @@ angular.module('gvyweb').service('gvypics', [
   function($http, $location, fold) {
     var self = this;
     var folderCache = {};
+    var vidFolderCache = {};
     var token = null;
     this.userId = null;
     
@@ -68,12 +69,21 @@ angular.module('gvyweb').service('gvypics', [
       }).catch(handleFailure);
     }
 
+    this.getCachedVideoFolder = function(id) {
+      return vidFolderCache[id];
+    }
+
     // get folder with video-only option
     this.getVideoFolder = function(id) {
-      var url = makeUrl("ls/" + id + "?vo=1");
-      return $http.get(url).then(function(resp) {
-        return resp.data;
-      }).catch(handleFailure);
+      if (id in vidFolderCache) {
+        return Promise.resolve(vidFolderCache[id]);
+      } else {
+        var url = makeUrl("ls/" + id + "?vo=1");
+        return $http.get(url).then(function(resp) {
+          vidFolderCache[id] = resp.data;
+          return resp.data;
+        }).catch(handleFailure);
+      }
     }
     
     this.login = function(userId, password) {
