@@ -4,7 +4,9 @@
       <div class="panel-body">
         <p><b>{{folder.name || folder.id}}</b></p>
         <p ng-repeat="vidid in folder.videos">
-          <a ng-href="{{'gvypics/vid/'+vidid}}">{{folder.names[vidid] || vidid}}</a>
+          {{folder.names[vidid] || vidid}}
+          &bull;
+          <a ng-href="{{'gvypics/vid/'+vidid}}">std</a>
           &bull;
           <a ng-href="{{'gvypics/vid/'+vidid+'?res=hq'}}">hq</a>
         </p>
