@@ -1,14 +1,21 @@
 <div class="container">
+  <div class="row">
+    <div class="panel panel-default col-md-8">
+      <div class="panel-body">
+        <h2 class="curly-font">Video Finder</h2>
+      </div>
+    </div>
+  </div>
   <div class="row" ng-repeat="folder in folders">
     <div class="panel panel-default col-md-8">
       <div class="panel-body">
-        <p><b>{{folder.name || folder.id}}</b></p>
-        <p ng-repeat="vidid in folder.videos">
-          {{folder.names[vidid] || vidid}}
-          &bull;
-          <a ng-href="{{'gvypics/vid/'+vidid}}">std</a>
-          &bull;
-          <a ng-href="{{'gvypics/vid/'+vidid+'?res=hq'}}">hq</a>
+        <p><b><a ng-click="toggle(folder)">{{folder.name || folder.id}}</a></b></p>
+        <p ng-show="folder.expanded" ng-repeat="vidId in folder.videos">
+          <a ng-href="{{'gvypics/vid/'+vidId}}">{{folder.names[vidId] || vidId}}</a>
+          <span ng-if="folder.hqExists[vidId]">
+            &bull;
+            <a ng-href="{{'gvypics/vid/'+vidId+'?res=hq'}}">hq</a>
+          </span>
         </p>
       </div>
     </div>

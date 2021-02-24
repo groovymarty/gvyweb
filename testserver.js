@@ -5,10 +5,10 @@ var axios = require('axios');
 var app = express();
 app.use(express.static("."));
 app.get('/gvypics/pic/*', function(req, res) {
-  res.redirect("https://groovymarty.com"+req.path);
+  res.redirect("https://groovymarty.com"+req.url);
 });
 app.get('/gvypics/vid/*', function(req, res) {
-  res.redirect("https://groovymarty.com"+req.path);
+  res.redirect("https://groovymarty.com"+req.url);
 });
 app.get('/gvypics/*', function(req, res, next) {
   axios.get("https://groovymarty.com"+req.url)

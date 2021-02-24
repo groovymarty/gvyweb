@@ -65,7 +65,7 @@ angular.module('gvyweb').service('gvypics', [
     this.getVideoFolders = function() {
       var url = makeUrl("lsv");
       return $http.get(url).then(function(resp) {
-        return resp.data.folders;
+        return resp.data;
       }).catch(handleFailure);
     }
 
