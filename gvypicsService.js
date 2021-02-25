@@ -67,11 +67,11 @@ angular.module('gvyweb').service('gvypics', [
       return $http.get(url).then(function(resp) {
         return resp.data;
       }).catch(handleFailure);
-    }
+    };
 
     this.getCachedVideoFolder = function(id) {
       return vidFolderCache[id];
-    }
+    };
 
     // get folder with video-only option
     this.getVideoFolder = function(id) {
@@ -84,8 +84,17 @@ angular.module('gvyweb').service('gvypics', [
           return resp.data;
         }).catch(handleFailure);
       }
-    }
-    
+    };
+
+    // test if video exists
+    this.testVideoExists = function(id, res) {
+      var url = makeUrl("testvid/" + id);
+      if (res) {
+        url += "?res=" + res;
+      }
+      return $http.get(url).then(() => true, () => false);
+    };
+
     this.login = function(userId, password) {
       var self = this;
       var url = makeUrl("login?user=" + userId + "&pw=" + password);
