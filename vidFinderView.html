@@ -11,7 +11,9 @@
       <div class="panel-body">
         <p><b><a ng-click="toggle(folder)">{{folder.name || folder.id}}</a></b></p>
         <p ng-show="folder.expanded" ng-repeat="vidId in folder.videos">
-          <a ng-href="{{'gvypics/vid/'+vidId}}">{{folder.names[vidId] || vidId}}</a>
+          {{folder.names[vidId] || vidId}}
+          &bull;
+          <a ng-href="{{'gvypics/vid/'+vidId}}">std</a>
           <span ng-if="folder.hqExists[vidId]">
             &bull;
             <a ng-href="{{'gvypics/vid/'+vidId+'?res=hq'}}">hq</a>
