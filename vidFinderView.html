@@ -3,6 +3,7 @@
     <div class="panel panel-default col-md-8">
       <div class="panel-body">
         <h2 class="curly-font">Video Finder</h2>
+        <p>Click a folder name to show videos, click again to hide them.</p>
       </div>
     </div>
   </div>
@@ -11,9 +12,7 @@
       <div class="panel-body">
         <p><b><a ng-click="toggle(folder)">{{folder.name || folder.id}}</a></b></p>
         <p ng-show="folder.expanded" ng-repeat="vidId in folder.videos">
-          {{folder.names[vidId] || vidId}}
-          &bull;
-          <a ng-href="{{'gvypics/vid/'+vidId}}">std</a>
+          <a ng-href="{{'gvypics/vid/'+vidId}}">{{folder.names[vidId] || vidId}}</a>
           <span ng-if="folder.hqExists[vidId]">
             &bull;
             <a ng-href="{{'gvypics/vid/'+vidId+'?res=hq'}}">hq</a>
