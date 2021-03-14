@@ -50,6 +50,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "F206-1",
     collection: "C01+37"
   },{
+    id: "MG08",
+    title: "MG08 - Happy To Be Here",
+    caption: "The Sauser clan moves to Atlanta.  A phone call from Maybel Boyter.  Birth of Ann and Linda.",
+    vidid: "SS-V88",
+    titlepic: "E396-4",
+    collection: "C01+38"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
