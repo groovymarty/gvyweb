@@ -57,6 +57,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "E396-4",
     collection: "C01+38"
   },{
+    id: "MG09",
+    title: "MG09 - Three Girls and a Boy",
+    caption: "Birth of Marty and Jean.  Martin becomes concertmaster and plays violin with Jack Benny.",
+    vidid: "SS-V89",
+    titlepic: "E500-1A",
+    collection: "C01+39"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
