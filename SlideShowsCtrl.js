@@ -64,6 +64,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "E500-1A",
     collection: "C01+39"
   },{
+    id: "MG10",
+    title: "MG10 - Four Stories",
+    caption: "Ann, Linda, Marty and Jean tell stories about their dad.",
+    vidid: "SS-V90",
+    titlepic: "FF-82",
+    collection: "C01+40"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
