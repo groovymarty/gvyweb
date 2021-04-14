@@ -75,7 +75,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     title: "MG11 - Growing Up",
     caption: "Scenes from family life and vacations. A goat on the roof.",
     vidid: "SS-V91",
-    titlepic: "S201-39A",
+    titlepic: "E455-1A",
     collection: "C01+41"
   },{
     id: "KR01",
