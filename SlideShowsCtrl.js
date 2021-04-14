@@ -71,6 +71,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "FF-82",
     collection: "C01+40"
   },{
+    id: "MG11",
+    title: "MG11 - Growing Up",
+    caption: "Scenes from family life and vacations. A goat on the roof.",
+    vidid: "SS-V91",
+    titlepic: "S201-39A",
+    collection: "C01+41"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
