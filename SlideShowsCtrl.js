@@ -240,5 +240,12 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     vidid: "SS-V2",
     titlepic: "A27-229",
     collection: "C01+24"
+  },{
+    id: "KS01",
+    title: "Mark Brooks Tribute",
+    caption: "30 years of devoted service to the Kent Singers",
+    vidid: "SS-V41",
+    titlepic: "KS+201906-2050",
+    collection: "C01+25"
   }];
 }]);
