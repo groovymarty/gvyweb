@@ -78,6 +78,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "E455-1A",
     collection: "C01+41"
   },{
+    id: "MG12",
+    title: "MG12 - Ten Grandkids",
+    caption: "Baby pictures of all the grandchildren.  Symphony players go on strike.",
+    vidid: "SS-V92",
+    titlepic: "A26-15",
+    collection: "C01+42"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
