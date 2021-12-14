@@ -85,6 +85,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "A26-15",
     collection: "C01+42"
   },{
+    id: "MG13",
+    title: "MG13 - Muggert & Pop-Pop",
+    caption: "Two decades of family gatherings.  So many birthday cakes.",
+    vidid: "SS-V93",
+    titlepic: "E502-2",
+    collection: "C01+43"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
