@@ -92,6 +92,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "E502-2",
     collection: "C01+43"
   },{
+    id: "MG14",
+    title: "MG14 - Moments in Time",
+    caption: "Joys and sorrows, reunions and meals with the extended family.  Videos of our parents, aunts & uncles.",
+    vidid: "SS-V94",
+    titlepic: "JHB-33",
+    collection: "C01+44"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
