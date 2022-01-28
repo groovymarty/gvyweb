@@ -99,6 +99,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "JHB-33",
     collection: "C01+44"
   },{
+    id: "MG15",
+    title: "MG15 - A Life of Music",
+    caption: "Martin retires from ASO, dresses up as Bach and plays in a traveling show.  Cold War geopolitics.",
+    vidid: "SS-V95",
+    titlepic: "E464-6",
+    collection: "C01+45"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
