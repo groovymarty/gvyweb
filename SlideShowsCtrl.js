@@ -106,6 +106,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "E464-6",
     collection: "C01+45"
   },{
+    id: "MG16",
+    title: "MG16 - Coconuts and Bananas",
+    caption: "Golf, traveling and other pleasures of retirement.  Open up and eat your fish.",
+    vidid: "SS-V96",
+    titlepic: "E476-16",
+    collection: "C01+46"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
