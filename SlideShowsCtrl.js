@@ -113,6 +113,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "E476-16",
     collection: "C01+46"
   },{
+    id: "MG17",
+    title: "MG17 - Balm in Gilead",
+    caption: "The touching ending to our story.  Fasten your emotional seatbelt.",
+    vidid: "SS-V97",
+    titlepic: "D17D-420A",
+    collection: "C01+47"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
