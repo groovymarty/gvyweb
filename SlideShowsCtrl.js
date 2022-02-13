@@ -115,7 +115,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
   },{
     id: "MG17",
     title: "MG17 - Balm in Gilead",
-    caption: "The touching ending to our story.  Fasten your emotional seatbelt.",
+    caption: "The touching end of our story.  Fasten your emotional seatbelt.",
     vidid: "SS-V97",
     titlepic: "D17D-420A",
     collection: "C01+47"
