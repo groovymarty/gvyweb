@@ -120,6 +120,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "D17D-420A",
     collection: "C01+47"
   },{
+    id: "MG18",
+    title: "MG18 - Epilogue",
+    caption: "Weddings and babies that came later.  Martin plays a wrong note.",
+    vidid: "SS-V98",
+    titlepic: "D08N-16",
+    collection: "C01+48"
+  },{
     id: "KR01",
     groupTitle: "The Modest Lives of Kermit & Ruth Pfeifle",
     title: "KR01 - Opening",
