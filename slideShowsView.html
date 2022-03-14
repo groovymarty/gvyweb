@@ -6,6 +6,7 @@
         <p>Slide show videos are available on DVD.  To request a DVD, write me at msauser2@gmail.com</p>
         <p>I hope you enjoy the slide shows. If you have any comments, suggestions or corrections,
         please let me know.</p>
+        <p>If you are watching on a big screen, click the higher quality video button for a better picture.</p>
       </div>
     </div>
   </div>
@@ -17,9 +18,10 @@
         <a ng-href="{{'gvypics/vid/'+show.vidid}}">
           <img class="img-responsive" src="gvypics/pic/{{show.titlepic}}?sz=sm" alt="{{show.title}}"></a>
         <p>{{show.caption}}</p>
-        <a ng-href="{{'gvypics/vid/'+show.vidid}}">Click here to view slideshow</a>
-        <p><a ui-sref="picbrowser({id: '{{show.collection}}', i: null, sz: 'sm', showid: 1})">
-          (Here are all the pictures)</a></p>
+        <a class="btn btn-warning" ng-href="{{'gvypics/vid/'+show.vidid}}">View Slideshow</a>
+        <a class="btn btn-primary" ng-href="{{'gvypics/vid/'+show.vidid+'?res=hq'}}">Higher Quality Video</a>
+        <a class="btn btn-default" ui-sref="picbrowser({id: '{{show.collection}}', i: null, sz: 'sm', showid: 1})">
+          Picture Collection</a>
       </div>
     </div>
   </div>
