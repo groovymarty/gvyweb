@@ -270,7 +270,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
   },{
     id: "KR21",
     title: "KR21 - Epilogue",
-    caption: "Jeff and Heidi’s weddings. Birth of Josie. Kermit & Ruth’s voices.",  
+    caption: "Jeff and Heidi’s weddings. Marty & Jill move to Connecticut. Kermit & Ruth’s voices.",  
     vidid: "SS-V71",
     titlepic: "D15J4-85",
     collection: "C01+21"
