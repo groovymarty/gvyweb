@@ -1,5 +1,36 @@
 angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope) {
   $scope.shows = [{
+    id: "TR01",
+    groupTitle: "Trips",
+    title: "Our Trip to Scotland & Dublin",
+    caption: "Seven members of our neighborhood wine club try some Scotch for a change.",
+    vidid: "SS-V42",
+    titlepic: "D22T4-610",
+    collection: "C01+26"
+  },{
+    id: "JJ01",
+    groupTitle: "Our Family",
+    title: "Jeff & Jaimye",
+    caption: "Jeff & Jaimye's fun slideshow for their wedding.",
+    vidid: "SS-V1",
+    titlepic: "D12T-87",
+    collection: "C01+23"
+  },{
+    id: "HM01",
+    title: "Heidi & Michael",
+    caption: "Heidi and Mike's baby pictures and how they met!",
+    vidid: "SS-V2",
+    titlepic: "A27-229",
+    collection: "C01+24"
+  },{
+    id: "KS01",
+    groupTitle: "Kent Singers",
+    title: "Mark Brooks Tribute",
+    caption: "30 years of devoted service to the Kent Singers.",
+    vidid: "SS-V41",
+    titlepic: "KS+201906-2050",
+    collection: "C01+25"
+  },{
     id: "MG01",
     groupTitle: "Something Very Nice: The Story of Martin & Grace Sauser",
     title: "MG01 - Opening",
@@ -274,27 +305,5 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     vidid: "SS-V71",
     titlepic: "D15J4-85",
     collection: "C01+21"
-  },{
-    id: "JJ01",
-    groupTitle: "Our Family",
-    title: "Jeff & Jaimye",
-    caption: "Jeff & Jaimye's fun slideshow for their wedding.",
-    vidid: "SS-V1",
-    titlepic: "D12T-87",
-    collection: "C01+23"
-  },{
-    id: "HM01",
-    title: "Heidi & Michael",
-    caption: "Heidi and Mike's baby pictures and how they met!",
-    vidid: "SS-V2",
-    titlepic: "A27-229",
-    collection: "C01+24"
-  },{
-    id: "KS01",
-    title: "Mark Brooks Tribute",
-    caption: "30 years of devoted service to the Kent Singers",
-    vidid: "SS-V41",
-    titlepic: "KS+201906-2050",
-    collection: "C01+25"
   }];
 }]);
