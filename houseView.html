@@ -11,14 +11,18 @@
           </div>
           <div class="d-flex">
             <div class="house-box house-box-lg d-flex flex-column"
-                 ng-class="{'heat': h_1st, 'cool': c_1st}">
-              <p>1st Floor<p>
-              <p>{{h_1st ? "HEAT" : c_1st ? "COOL" : ""}}</p>
+                 ng-class="{'heat': h_1st && !pel_on, 'pellet': h_1st && pel_on, 'cool': c_1st}">
+              <p>1st Floor</p>
+              <p>{{h_1st ? "HEAT" : c_1st ? "COOL" : ""}} {{hstat_lr ? "HSTAT" : ""}}</p>
+              <div class="house-box house-box-sm d-flex"
+                   ng-class="{'pellet': pel_on}">
+                <p>Pellet Stove {{pel_on ? "ON" : "OFF"}}</p>
+              </div>
             </div>
             <div class="house-box house-box-lg d-flex flex-column"
                  ng-class="{'heat': h_mbr, 'cool': c_mbr}">
               <p>MBR</p>
-              <p>{{h_mbr ? "HEAT" : c_mbr ? "COOL" : ""}}</p>
+              <p>{{h_mbr ? "HEAT" : c_mbr ? "COOL" : ""}} {{hstat_br ? "HSTAT" : ""}}</p>
             </div>
           </div>
           <div class="d-flex">

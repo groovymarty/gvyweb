@@ -26,8 +26,8 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
         // these objects specify choices for query dropdown
         $scope.queries = [{
             label: "Winter Season (Heat)",
-            // three heat zones, water heater, boiler, hw pump, outdoor temp
-            ch: "ma1)inp^1^2^4^8^16^512,ow1)temp"
+            // three heat zones, water heater, boiler, hw pump, pellet stove, outdoor temp
+            ch: "ma1)inp^1^2^4^8^16^512^4096,ow1)temp"
         },{
             label: "Summer Season (A/C)",
             // three cool zones, water heater, boiler, hw pump, outdoor temp
@@ -36,6 +36,10 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
             label: "Water",
             // water heater, boiler, hw pump, well pump
             ch: "ma1)inp^1^16^256^512"
+        },{
+            label: "Humidifiers",
+            // hstats, outdoor temp and humidity
+            ch: "ma1)inp^1024^2048,ow1)temp)humid"
         },{
             label: "Weather",
             ch: "ow1)temp)humid"
@@ -68,19 +72,19 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
                 name: "1st Floor Heat",
                 columnClassName: "",
                 valueClassName: "heat",
-                order: 21
+                order: 22
             },
             "ma1)inp^8": {
                 name: "2nd Floor Heat",
                 columnClassName: "",
                 valueClassName: "heat",
-                order: 22
+                order: 23
             },
             "ma1)inp^16": {
                 name: "Boiler",
                 columnClassName: "",
                 valueClassName: "heat",
-                order: 23
+                order: 29
             },
             "ma1)inp^32": {
                 name: "MBR Cool",
@@ -111,6 +115,24 @@ angular.module('gvyweb').controller('ChanViewerCtrl', [
                 columnClassName: "water",
                 valueClassName: "heat",
                 order: 32
+            },
+            "ma1)inp^1024": {
+                name: "HSTAT BR",
+                columnClassName: "water",
+                valueClassName: "cool",
+                order: 32
+            },
+            "ma1)inp^2048": {
+                name: "HSTAT LR",
+                columnClassName: "water",
+                valueClassName: "cool",
+                order: 32
+            },
+            "ma1)inp^4096": {
+                name: "Pellet",
+                columnClassName: "",
+                valueClassName: "pellet",
+                order: 21
             },
             "ow1)temp": {
                 name: "Outdoor Temp",

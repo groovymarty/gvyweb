@@ -17,6 +17,9 @@ angular.module('gvyweb').controller('HouseCtrl', [
           $scope.c_2nd = inp & 128;
           $scope.well = inp & 256;
           $scope.hw_pump = inp & 512;
+          $scope.hstat_br = inp & 1024;
+          $scope.hstat_lr = inp & 2048;
+          $scope.pel_on = inp & 4096;
           $scope.weather = latest.ow1;
         })
         .catch(err => {

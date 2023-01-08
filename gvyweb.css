@@ -355,6 +355,10 @@ body {
   color: white;
   background-color: blue;
 }
+.pellet {
+  color: black;
+  background-color: orange;
+}
 .water {
   background-color: lightblue;
 }
