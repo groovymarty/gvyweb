@@ -3,7 +3,7 @@ angular.module('gvyweb').controller('VidFinderCtrl', [
   function($scope, gvypics) {
     $scope.folders = [];
     gvypics.getVideoFolders().then(result => {
-        result.folders.sort().forEach(folderId => {
+        result.folders.sort().reverse().forEach(folderId => {
             $scope.folders.push({
                 id: folderId,
                 name: result.names[folderId],
