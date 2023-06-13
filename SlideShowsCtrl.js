@@ -31,6 +31,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "KS+201906-2050",
     collection: "C01+25"
   },{
+    id: "KS02",
+    title: "50th Anniversary Season",
+    caption: "Three special concerts, plus cupcakes.",
+    vidid: "SS-V43",
+    titlepic: "KS+202306-0060",
+    collection: "C01+27"
+  },{
     id: "MG01",
     groupTitle: "Something Very Nice: The Story of Martin & Grace Sauser",
     title: "MG01 - Opening",
