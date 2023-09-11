@@ -1,15 +1,14 @@
 angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope) {
   $scope.shows = [{
-    id: "TR01",
-    groupTitle: "Trips",
-    title: "Our Trip to Scotland & Dublin",
-    caption: "Seven members of our neighborhood wine club try some Scotch for a change.",
-    vidid: "SS-V42",
-    titlepic: "D22T4-610",
-    collection: "C01+42"
+    id: "JM21",
+    groupTitle: "Our Family",
+    title: "Camp Nana 2021",
+    caption: "Exploring the solar system in our backyard.",
+    vidid: "SS-V21",
+    titlepic: "D23RA12-380",
+    collection: "C01+21"
   },{
     id: "JJ01",
-    groupTitle: "Our Family",
     title: "Jeff & Jaimye",
     caption: "Jeff & Jaimye's fun slideshow for their wedding.",
     vidid: "SS-V1",
@@ -22,6 +21,14 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     vidid: "SS-V2",
     titlepic: "A27-229",
     collection: "C01+02"
+  },{
+    id: "TR01",
+    groupTitle: "Trips",
+    title: "Our Trip to Scotland & Dublin",
+    caption: "Seven members of our neighborhood wine club try some Scotch for a change.",
+    vidid: "SS-V42",
+    titlepic: "D22T4-610",
+    collection: "C01+42"
   },{
     id: "KS01",
     groupTitle: "Kent Singers",
