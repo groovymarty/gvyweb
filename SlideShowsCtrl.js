@@ -2,7 +2,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
   $scope.shows = [{
     id: "JM21",
     groupTitle: "Our Family",
-    title: "Camp Nana 2021",
+    title: "Camp Nana 2023",
     caption: "Exploring the solar system in our backyard.",
     vidid: "SS-V21",
     titlepic: "D23RA12-380",
