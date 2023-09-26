@@ -20,7 +20,7 @@
         <p>{{show.caption}}</p>
         <a class="btn btn-warning" ng-href="{{'gvypics/vid/'+show.vidid}}">View Slideshow</a>
         <a class="btn btn-primary" ng-href="{{'gvypics/vid/'+show.vidid+'?res=hq'}}">Higher Quality Video</a>
-        <a class="btn btn-default" ui-sref="picbrowser({id: '{{show.collection}}', i: null, sz: 'sm', showid: 1})">
+        <a class="btn btn-default" ui-sref="picbrowser({id: '{{show.collection}}', i: null, sz: 'sm', showid: 1})" ng-if="show.collection">
           Picture Collection</a>
       </div>
     </div>

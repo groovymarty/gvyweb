@@ -45,6 +45,20 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "KS+202306-0060",
     collection: "C01+43"
   },{
+    id: "KS03",
+    title: "Choral Highlights from Handel's Messiah",
+    caption: "From our concert on June 12, 2022.",
+    vidid: "SS-V44",
+    titlepic: "D22M3-110",
+    collection: ""
+  },{
+    id: "KS04",
+    title: "Highlights from Songs of the British Isles",
+    caption: "From our concert on March 6, 2022.",
+    vidid: "SS-V43",
+    titlepic: "D22G3-50",
+    collection: ""
+  },{
     id: "MG01",
     groupTitle: "Something Very Nice: The Story of Martin & Grace Sauser",
     title: "MG01 - Opening",
