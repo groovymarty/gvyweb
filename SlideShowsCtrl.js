@@ -55,7 +55,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     id: "KS04",
     title: "Highlights from Songs of the British Isles",
     caption: "From our concert on March 6, 2022.",
-    vidid: "SS-V43",
+    vidid: "SS-V45",
     titlepic: "D22G3-50",
     collection: ""
   },{
