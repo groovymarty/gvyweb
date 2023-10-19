@@ -15,6 +15,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "D12T-87",
     collection: "C01+01"
   },{
+    id: "JJ02",
+    title: "40 Years of Jeff",
+    caption: "A fast tour of Jeff's life from birth to 40th birthday.",
+    vidid: "SS-V3",
+    titlepic: "D22U-52",
+    collection: "C01+03"
+  },{
     id: "HM01",
     title: "Heidi & Michael",
     caption: "Heidi and Mike's baby pictures and how they met!",
