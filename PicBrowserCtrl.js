@@ -224,7 +224,7 @@ angular.module('gvyweb').controller('PicBrowserCtrl', [
     }
 
     $scope.clickPic = function(id) {
-      //remove for now.. $state.go('picviewer', makeGoParams(id));
+      $state.go('picviewer', makeGoParams(id));
     };
 
     $scope.moreBack = function() {
