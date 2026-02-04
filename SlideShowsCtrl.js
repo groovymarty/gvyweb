@@ -43,6 +43,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "A27-229",
     collection: "C01+02"
   },{
+    id: "HM02",
+    title: "40 Years of Heidi",
+    caption: "The adventures of Heidi. If she can make it there, she can make it anywhere.",
+    vidid: "SS-V4",
+    titlepic: "D25A3-200",
+    collection: "C01+04"
+  },{
     id: "TR01",
     groupTitle: "Trips",
     title: "Our Trip to Scotland & Dublin",
