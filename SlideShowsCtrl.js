@@ -58,6 +58,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "D22T4-610",
     collection: "C01+42"
   },{
+    id: "TR02",
+    title: "Summer Road Trip 2025: Happy Trails West",
+    caption: "Part 1: Connecticut to Yellowstone. See Kermit's birthplace in North Dakota.",
+    vidid: "SS-V46",
+    titlepic: "D25N06-1370",
+    collection: "C01+46"
+  },{
     id: "KS01",
     groupTitle: "Kent Singers",
     title: "Mark Brooks Tribute",
