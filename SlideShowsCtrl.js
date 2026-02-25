@@ -62,7 +62,7 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     title: "Summer Road Trip 2025: Happy Trails West",
     caption: "Part 1: Connecticut to Yellowstone. See Kermit's birthplace in North Dakota.",
     vidid: "SS-V46",
-    titlepic: "D25N06-1370",
+    titlepic: "D25N06-1370A",
     collection: "C01+46"
   },{
     id: "KS01",
