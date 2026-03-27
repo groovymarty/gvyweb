@@ -65,6 +65,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope
     titlepic: "D25N06-1370A",
     collection: "C01+46"
   },{
+    id: "TR03",
+    title: "Summer Road Trip 2025: Yellowstone",
+    caption: "Part 2: The adventures of five friends at Yellowstone National Park.",
+    vidid: "SS-V47",
+    titlepic: "D25N14-2020",
+    collection: "C01+47"
+  },{
     id: "KS01",
     groupTitle: "Kent Singers",
     title: "Mark Brooks Tribute",
