@@ -385,3 +385,62 @@ body {
   background-color: black;
   opacity: 0.1;
 }
+/* Container */
+.audio-player {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+/* Slightly dim inactive players (optional but nice) */
+.audio-player {
+  opacity: 0.85;
+}
+
+/* Highlight entire player when it is actively playing */
+.audio-player.playing {
+  border-color: #2a6cff;
+  background: #f5f8ff;
+  opacity: 1;
+}
+
+/* Playlist container */
+.audio-player .playlist {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0 0;
+}
+
+/* Playlist items */
+.audio-player .playlist li {
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  transition: background 0.15s ease;
+}
+
+/* Hover effect */
+.audio-player .playlist li:hover {
+  background: #f0f0f0;
+}
+
+/* Selected track (but not necessarily playing) */
+.audio-player .playlist li.active {
+  font-weight: bold;
+  background: #e6e6e6;
+}
+
+/* 🔥 Strong highlight when THIS player is actively playing */
+.audio-player.playing .playlist li.active {
+  background: #cfe2ff;
+  border-left: 4px solid #2a6cff;
+  padding-left: 0.4rem; /* adjust for border */
+}
+
+/* Optional: make the audio element fit nicely */
+.audio-player audio {
+  width: 100%;
+  display: block;
+}
