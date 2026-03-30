@@ -6,6 +6,8 @@ angular.module('gvyweb').service('gvypics', [
     var vidFolderCache = {};
     var token = null;
     this.userId = null;
+    this.site = "gvypics"; //production
+    //this.site = "//groovymarty.com/gvypics"; //local testing
     
     function makeUrl(meat) {
       var url = $location.protocol() + "://" + $location.host();

@@ -1,4 +1,5 @@
-angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', function($scope) {
+angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', 'gvypics', function($scope, gvypics) {
+  $scope.gvypics = gvypics;
   $scope.shows = [{
     id: "JM23",
     groupTitle: "Our Family",

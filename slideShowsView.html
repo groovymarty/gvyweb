@@ -15,11 +15,11 @@
     <div class="panel panel-default col-md-8">
       <div class="panel-body">
         <p><b>{{show.title}}</b></p>
-        <a ng-href="{{'gvypics/vid/'+show.vidid}}">
-          <img class="img-responsive" src="gvypics/pic/{{show.titlepic}}?sz=sm" alt="{{show.title}}"></a>
+        <a ng-href="{{gvypics.site+'/vid/'+show.vidid}}">
+          <img class="img-responsive" src="{{gvypics.site}}/pic/{{show.titlepic}}?sz=sm" alt="{{show.title}}"></a>
         <p>{{show.caption}}</p>
-        <a class="btn btn-warning" ng-href="{{'gvypics/vid/'+show.vidid}}">View Slideshow</a>
-        <a class="btn btn-primary" ng-href="{{'gvypics/vid/'+show.vidid+'?res=hq'}}">Higher Quality Video</a>
+        <a class="btn btn-warning" ng-href="{{gvypics.site+'/vid/'+show.vidid}}">View Slideshow</a>
+        <a class="btn btn-primary" ng-href="{{gvypics.site+'/vid/'+show.vidid+'?res=hq'}}">Higher Quality Video</a>
         <a class="btn btn-default" ui-sref="picbrowser({id: '{{show.collection}}', i: null, sz: 'sm', showid: 1})" ng-if="show.collection">
           Picture Collection</a>
       </div>

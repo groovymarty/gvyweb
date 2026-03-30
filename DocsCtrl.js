@@ -1,4 +1,5 @@
-angular.module('gvyweb').controller('DocsCtrl', ['$scope', function($scope) {
+angular.module('gvyweb').controller('DocsCtrl', ['$scope', 'gvypics', function($scope, gvypics) {
+  $scope.gvypics = gvypics;
   $scope.links = {
     armyLetters: "https://www.dropbox.com/sh/f4qpo967x9apqh6/AAA4XuTcOTr8Cdc49webp5xta?dl=0",
     armyDocuments: "https://www.dropbox.com/sh/cx7sf2amvcvnvxe/AABXZG9eg35ARqrLZOgL2IORa?dl=0",
