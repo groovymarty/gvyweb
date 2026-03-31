@@ -106,3 +106,8 @@ myApp.service('appSettings',
     this.videoRes = 'std';
   }
 );
+
+myApp.run(function($anchorScroll) {
+  //enable default anchor scrolling
+});
+
