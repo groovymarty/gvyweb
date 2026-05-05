@@ -51,6 +51,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', 'gvypics', func
     titlepic: "D25A3-200",
     collection: "C01+04"
   },{
+    id: "HM03",
+    title: "Gracie",
+    caption: "Doggie witness to Heidi & Mike's life in NYC. Everybody loves Gracie.",
+    vidid: "SS-V5",
+    titlepic: "D22M4-860",
+    collection: "C01+05"
+  },{
     id: "TR01",
     groupTitle: "Trips",
     title: "Our Trip to Scotland & Dublin",
