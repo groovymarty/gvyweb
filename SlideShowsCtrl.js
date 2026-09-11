@@ -1,8 +1,15 @@
 angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', 'gvypics', function($scope, gvypics) {
   $scope.gvypics = gvypics;
   $scope.shows = [{
-    id: "JM23",
+    id: "JM24",
     groupTitle: "Our Family",
+    title: "Camp Nana 2026",
+    caption: "Time Travel. The battle of the dinosaurs.",
+    vidid: "SS-V24",
+    titlepic: "D26O5-2900",
+    collection: "C01+24"
+  },{
+    id: "JM23",
     title: "Camp Nana 2025",
     caption: "Nature and technology. Poop race.",
     vidid: "SS-V23",
