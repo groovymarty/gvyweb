@@ -87,6 +87,13 @@ angular.module('gvyweb').controller('SlideShowsCtrl', ['$scope', 'gvypics', func
     titlepic: "D25N14-2020",
     collection: "C01+47"
   },{
+    id: "TR05",
+    title: "New Orleans & Florida 2025",
+    caption: "WWII museum and a week in Sandestin, FL with Mary Janice & Jeff Hayslett.",
+    vidid: "SS-V49",
+    titlepic: "D25T08-210",
+    collection: "C01+49"
+  },{
     id: "KS01",
     groupTitle: "Kent Singers",
     title: "Mark Brooks Tribute",
